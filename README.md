@@ -4,7 +4,7 @@
 
 ## Database Schema Design
 
-![Alt text](image-1.png)
+![db-schema](images/dbSchemaDesign.png)
 
 ## API Documentation
 
