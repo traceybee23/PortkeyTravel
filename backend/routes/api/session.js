@@ -19,7 +19,7 @@ router.post('/', async (req, res, next) => {
         }
     });
 
-    if(!user || !bcrypt.compareSync(password, user.hashedPassword.toString())) {
+    if (!user || !bcrypt.compareSync(password, user.hashedPassword.toString())) {
         const err = new Error('Login failed');
         err.status = 401;
         err.title = 'Login failed';
@@ -37,8 +37,12 @@ router.post('/', async (req, res, next) => {
 
     return res.json({
         user: safeUser
-    })
-})
+    });
+});
 
+router.delete('/', (_req, res) => {
+    res.clearCookie('token');
+    return res.json({ message: 'success' });
+});
 
 module.exports = router;
