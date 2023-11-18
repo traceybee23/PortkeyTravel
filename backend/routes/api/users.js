@@ -10,31 +10,41 @@ const router = express.Router();
 
 const validateSignup = [
     check('email')
-      .exists({ checkFalsy: true })
-      .isEmail()
-      .withMessage('Please provide a valid email.'),
+        .exists({ checkFalsy: true })
+        .isEmail()
+        .withMessage('Please provide a valid email.'),
     check('username')
-      .exists({ checkFalsy: true })
-      .isLength({ min: 4 })
-      .withMessage('Please provide a username with at least 4 characters.'),
+        .exists({ checkFalsy: true })
+        .isLength({ min: 4 })
+        .withMessage('Please provide a username with at least 4 characters.'),
     check('username')
-      .not()
-      .isEmail()
-      .withMessage('Username cannot be an email.'),
+        .not()
+        .isEmail()
+        .withMessage('Username cannot be an email.'),
     check('password')
-      .exists({ checkFalsy: true })
-      .isLength({ min: 6 })
-      .withMessage('Password must be 6 characters or more.'),
+        .exists({ checkFalsy: true })
+        .isLength({ min: 6 })
+        .withMessage('Password must be 6 characters or more.'),
+    check('firstName')
+        .exists({ checkFalsy: true })
+        .isLength({ min: 1 })
+        .withMessage('Please provide a first name with at least 1 character.'),
+    check('lastName')
+        .exists({ checkFalsy: true })
+        .isLength({ min: 1 })
+        .withMessage('Please provide a last name with at least 1 character.'),
     handleValidationErrors
-  ];
+];
 
 router.post('/', validateSignup, async (req, res) => {
-    const { email, password, username } = req.body;
+    const { firstName, lastName, email, password, username } = req.body;
     const hashedPassword = bcrypt.hashSync(password);
-    const user = await User.create({ email, username, hashedPassword });
+    const user = await User.create({ firstName, lastName, email, username, hashedPassword });
 
     const safeUser = {
         id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
         username: user.username,
     };
@@ -47,3 +57,18 @@ router.post('/', validateSignup, async (req, res) => {
 });
 
 module.exports = router;
+
+// signup fetch('/api/users', {
+//     method: 'POST',
+//     headers: {
+//         "Content-Type": "application/json",
+//         "XSRF-TOKEN": `KKRoMHcY-xt8vWYUu2HCXaCyUDOn31uTiHJk`
+//     },
+//     body: JSON.stringify({
+//         firstName: 'Fire',
+//         lastName: 'Star',
+//         email: 'firestar@spider.man',
+//         username: 'Firestar',
+//         password: 'J7eVf6'
+//     })
+// }).then(res => res.json()).then(data => console.log(data));
