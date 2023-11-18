@@ -1,7 +1,4 @@
 {
-  "dependencies": {
-    "express-validator": "^7.0.1"
-  },
   "name": "shorttermvacayrentals",
   "description": "## Database Schema Design",
   "version": "1.0.0",
