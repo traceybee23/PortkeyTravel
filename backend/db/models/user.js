@@ -3,6 +3,8 @@ const { Model, Validator } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
+
+
     static associate(models) {
       // define association here
     }
@@ -10,6 +12,18 @@ module.exports = (sequelize, DataTypes) => {
 
   User.init(
     {
+      username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [4, 30],
+          isNotEmail(value) {
+            if (Validator.isEmail(value)) {
+              throw new Error("Cannot be an email.");
+            }
+          }
+        }
+      },
       firstName: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -27,18 +41,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           len: [1, 30],
-          isNotEmail(value) {
-            if (Validator.isEmail(value)) {
-              throw new Error("Cannot be an email.");
-            }
-          }
-        }
-      },
-      username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: [4, 30],
           isNotEmail(value) {
             if (Validator.isEmail(value)) {
               throw new Error("Cannot be an email.");
