@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
           through: models.Booking,
           foreignKey: 'spotId',
           otherKey: 'userId',
-          onDelete: CASCADE
+          onDelete: 'CASCADE'
         }
       );
       Spot.belongsToMany(
