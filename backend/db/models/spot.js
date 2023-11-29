@@ -17,18 +17,21 @@ module.exports = (sequelize, DataTypes) => {
       );
 
       Spot.hasMany(
-        models.Booking,
-        { foreignKey: 'spotId', onDelete: 'CASCADE',  hooks: true }
+        models.Booking, {
+          foreignKey: 'spotId',
+          onDelete: 'CASCADE',
+          hooks: true
+        }
       );
 
       Spot.belongsToMany(
         models.User, {
-          through: models.Booking,
-          foreignKey: 'spotId',
-          otherKey: 'userId',
-          onDelete: 'CASCADE'
-        }
-      );
+        through: models.Booking,
+        foreignKey: 'spotId',
+        otherKey: 'userId',
+        onDelete: 'CASCADE'
+      });
+
       Spot.belongsToMany(
         models.User,
         {
@@ -36,8 +39,15 @@ module.exports = (sequelize, DataTypes) => {
           foreignKey: 'spotId',
           otherKey: 'userId',
           onDelete: 'CASCADE'
+        });
+
+      Spot.hasMany(models.Image, {
+        foreignKey: 'imageableId',
+        constraints: false,
+        scope: {
+          imageableType: 'Spot'
         }
-      );
+      });
 
     }
   }
