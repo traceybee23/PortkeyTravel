@@ -18,8 +18,20 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER,
     spotId: DataTypes.INTEGER,
     spot: DataTypes.STRING,
-    startDate: DataTypes.DATE,
-    endDate: DataTypes.DATE
+    startDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        isBefore: this.endDate
+      }
+    },
+    endDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        isAfter: this.startDate
+      }
+    },
   }, {
     sequelize,
     modelName: 'Booking',
