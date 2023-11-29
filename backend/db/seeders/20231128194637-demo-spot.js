@@ -68,6 +68,6 @@ module.exports = {
     options.tableName = 'Spots';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options,
-      { [Op.or]: demoSpots }, {});
+      { [Op.in]: demoSpots }, {});
   }
 };

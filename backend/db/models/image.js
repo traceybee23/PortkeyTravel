@@ -5,7 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Image extends Model {
     getImageable(options) {
-      if(!this.imageableType) return Promise.resolve(null);
+      if (!this.imageableType) return Promise.resolve(null);
       const mixinMethodName = `get${this.imageableType}`;
       return this[mixinMethodName](options);
     }
@@ -24,15 +24,10 @@ module.exports = (sequelize, DataTypes) => {
   Image.init({
     imageableId: DataTypes.INTEGER,
     imageableType: DataTypes.STRING,
-    url:{
+    url: {
       type: DataTypes.STRING,
       validate: {
         isUrl: true,
-        isLessThan10(value) {
-          if(this.url.length > 10) {
-            throw new Error("Maximum number of images for this resource was reached")
-          }
-        }
       }
     }
   }, {

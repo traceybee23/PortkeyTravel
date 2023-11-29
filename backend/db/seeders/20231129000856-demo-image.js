@@ -33,7 +33,7 @@ const demoImages = [
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await Spot.bulkCreate(demoImages, { validate: true })
+    await Image.bulkCreate(demoImages, { validate: true })
   },
 
   async down (queryInterface, Sequelize) {
