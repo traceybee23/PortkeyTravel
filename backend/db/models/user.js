@@ -66,14 +66,16 @@ module.exports = (sequelize, DataTypes) => {
               throw new Error("Cannot be an email.");
             }
           }
-        }
+        },
+        unique: { msg: 'User already exists'},
       },
       email: {
         type: DataTypes.STRING,
+        unique: { msg: 'User already exists'},
         allowNull: false,
         validate: {
           len: [3, 256],
-          isEmail: true
+          isEmail: true,
         }
       },
       hashedPassword: {
