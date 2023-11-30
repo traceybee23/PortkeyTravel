@@ -12,34 +12,34 @@ const validateSignup = [
     check('email')
         .exists({ checkFalsy: true })
         .isEmail()
-        .withMessage('Please provide a valid email.'),
+        .withMessage('Invalid email'),
     check('username')
         .exists({ checkFalsy: true })
         .isLength({ min: 4 })
-        .withMessage('Please provide a username with at least 4 characters.'),
+        .withMessage('Username is required'),
     check('username')
         .not()
         .isEmail()
         .withMessage('Username cannot be an email.'),
-    check('password')
-        .exists({ checkFalsy: true })
-        .isLength({ min: 6 })
-        .withMessage('Password must be 6 characters or more.'),
+    // check('password')
+    //     .exists({ checkFalsy: true })
+    //     .isLength({ min: 6 })
+    //     .withMessage('Password must be 6 characters or more.'),
     check('firstName')
         .exists({ checkFalsy: true })
         .isLength({ min: 1 })
-        .withMessage('Please provide a first name with at least 1 character.'),
+        .withMessage('First Name is required'),
     check('lastName')
         .exists({ checkFalsy: true })
         .isLength({ min: 1 })
-        .withMessage('Please provide a last name with at least 1 character.'),
+        .withMessage('Last Name is required'),
     handleValidationErrors
 ];
 
 router.post('/', validateSignup, async (req, res) => {
-    try {
     const { firstName, lastName, email, password, username } = req.body;
     const hashedPassword = bcrypt.hashSync(password);
+    try {
 
         const user = await User.create({ firstName, lastName, email, username, hashedPassword });
 
@@ -58,9 +58,15 @@ router.post('/', validateSignup, async (req, res) => {
         });
 
     } catch (error) {
-        res.json({
+
+
+        const errors = {};
+
+        errors[error.errors[0].path] = error.errors[0].message
+
+        res.status(500).json({
             message: "User already exists",
-            errors: error.message
+            errors
         })
     }
 });
