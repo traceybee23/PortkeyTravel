@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === 'production') {
 const demoImages = [
   {
     "imageableId": "1",
-    "imageableType": "Review",
+    "imageableType": "Spot",
     "url": "https://images.unsplash.com/photo-1426122402199-be02db90eb90?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c2FuJTIwZnJhbmNpc2NvJTIwaG91c2V8ZW58MHx8MHx8fDA%3D",
   },
   {
@@ -20,13 +20,33 @@ const demoImages = [
   },
   {
     "imageableId": "3",
-    "imageableType": "Review",
+    "imageableType": "Spot",
     "url": "https://images.unsplash.com/photo-1608463123864-40a2961b7d00?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDJ8fGhvdXNlJTIwaW4lMjBzZWF0dGxlfGVufDB8fDB8fHww",
   },
   {
     "imageableId": "4",
     "imageableType": "Spot",
-    "url": "https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2UlMjBpbiUyMGF1c3RpbiUyMFRYfGVufDB8fDB8fHww",
+    "url": "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aG91c2V8ZW58MHx8MHx8fDA%3D",
+  },
+  {
+    "imageableId": "1",
+    "imageableType": "Review",
+    "url": "https://plus.unsplash.com/premium_photo-1674815329488-c4fc6bf4ced8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW50ZXJpb3J8ZW58MHx8MHx8fDA%3D",
+  },
+  {
+    "imageableId": "2",
+    "imageableType": "Review",
+    "url": "https://images.unsplash.com/photo-1616047006789-b7af5afb8c20?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGludGVyaW9yfGVufDB8fDB8fHww",
+  },
+  {
+    "imageableId": "3",
+    "imageableType": "Review",
+    "url": "https://images.unsplash.com/photo-1618219944342-824e40a13285?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjh8fGludGVyaW9yfGVufDB8fDB8fHww",
+  },
+  {
+    "imageableId": "4",
+    "imageableType": "Review",
+    "url": "https://plus.unsplash.com/premium_photo-1680100256127-e73d3f1f3376?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGludGVyaW9yfGVufDB8fDB8fHww",
   },
 ]
 
