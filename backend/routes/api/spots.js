@@ -89,7 +89,7 @@ router.get('/:spotId', async (req, res, next) => {
     });
 
     if(!spots.length) {
-        const err = Error('nope');
+        const err = Error('Spot not found');
         err.message = "Spot couldn't be found";
         err.status = 404;
         return next(err)
@@ -104,8 +104,8 @@ router.get('/:spotId', async (req, res, next) => {
     let stars = [];
     spotsList.forEach(spot => {
         spot.Reviews.forEach(review => {
+            spot.numReviews = spot.Reviews.length
             if (spot.Reviews.length > 1) {
-                spot.numReviews = spot.Reviews.length
                 stars.push(review.stars)
                 spot.avgStarRating = (stars.reduce((acc, curr) => acc + curr, 0) / stars.length)
             } else {
