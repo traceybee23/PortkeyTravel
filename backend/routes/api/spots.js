@@ -9,7 +9,7 @@ const e = require('express');
 
 const router = express.Router();
 
-router.get('/current', requireAuth, async (req, res, next) => {
+router.get('/current', requireAuth, async (req, res) => {
 
     const { user } = req;
 
@@ -66,9 +66,44 @@ router.get('/current', requireAuth, async (req, res, next) => {
         })
         res.json({ Spots: spotsList })
     }
-
 })
 
+router.get('/:spotId', async (req, res, next) => {
+    const spots = await Spot.findAll({
+        include: [
+            {
+                model: Review,
+                attributes: ['stars'],
+            },
+            {
+                model: Image,
+                attributes: ['id', 'url', ],
+            }
+        ],
+    });
+
+    let spotsList = [];
+
+    spots.forEach(spot => {
+        //console.log(spot)
+        spotsList.push(spot.toJSON())
+    })
+
+    ///get avgRating
+    let stars = [];
+    spotsList.forEach(spot => {
+        spot.Reviews.forEach(review => {
+            if (spot.Reviews.length > 1) {
+                stars.push(review.stars)
+                spot.avgRating = (stars.reduce((acc, curr) => acc + curr, 0) / stars.length)
+            } else {
+                spot.avgRating = review.stars
+            }
+        })
+        delete spot.Reviews
+    })
+    res.json({ Spots: spotsList })
+})
 
 router.get('/', async (req, res) => {
 
