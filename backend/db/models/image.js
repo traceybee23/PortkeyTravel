@@ -29,7 +29,8 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         isUrl: true,
       }
-    }
+    },
+    preview: DataTypes.BOOLEAN,
   }, {
     sequelize,
     modelName: 'Image',
