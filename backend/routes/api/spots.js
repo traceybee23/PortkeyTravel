@@ -130,7 +130,7 @@ router.get('/:spotId', async (req, res, next) => {
         spot.Owner = spot.User
         delete spot.User
     })
-    res.json({ Spots: spotsList })
+    res.json( ...spotsList )
     }
 })
 
