@@ -68,41 +68,66 @@ module.exports = (sequelize, DataTypes) => {
     address: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notNull: {msg: "Street address is required"}
+      }
     },
     city: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notNull: {msg: "City is required"}
+      }
     },
     state: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notNull: {msg: "State is required"}
+      }
     },
     country: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notNull: {msg: "Country is required"}
+      }
     },
     lat: {
       type: DataTypes.FLOAT,
       allowNull: false,
+      validate: {
+        notNull: {msg: "Latitude is not valid"}
+      }
     },
     lng: {
       type: DataTypes.FLOAT,
       allowNull: false,
+      validate: {
+        notNull: {msg: "Longitude is not valid"}
+      }
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [4, 50],
+        notNull: {msg: "Name must be less than 50 characters"}
       }
     },
     description: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notNull: {msg: "Description is required"}
+      }
     },
     price: {
       type: DataTypes.FLOAT,
       allowNull: false,
+      validate: {
+        notNull: {msg: "Price per day is required"}
+      }
     }
   }, {
     sequelize,

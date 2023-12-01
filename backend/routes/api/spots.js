@@ -5,9 +5,35 @@ const { handleValidationErrors } = require('../../utils/validation')
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { Spot, Review, Image, User } = require('../../db/models');
-const e = require('express');
+
 
 const router = express.Router();
+
+
+
+router.post('/', requireAuth, async (req, res, next) => {
+    const { user } = req;
+
+    try {
+
+    const { address, city, state, country, lat, lng, name, description, price } = req.body
+
+    if(user) {
+        const ownerId = user.id
+        console.log(user.id)
+        const spot = await Spot.create({ ownerId, address, city, state, country, lat, lng, name, description, price })
+
+        res.status(201).json(spot)
+    }
+
+} catch (error) {
+
+    error.message = "Bad Request"
+    error.status = 400
+    next(error)
+}
+
+})
 
 router.get('/current', requireAuth, async (req, res) => {
 
