@@ -4,7 +4,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation')
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { Spot, Review, Image, User } = require('../../db/models');
+const { Spot, Review, Image, User, sequelize } = require('../../db/models');
 const e = require('express');
 
 const router = express.Router();
@@ -17,13 +17,15 @@ router.get('/current', requireAuth, async (req, res) => {
         const safeUser = {
             ownerId: user.id
         }
-        console.log(safeUser)
         const spots = await Spot.findAll({
             where: safeUser,
             include: [
                 {
                     model: Review,
-                    attributes: ['stars'],
+                    attributes: [
+                        'stars',
+                        [sequelize.fn('AVG', sequelize.col('stars')), 'avg_stars']
+                    ],
                 },
                 {
                     model: Image,
@@ -31,23 +33,19 @@ router.get('/current', requireAuth, async (req, res) => {
                 }
             ],
         })
+        console.log(spots)
         let spotsList = [];
 
         spots.forEach(spot => {
             //console.log(spot)
             spotsList.push(spot.toJSON())
         })
-
+        console.log(spotsList)
         ///get avgRating
-        let stars = [];
         spotsList.forEach(spot => {
             spot.Reviews.forEach(review => {
-                if (spot.Reviews.length > 1) {
-                    stars.push(review.stars)
-                    spot.avgRating = (stars.reduce((acc, curr) => acc + curr, 0) / stars.length)
-                } else {
-                    spot.avgRating = review.stars
-                }
+                spot.numReviews = spot.Reviews.length
+                spot.avgStarRating = review.avg_stars
             })
             delete spot.Reviews
         })
@@ -75,7 +73,10 @@ router.get('/:spotId', async (req, res, next) => {
         include: [
             {
                 model: Review,
-                attributes: ['stars'],
+                attributes: [
+                    'stars',
+                    [sequelize.fn('AVG', sequelize.col('stars')), 'avg_stars']
+                ],
             },
             {
                 model: Image,
@@ -88,49 +89,45 @@ router.get('/:spotId', async (req, res, next) => {
         ],
     });
 
-    if(!spots.length) {
+    console.log(spots)
+
+    if (!spots.length) {
         const err = Error('Spot not found');
         err.message = "Spot couldn't be found";
         err.status = 404;
         return next(err)
     } else {
-    let spotsList = [];
+        let spotsList = [];
 
-    spots.forEach(spot => {
-        spotsList.push(spot.toJSON())
-    })
-
-    ///get avgStarRating
-    let stars = [];
-    spotsList.forEach(spot => {
-        spot.Reviews.forEach(review => {
-            spot.numReviews = spot.Reviews.length
-            if (spot.Reviews.length > 1) {
-                stars.push(review.stars)
-                spot.avgStarRating = (stars.reduce((acc, curr) => acc + curr, 0) / stars.length)
-            } else {
-                spot.avgStarRating = review.stars
-            }
+        spots.forEach(spot => {
+            spotsList.push(spot.toJSON())
         })
-        delete spot.Reviews
-    })
 
-    spotsList.forEach(spot => {
-        spot.Images.forEach(image => {
-            if (!spot.Images) {
-                spot.SpotImages = "no images"
-            } else {
-                spot.SpotImages = spot.Images
-            }
+        ///make avgStarRating
+        spotsList.forEach(spot => {
+            spot.Reviews.forEach(review => {
+                spot.numReviews = spot.Reviews.length
+                spot.avgStarRating = review.avg_stars
+            })
+            delete spot.Reviews
         })
-        delete spot.Images
-    })
 
-    spotsList.forEach(spot => {
-        spot.Owner = spot.User
-        delete spot.User
-    })
-    res.json({ Spots: spotsList })
+        spotsList.forEach(spot => {
+            spot.Images.forEach(image => {
+                if (!spot.Images) {
+                    spot.SpotImages = "no images"
+                } else {
+                    spot.SpotImages = spot.Images
+                }
+            })
+            delete spot.Images
+        })
+
+        spotsList.forEach(spot => {
+            spot.Owner = spot.User
+            delete spot.User
+        })
+        res.json({ Spots: spotsList })
     }
 })
 
