@@ -3,6 +3,8 @@ const { Model, Validator } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
+
+
     static associate(models) {
       // define association here
       User.hasMany(
@@ -32,6 +34,18 @@ module.exports = (sequelize, DataTypes) => {
 
   User.init(
     {
+      username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [4, 30],
+          isNotEmail(value) {
+            if (Validator.isEmail(value)) {
+              throw new Error("Cannot be an email.");
+            }
+          }
+        }
+      },
       firstName: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -47,21 +61,9 @@ module.exports = (sequelize, DataTypes) => {
       lastName: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-          len: [1, 30],
-          isNotEmail(value) {
-            if (Validator.isEmail(value)) {
-              throw new Error("Cannot be an email.");
-            }
-          }
-        }
-      },
-      username: {
-        type: DataTypes.STRING,
-        allowNull: false,
         unique: { msg: "User with that username already exists"},
         validate: {
-          len: [4, 30],
+          len: [1, 30],
           isNotEmail(value) {
             if (Validator.isEmail(value)) {
               throw new Error("Cannot be an email.");
