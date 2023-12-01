@@ -4,7 +4,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation')
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { Spot, Review, Image } = require('../../db/models');
+const { Spot, Review, Image, User } = require('../../db/models');
 const e = require('express');
 
 const router = express.Router();
@@ -69,7 +69,9 @@ router.get('/current', requireAuth, async (req, res) => {
 })
 
 router.get('/:spotId', async (req, res, next) => {
+
     const spots = await Spot.findAll({
+        where: { id: req.params.spotId },
         include: [
             {
                 model: Review,
@@ -77,32 +79,59 @@ router.get('/:spotId', async (req, res, next) => {
             },
             {
                 model: Image,
-                attributes: ['id', 'url', ],
+                attributes: ['id', 'url', 'preview'],
+            },
+            {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName'],
             }
         ],
     });
 
+    if(!spots.length) {
+        const err = Error('nope');
+        err.message = "Spot couldn't be found";
+        err.status = 404;
+        return next(err)
+    } else {
     let spotsList = [];
 
     spots.forEach(spot => {
-        //console.log(spot)
         spotsList.push(spot.toJSON())
     })
 
-    ///get avgRating
+    ///get avgStarRating
     let stars = [];
     spotsList.forEach(spot => {
         spot.Reviews.forEach(review => {
             if (spot.Reviews.length > 1) {
+                spot.numReviews = spot.Reviews.length
                 stars.push(review.stars)
-                spot.avgRating = (stars.reduce((acc, curr) => acc + curr, 0) / stars.length)
+                spot.avgStarRating = (stars.reduce((acc, curr) => acc + curr, 0) / stars.length)
             } else {
-                spot.avgRating = review.stars
+                spot.avgStarRating = review.stars
             }
         })
         delete spot.Reviews
     })
+
+    spotsList.forEach(spot => {
+        spot.Images.forEach(image => {
+            if (!spot.Images) {
+                spot.SpotImages = "no images"
+            } else {
+                spot.SpotImages = spot.Images
+            }
+        })
+        delete spot.Images
+    })
+
+    spotsList.forEach(spot => {
+        spot.Owner = spot.User
+        delete spot.User
+    })
     res.json({ Spots: spotsList })
+    }
 })
 
 router.get('/', async (req, res) => {
