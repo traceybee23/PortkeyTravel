@@ -109,9 +109,89 @@ router.get('/current', requireAuth, async (req, res) => {
     }
 })
 
-router.put('/:spotId', async (req, res, next) => {});
+router.put('/:spotId', requireAuth, async (req, res, next) => {
+    const { user } = req;
+    const spotId = req.params.spotId
+    try {
+        const { address, city, state, country, lat, lng, name, description, price } = req.body
+        const spot = await Spot.findOne({
+            where: {
+                id: spotId
+            }
+        })
+        if (!spot) {
+            res.status(404).json({
+                "message": "Spot couldn't be found"
+            })
+        }
+        if (!user) {
+            res.status(401).json({
+                "message": "Authentication required"
+            })
+        }
+        if (user.id !== spot.ownerId) {
+            res.status(403).json({
+                "message": "Forbidden"
+            })
+        }
 
-router.delete('/:spotId', async (req, res, next) => {});
+        if (user) {
+
+            spot.set({ address, city, state, country, lat, lng, name, description, price })
+
+            await spot.save();
+
+            res.status(200).json(spot)
+        }
+
+    } catch (error) {
+        error.message = "Bad Request"
+        error.status = 400
+        next(error)
+    }
+});
+
+router.delete('/:spotId', async (req, res, next) => {
+    const { user } = req;
+    const spotId = req.params.spotId
+    try {
+        const { address, city, state, country, lat, lng, name, description, price } = req.body
+        const spot = await Spot.findOne({
+            where: {
+                id: spotId
+            }
+        })
+        if (!spot) {
+            res.status(404).json({
+                "message": "Spot couldn't be found"
+            })
+        }
+        if (!user) {
+            res.status(401).json({
+                "message": "Authentication required"
+            })
+        }
+        if (user.id !== spot.ownerId) {
+            res.status(403).json({
+                "message": "Forbidden"
+            })
+        }
+
+        if (user) {
+
+            await spot.destroy(spot)
+
+            res.status(200).json({
+                "message": "Successfully deleted"
+            })
+        }
+
+    } catch (error) {
+        error.message = "Bad Request"
+        error.status = 400
+        next(error)
+    }
+});
 
 router.get('/:spotId', async (req, res, next) => {
 
