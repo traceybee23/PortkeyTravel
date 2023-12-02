@@ -59,7 +59,6 @@ router.post('/', validateSignup, async (req, res) => {
 
     } catch (error) {
 
-
         const errors = {};
 
         errors[error.errors[0].path] = error.errors[0].message
