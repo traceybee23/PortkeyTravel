@@ -27,6 +27,7 @@ router.get('/current', requireAuth, async (req, res) => {
                 },
                 {
                     model: Spot,
+                    exclude: ['createdAt', 'updatedAt']
                 },
                 {
                     model: Image,
@@ -51,7 +52,18 @@ router.get('/current', requireAuth, async (req, res) => {
             reviewList.push(review.toJSON())
         })
 
-        //attach images
+        //attach images to spot info
+
+        const spotData = await Spot.findAll({
+            where: { ownerId: user.id},
+            include: [
+                {
+                    model: Image,
+                    attributes: ['url']
+                }
+            ]
+        })
+        //console.log(spotData)
         reviewList.forEach(review => {
             review.Images.forEach(image => {
                 //console.log(image.url)
@@ -63,7 +75,7 @@ router.get('/current', requireAuth, async (req, res) => {
             })
             delete review.Images
         })
-        res.json({ reviews: reviewList })
+        res.json({ Reviews: reviewList })
     }
 })
 
