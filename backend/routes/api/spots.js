@@ -162,17 +162,17 @@ router.delete('/:spotId', async (req, res, next) => {
             }
         })
         if (!spot) {
-            res.status(404).json({
+            return res.status(404).json({
                 "message": "Spot couldn't be found"
             })
         }
         if (!user) {
-            res.status(401).json({
+            return res.status(401).json({
                 "message": "Authentication required"
             })
         }
         if (user.id !== spot.ownerId) {
-            res.status(403).json({
+            return res.status(403).json({
                 "message": "Forbidden"
             })
         }
