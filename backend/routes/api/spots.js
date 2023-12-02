@@ -1,9 +1,9 @@
 const express = require('express');
 //const bcrypt = require('bcryptjs');
-const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation')
+//const { check } = require('express-validator');
+//const { handleValidationErrors } = require('../../utils/validation')
 
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
+const { requireAuth } = require('../../utils/auth');
 const { Spot, Review, Image, User } = require('../../db/models');
 
 
@@ -63,7 +63,7 @@ router.get('/current', requireAuth, async (req, res) => {
         const safeUser = {
             ownerId: user.id
         }
-        console.log(safeUser)
+        //console.log(safeUser)
         const spots = await Spot.findAll({
             where: safeUser,
             include: [
@@ -77,6 +77,16 @@ router.get('/current', requireAuth, async (req, res) => {
                 }
             ],
         })
+        if (!spots.length) {
+            return res.status(404).json({
+                message: "Spots couldn't be found"
+            })
+        }
+        if (!user) {
+            return res.status(401).json({
+                "message": "Authentication required"
+            })
+        }
         let spotsList = [];
 
         spots.forEach(spot => {
