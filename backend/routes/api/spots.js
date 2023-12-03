@@ -103,15 +103,16 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 
     const { user } = req;
 
-    const { url, preview } = req.body
+    const { url, preview } = req.body;
 
-    const spotId = Number(req.params.spotId)
+    const spotId = Number(req.params.spotId);
 
     const spot = await Spot.findOne({
         where: {
             id: spotId
         }
-    })
+    });
+
     if (!spot) {
         return res.status(404).json({
             message: "Spot couldn't be found"
@@ -256,11 +257,10 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
     }
 });
 
-router.delete('/:spotId', async (req, res, next) => {
+router.delete('/:spotId', requireAuth, async (req, res, next) => {
     const { user } = req;
     const spotId = req.params.spotId
     try {
-        const { address, city, state, country, lat, lng, name, description, price } = req.body
         const spot = await Spot.findOne({
             where: {
                 id: spotId
