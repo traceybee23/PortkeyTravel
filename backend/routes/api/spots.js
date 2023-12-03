@@ -9,6 +9,54 @@ const { Spot, Review, Image, User } = require('../../db/models');
 
 const router = express.Router();
 
+router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
+
+    const { user } = req;
+    if (!user) {
+        return res.status(401).json({
+            "message": "Authentication required"
+        })
+    }
+
+    const { review, stars } = req.body
+
+    const spotId = Number(req.params.spotId)
+
+    const spot = await Spot.findOne({
+        where: { id: spotId },
+        include: [
+            {
+                model: Review,
+                attributes: ['userId']
+            }
+        ]
+    })
+
+    if (!spot) {
+        return res.status(404).json({
+            message: "Spot couldn't be found"
+        })
+    }
+
+    spot.Reviews.forEach(review => {
+        if (review.userId === user.id) {
+            return res.status(500).json({
+                "message": "User already has a review for this spot"
+            })
+        }
+    })
+
+    try {
+        const newReview = await Review.create({ userId: user.id, spotId, review, stars })
+        res.json(newReview)
+    } catch (error) {
+        error.message = "Bad Request"
+        error.status = 400
+        next(error)
+    }
+
+})
+
 router.get('/:spotId/reviews', async (req, res, next) => {
 
     const spot = await Spot.findByPk(req.params.spotId)
@@ -20,6 +68,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
     }
 
     const reviews = await Review.findAll({
+        where: { spotId: req.params.spotId },
         include: [
             {
                 model: User,
@@ -27,7 +76,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
             },
             {
                 model: Image,
-                attributes: [ 'id', 'url' ]
+                attributes: ['id', 'url']
             }
         ]
     })
@@ -42,7 +91,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
     reviewList.forEach(review => {
         review.ReviewImages = review.Images;
         delete review.Images
-        if(review.ReviewImages.length < 1) {
+        if (review.ReviewImages.length < 1) {
             review.ReviewImages = "No available review images"
         }
     })
