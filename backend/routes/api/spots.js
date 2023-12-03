@@ -4,10 +4,65 @@ const express = require('express');
 //const { handleValidationErrors } = require('../../utils/validation')
 
 const { requireAuth } = require('../../utils/auth');
-const { Spot, Review, Image, User } = require('../../db/models');
+const { Spot, Review, Image, User, Booking } = require('../../db/models');
 
 
 const router = express.Router();
+
+router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
+
+    const { user } = req;
+
+    const spot = await Spot.findByPk(req.params.spotId)
+
+    if (!spot) {
+        return res.status(404).json({
+            message: "Spot couldn't be found"
+        })
+    }
+    const bookings = await Booking.findAll({
+        where: { spotId: req.params.spotId },
+        attributes: {
+            include: ['id'],
+            exclude: ['spot']
+        },
+        include: [
+            {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName']
+            }
+        ]
+    })
+
+    let bookingsList = [];
+
+    bookings.forEach(booking => {
+        bookingsList.push(booking.toJSON())
+    })
+
+    let bookingData = {};
+
+    bookingsList.forEach(booking => {
+
+            if (user.id !== spot.ownerId) {
+                bookingData.spotId = booking.spotId
+                bookingData.startDate = booking.startDate
+                bookingData.endDate = booking.endDate
+                console.log(user.id, spot.ownerId, 'oooooooooooooooooooooo')
+            } else {
+            bookingData.User = booking.User
+            bookingData.id = booking.id
+            bookingData.spotId = booking.spotId
+            bookingData.userId = booking.userId
+            bookingData.startDate = booking.startDate
+            bookingData.endDate = booking.endDate
+            bookingData.createdAt = booking.createdAt
+            bookingData.updatedAt = booking.updatedAt
+            }
+    })
+
+    res.json({ Bookings: [bookingData] })
+})
 
 router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
 
