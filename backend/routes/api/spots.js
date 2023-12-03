@@ -9,6 +9,47 @@ const { Spot, Review, Image, User } = require('../../db/models');
 
 const router = express.Router();
 
+router.get('/:spotId/reviews', async (req, res, next) => {
+
+    const spot = await Spot.findByPk(req.params.spotId)
+
+    if (!spot) {
+        return res.status(404).json({
+            message: "Spot couldn't be found"
+        })
+    }
+
+    const reviews = await Review.findAll({
+        include: [
+            {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName'],
+            },
+            {
+                model: Image,
+                attributes: [ 'id', 'url' ]
+            }
+        ]
+    })
+
+    let reviewList = [];
+
+    reviews.forEach(review => {
+        //console.log(spot)
+        reviewList.push(review.toJSON())
+    })
+
+    reviewList.forEach(review => {
+        review.ReviewImages = review.Images;
+        delete review.Images
+        if(review.ReviewImages.length < 1) {
+            review.ReviewImages = "No available review images"
+        }
+    })
+
+    res.json({ Reviews: reviewList })
+})
+
 router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 
     const { user } = req;
