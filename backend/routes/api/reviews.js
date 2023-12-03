@@ -1,11 +1,10 @@
 const express = require('express');
 //const bcrypt = require('bcryptjs');
-const { check } = require('express-validator');
+//const { check } = require('express-validator');
 //const { handleValidationErrors } = require('../../utils/validation')
 
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
+const { requireAuth } = require('../../utils/auth');
 const { Spot, Review, Image, User } = require('../../db/models');
-
 
 const router = express.Router();
 
@@ -118,9 +117,9 @@ router.get('/current', requireAuth, async (req, res) => {
 
         //attach preview image to spot info
         reviewList.forEach(review => {
-            console.log(review.Spot.Images[0].url)
+            //console.log(review.Spot.Images[0].url)
             if (!review.Spot.Images) {
-                review.Spot.previewImage = "image url"
+                review.Spot.previewImage = "no image found"
             } else {
                 review.Spot.previewImage = review.Spot.Images[0].url
             }
