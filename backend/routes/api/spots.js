@@ -48,7 +48,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
 
     try {
         const newReview = await Review.create({ userId: user.id, spotId, review, stars })
-        res.json(newReview)
+        res.status(201).json(newReview)
     } catch (error) {
         error.message = "Bad Request"
         error.status = 400
