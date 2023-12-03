@@ -54,7 +54,6 @@ router.get('/current', requireAuth, async (req, res, next) => {
         let bookingData = {};
 
         bookingsList.forEach(booking => {
-            console.log(booking.Spot.Images[0].url)
             if(!booking.Spot.Images) {
                 booking.Spot.previewImage = "no image found"
             } else {
@@ -68,7 +67,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
            bookingData.startDate = booking.startDate
            bookingData.endDate = booking.endDate
            bookingData.createdAt = booking.createdAt
-           bookingData.updatedAt = booking.updatedAtAt
+           bookingData.updatedAt = booking.updatedAt
         })
 
         res.json({Bookings: [bookingData]})
