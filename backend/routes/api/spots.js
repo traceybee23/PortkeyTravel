@@ -43,13 +43,11 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
     let bookingData = {};
 
     bookingsList.forEach(booking => {
-
-            if (user.id !== spot.ownerId) {
-                bookingData.spotId = booking.spotId
-                bookingData.startDate = booking.startDate
-                bookingData.endDate = booking.endDate
-                console.log(user.id, spot.ownerId, 'oooooooooooooooooooooo')
-            } else {
+        if (user.id !== spot.ownerId) {
+            bookingData.spotId = booking.spotId
+            bookingData.startDate = booking.startDate
+            bookingData.endDate = booking.endDate
+        } else {
             bookingData.User = booking.User
             bookingData.id = booking.id
             bookingData.spotId = booking.spotId
@@ -58,7 +56,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
             bookingData.endDate = booking.endDate
             bookingData.createdAt = booking.createdAt
             bookingData.updatedAt = booking.updatedAt
-            }
+        }
     })
 
     res.json({ Bookings: [bookingData] })
