@@ -29,16 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     spotId: DataTypes.INTEGER,
     spot: DataTypes.STRING,
     startDate: {
-      type: DataTypes.DATE,
-      unique: { msg: "Start date conflicts with an existing booking" }
-      // validate: {
-      //   bookingExists(value){
-      //     if(value === this.startDate) {
-      //       throw new Error("Start date conflicts with an existing booking")
-
-      //     }
-      //   }
-      // },
+      type: DataTypes.DATE
     },
     endDate: {
       type: DataTypes.DATE,

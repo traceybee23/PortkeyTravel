@@ -1,4 +1,5 @@
 const express = require('express');
+const { Op } = require('sequelize');
 //const bcrypt = require('bcryptjs');
 //const { check } = require('express-validator');
 //const { handleValidationErrors } = require('../../utils/validation')
@@ -16,7 +17,15 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
             "message": "Authentication required"
         })
     }
-    const { startDate, endDate } = req.body
+    const { startDate, endDate } = req.body;
+    if (!startDate || !endDate) {
+        return res.status(400).json({
+            "message": "Bad Request",
+            "errors": {
+                "endDate": "endDate cannot be on or before startDate"
+            }
+        })
+    }
 
     const spotId = Number(req.params.spotId)
 
@@ -42,10 +51,43 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
         })
     }
 
+    let newStartDate = new Date(startDate)
+    let newEndDate = new Date(endDate)
 
+    const existingBooking = await Booking.findAll({
+        where: {
+            startDate: {
+                [Op.between]: [newStartDate, newEndDate]
+            }
+        }
+    })
+
+
+    if (existingBooking) {
+        existingBooking.forEach(booking => {
+
+            if (!booking.startDate || !booking.endDate || newStartDate > newEndDate) {
+                return res.status(400).json({
+                    "message": "Bad Request",
+                    "errors": {
+                        "endDate": "endDate cannot be on or before startDate"
+                    }
+                })
+            } else if (booking.startDate <= newStartDate && booking.endDate >= newEndDate ) {
+                return res.status(403).json({
+                    "message": "Sorry, this spot is already booked for the specified dates",
+                    "errors": {
+                        "startDate": "Start date conflicts with an existing booking",
+                        "endDate": "End date conflicts with an existing booking"
+                    }
+                })
+            }
+        })
+    }
     try {
-        const booking = await Booking.create({ userId: user.id, spotId, startDate, endDate })
         let newBooking = {}
+
+        const booking = await Booking.create({ userId: user.id, spotId, startDate, endDate })
 
         newBooking.id = booking.id
         newBooking.spotId = spotId
@@ -55,12 +97,15 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
         newBooking.createdAt = booking.createdAt
         newBooking.updatedAt = booking.updatedAt
 
-        console.log(newBooking)
-        res.status(201).json(newBooking)
+        return res.status(201).json(newBooking)
+
     } catch (error) {
-        error.message = "Bad Request",
-            error.status = 400
-        next(error)
+        res.status(400).json({
+            "message": "Bad Request",
+            "errors": {
+                "endDate": "endDate cannot be on or before startDate"
+            }
+        })
     }
 })
 
@@ -97,12 +142,18 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
     let bookingData = {};
 
-    bookingsList.forEach(booking => {
-        if (user.id !== spot.ownerId) {
+    if (user.id !== spot.ownerId) {
+        let bookingListNotOwner = [];
+        bookingsList.forEach(booking => {
             bookingData.spotId = booking.spotId
             bookingData.startDate = booking.startDate
             bookingData.endDate = booking.endDate
-        } else {
+            bookingListNotOwner.push(bookingData)
+        })
+        res.json({ Bookings: [bookingListNotOwner] })
+    } else {
+        let bookingListOwner = [];
+        bookingsList.forEach(booking => {
             bookingData.User = booking.User
             bookingData.id = booking.id
             bookingData.spotId = booking.spotId
@@ -111,10 +162,11 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
             bookingData.endDate = booking.endDate
             bookingData.createdAt = booking.createdAt
             bookingData.updatedAt = booking.updatedAt
-        }
-    })
+            bookingListOwner.push(bookingData)
+        })
+        res.json({ Bookings: [bookingListOwner] })
+    }
 
-    res.json({ Bookings: [bookingData] })
 })
 
 router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
@@ -460,7 +512,7 @@ router.get('/:spotId', async (req, res, next) => {
 
 
         spotData.Owner = spot.User
-            delete spotData.User
+        delete spotData.User
 
         res.json(spotData)
     }
