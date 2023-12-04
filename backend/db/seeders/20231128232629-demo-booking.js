@@ -37,7 +37,7 @@ module.exports = {
     await Booking.bulkCreate(demoBookings, { validate: true })
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     options.tableName = 'Bookings';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options,

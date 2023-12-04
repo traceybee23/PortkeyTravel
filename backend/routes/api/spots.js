@@ -9,6 +9,61 @@ const { Spot, Review, Image, User, Booking } = require('../../db/models');
 
 const router = express.Router();
 
+router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
+    const { user } = req;
+    if (!user) {
+        return res.status(401).json({
+            "message": "Authentication required"
+        })
+    }
+    const { startDate, endDate } = req.body
+
+    const spotId = Number(req.params.spotId)
+
+    const spot = await Spot.findOne({
+        where: { id: spotId },
+        include: [
+            {
+                model: Booking,
+                attributes: ['startDate', 'endDate']
+            }
+        ]
+    })
+
+    if (!spot) {
+        return res.status(404).json({
+            message: "Spot couldn't be found"
+        })
+    }
+
+    if (spot.ownerId === user.id) {
+        return res.status(403).json({
+            "message": "Forbidden"
+        })
+    }
+
+
+    try {
+        const booking = await Booking.create({ userId: user.id, spotId, startDate, endDate })
+        let newBooking = {}
+
+        newBooking.id = booking.id
+        newBooking.spotId = spotId
+        newBooking.userId = user.id
+        newBooking.startDate = booking.startDate
+        newBooking.endDate = booking.endDate
+        newBooking.createdAt = booking.createdAt
+        newBooking.updatedAt = booking.updatedAt
+
+console.log(newBooking)
+        res.status(201).json(newBooking)
+    } catch (error) {
+        error.message = "Sorry, this spot is already booked for the specified dates",
+        error.status = 400
+        next(error)
+    }
+})
+
 router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
     const { user } = req;
