@@ -15,10 +15,10 @@ const demoImages = [
     "preview": true
   },
   {
-    "imageableId": "2",
+    "imageableId": "1",
     "imageableType": "Spot",
     "url": "https://images.unsplash.com/photo-1633511090164-b43840ea1607?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8aGF3YWlpJTIwaG91c2V8ZW58MHx8MHx8fDA%3D",
-    "preview": true
+    "preview": false
   },
   {
     "imageableId": "3",

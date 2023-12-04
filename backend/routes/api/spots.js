@@ -55,11 +55,11 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
         newBooking.createdAt = booking.createdAt
         newBooking.updatedAt = booking.updatedAt
 
-console.log(newBooking)
+        console.log(newBooking)
         res.status(201).json(newBooking)
     } catch (error) {
-        error.message = "Sorry, this spot is already booked for the specified dates",
-        error.status = 400
+        error.message = "Bad Request",
+            error.status = 400
         next(error)
     }
 })
@@ -408,7 +408,7 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
 
 router.get('/:spotId', async (req, res, next) => {
 
-    const spots = await Spot.findAll({
+    const spot = await Spot.findOne({
         where: { id: req.params.spotId },
         include: [
             {
@@ -426,49 +426,43 @@ router.get('/:spotId', async (req, res, next) => {
         ],
     });
 
-    if (!spots.length) {
+    if (!spot) {
         const err = Error('Spot not found');
         err.message = "Spot couldn't be found";
         err.status = 404;
         return next(err)
     } else {
-        let spotsList = [];
 
-        spots.forEach(spot => {
-            spotsList.push(spot.toJSON())
-        })
+        const spotData = spot.toJSON()
 
         ///get avgStarRating
-        let stars = [];
-        spotsList.forEach(spot => {
-            spot.Reviews.forEach(review => {
-                spot.numReviews = spot.Reviews.length
-                if (spot.Reviews.length > 1) {
-                    stars.push(review.stars)
-                    spot.avgStarRating = (stars.reduce((acc, curr) => acc + curr, 0) / stars.length)
-                } else {
-                    spot.avgStarRating = review.stars
-                }
-            })
-            delete spot.Reviews
-        })
+        let stars = 0;
 
-        spotsList.forEach(spot => {
-            spot.Images.forEach(image => {
-                if (!spot.Images) {
-                    spot.SpotImages = "no images"
-                } else {
-                    spot.SpotImages = spot.Images
-                }
-            })
-            delete spot.Images
+        spotData.Reviews.forEach(review => {
+            stars += review.stars
+            spotData.numReviews = spotData.Reviews.length
+            if (spot.Reviews.length > 1) {
+                spotData.avgStarRating = stars / spotData.Reviews.length
+            } else {
+                spot.avgStarRating = review.stars
+            }
         })
+        delete spotData.Reviews
 
-        spotsList.forEach(spot => {
-            spot.Owner = spot.User
-            delete spot.User
+        spotData.Images.forEach(image => {
+            if (!spot.Images) {
+                spotData.SpotImages = "no images"
+            } else {
+                spotData.SpotImages = spot.Images
+            }
         })
-        res.json(...spotsList)
+        delete spotData.Images
+
+
+        spotData.Owner = spot.User
+            delete spotData.User
+
+        res.json(spotData)
     }
 })
 

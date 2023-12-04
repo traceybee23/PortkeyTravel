@@ -43,19 +43,13 @@ module.exports = (sequelize, DataTypes) => {
     endDate: {
       type: DataTypes.DATE,
       allowNull: false,
-      unique: { msg: "Start date conflicts with an existing booking" },
       validate: {
-        notNull: { msg: "End date conflicts with an existing booking"},
+        notNull: { msg: "endDate cannot be on or before startDate"},
         isAfter(value) {
           if(value <= this.startDate) {
             throw new Error("endDate cannot be on or before startDate")
           }
         },
-        // endDateExists(value) {
-        //   if(value === this.endDate) {
-        //     throw new Error("End date conflicts with an existing booking")
-        //   }
-        // }
       },
     },
   }, {
