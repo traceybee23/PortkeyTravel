@@ -56,36 +56,25 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
     const existingBooking = await Booking.findAll({
         where: {
-            startDate: {
-                [Op.between]: [newStartDate, newEndDate]
-            }
+            spotId: spotId
         }
     })
 
-
-    if (existingBooking) {
-        existingBooking.forEach(booking => {
-
-            if (!booking.startDate || !booking.endDate || newStartDate > newEndDate) {
-                return res.status(400).json({
-                    "message": "Bad Request",
-                    "errors": {
-                        "endDate": "endDate cannot be on or before startDate"
-                    }
-                })
-            } else if (booking.startDate <= newStartDate && booking.endDate >= newEndDate ) {
-                return res.status(403).json({
-                    "message": "Sorry, this spot is already booked for the specified dates",
-                    "errors": {
-                        "startDate": "Start date conflicts with an existing booking",
-                        "endDate": "End date conflicts with an existing booking"
-                    }
-                })
-            }
-        })
-    }
+    existingBooking.forEach(booking => {
+        if ((newStartDate >= booking.startDate && newStartDate <= booking.endDate) ||
+            (newEndDate >= booking.startDate && newEndDate <= booking.endDate)) {
+            return res.status(403).json({
+                "message": "Sorry, this spot is already booked for the specified dates",
+                "errors": {
+                    "startDate": "Start date conflicts with an existing booking",
+                    "endDate": "End date conflicts with an existing booking"
+                }
+            })
+        }
+    })
     try {
         let newBooking = {}
+        res.json({ startDate, endDate })
 
         const booking = await Booking.create({ userId: user.id, spotId, startDate, endDate })
 
@@ -99,6 +88,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
         return res.status(201).json(newBooking)
 
+
     } catch (error) {
         res.status(400).json({
             "message": "Bad Request",
@@ -111,61 +101,35 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
 router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
-    const { user } = req;
-
-    const spot = await Spot.findByPk(req.params.spotId)
-
-    if (!spot) {
-        return res.status(404).json({
-            message: "Spot couldn't be found"
+    const userId = req.user.id
+    const spotId = req.params.spotId
+    const validSpot = await Spot.findByPk(spotId)
+    if (!validSpot) return res.status(404).json({
+        message: "Spot couldn't be found"
+    })
+    let isOwner;
+    if (validSpot.ownerId === userId) isOwner = true
+    if (!isOwner) {
+        const bookings = await Booking.findAll({
+            attributes: ['spotId', 'startDate', 'endDate'],
+            where: {
+                spotId
+            }
         })
+        return res.json({ Bookings: bookings })
     }
     const bookings = await Booking.findAll({
-        where: { spotId: req.params.spotId },
-        attributes: {
-            include: ['id'],
-            exclude: ['spot']
-        },
         include: [
             {
                 model: User,
-                attributes: ['id', 'firstName', 'lastName']
+                attributes: ['id', 'firstName', 'lastName'],
             }
-        ]
+        ],
+        where: {
+            spotId
+        }
     })
-
-    let bookingsList = [];
-
-    bookings.forEach(booking => {
-        bookingsList.push(booking.toJSON())
-    })
-
-    let bookingData = {};
-
-    if (user.id !== spot.ownerId) {
-        let bookingListNotOwner = [];
-        bookingsList.forEach(booking => {
-            bookingData.spotId = booking.spotId
-            bookingData.startDate = booking.startDate
-            bookingData.endDate = booking.endDate
-            bookingListNotOwner.push(bookingData)
-        })
-        res.json({ Bookings: [bookingListNotOwner] })
-    } else {
-        let bookingListOwner = [];
-        bookingsList.forEach(booking => {
-            bookingData.User = booking.User
-            bookingData.id = booking.id
-            bookingData.spotId = booking.spotId
-            bookingData.userId = booking.userId
-            bookingData.startDate = booking.startDate
-            bookingData.endDate = booking.endDate
-            bookingData.createdAt = booking.createdAt
-            bookingData.updatedAt = booking.updatedAt
-            bookingListOwner.push(bookingData)
-        })
-        res.json({ Bookings: [bookingListOwner] })
-    }
+    return res.json({ Bookings: bookings })
 
 })
 

@@ -11,21 +11,18 @@ const demoBookings = [
   {
     "userId": 1,
     "spotId": 1,
-    "spot": "App Academy",
     "startDate": "2024-11-19",
     "endDate": "2024-11-23"
   },
   {
     "userId": 3,
     "spotId": 4,
-    "spot": "BBQ Place",
     "startDate": "2024-06-10",
     "endDate": "2024-06-13"
   },
   {
     "userId": 2,
     "spotId": 2,
-    "spot": "Stitch's Place",
     "startDate": "2024-09-23",
     "endDate": "2024-09-28"
   }

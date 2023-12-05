@@ -21,9 +21,6 @@ module.exports = {
       spotId: {
         type: Sequelize.INTEGER
       },
-      spot: {
-        type: Sequelize.STRING
-      },
       startDate: {
         type: Sequelize.DATE
       },
