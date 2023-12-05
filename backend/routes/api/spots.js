@@ -43,11 +43,9 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
         })
     }
 
-    if (spot.ownerId === user.id) {
-        return res.status(403).json({
+    if (spot.ownerId === user.id) return res.status(403).json({
             "message": "Forbidden"
         })
-    }
 
     let newStartDate = new Date(startDate)
     let newEndDate = new Date(endDate)
@@ -61,13 +59,13 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     let errors = [];
 
     existingBooking.forEach(booking => {
-        if ((newStartDate >= booking.startDate && newStartDate <= booking.endDate) &&
+        if ((newStartDate >= booking.startDate && newStartDate <= booking.endDate) ||
             (newEndDate >= booking.startDate && newEndDate <= booking.endDate)) {
             const err = new Error("Sorry, this spot is already booked for the specified dates");
             errors.push(err)
         }
     })
-    if (errors) {
+    if (errors.length) {
         return res.status(403).json({
             "message": "Sorry, this spot is already booked for the specified dates",
             "errors": {
@@ -92,26 +90,28 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     }
 })
 
-router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
+router.get('/:spotId/bookings', requireAuth, async (req, res) => {
 
-    const userId = req.user.id
+    const { user } = req;
+
     const spotId = req.params.spotId
-    const validSpot = await Spot.findByPk(spotId)
-    if (!validSpot) return res.status(404).json({
+
+    const existingSpot = await Spot.findByPk(spotId)
+
+    if (!existingSpot) return res.status(404).json({
         message: "Spot couldn't be found"
     })
-    let isOwner;
-    if (validSpot.ownerId === userId) isOwner = true
-    if (!isOwner) {
+
+    if (existingSpot.ownerId !== user.id) {
         const bookings = await Booking.findAll({
-            attributes: ['id', 'spotId', 'startDate', 'endDate'],
+            attributes: ['id','spotId', 'startDate', 'endDate'],
             where: {
                 spotId
             }
         })
         return res.json({ Bookings: bookings })
     }
-    if (isOwner) {
+    if (existingSpot.ownerId === user.id) {
         const bookings = await Booking.findAll({
             include: [
                 {
@@ -126,7 +126,6 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
         let bookingList = [];
         let empty = {}
         bookings.forEach(booking => {
-            console.log(booking)
             empty = {
                 User: {
                     id: booking.User.id,
