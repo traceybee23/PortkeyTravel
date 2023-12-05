@@ -17,18 +17,35 @@ module.exports = (sequelize, DataTypes) => {
           imageableType: 'Review'
         }
       });
+
+      Review.belongsTo(models.User,
+        { foreignKey: 'userId' });
+
+      Review.belongsTo(models.Spot,
+        { foreignKey: 'spotId' })
     }
   }
   Review.init({
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
     userId: DataTypes.INTEGER,
     spotId: DataTypes.INTEGER,
     review: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notNull: {msg: "Review text is required"}
+      }
     },
     stars: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       validate: {
+        notNull: {msg: "Stars must be an integer from 1 to 5"},
         min: 1,
         max: 5
       }
