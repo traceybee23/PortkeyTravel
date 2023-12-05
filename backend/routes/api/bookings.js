@@ -9,6 +9,47 @@ const review = require('../../db/models/review');
 
 const router = express.Router();
 
+router.delete('/:bookingId', requireAuth, async (req, res, next) => {
+    const { user } = req;
+    const bookingId = req.params.bookingId
+    try {
+        const booking = await Booking.findOne({
+            where: {
+                id: bookingId
+            },
+            include: {
+                model: Spot
+            }
+        })
+
+        if (!booking) return res.status(404).json({
+            "message": "Booking couldn't be found"
+        });
+
+        if (!user) return res.status(401).json({
+            "message": "Authentication required"
+        })
+
+        console.log(booking.Spot.ownerId, user.id)
+        if ((user.id === booking.Spot.ownerId) || (user.id === booking.userId)) {
+
+            await booking.destroy(booking)
+
+            res.status(200).json({
+                "message": "Successfully deleted"
+            })
+        }
+        if (user.id !== booking.userId) return res.status(403).json({
+                "message": "Forbidden"
+            })
+
+    } catch (error) {
+        error.message = "Bad Request"
+        error.status = 400
+        next(error)
+    }
+});
+
 router.put('/:bookingId', requireAuth, async (req, res, next) => {
 
     const { user } = req;
@@ -116,7 +157,7 @@ router.get('/current', requireAuth, async (req, res) => {
         });
         if (!bookings.length) {
             return res.status(404).json({
-                message: "Reviews couldn't be found"
+                message: "Bookings couldn't be found"
             })
         }
         if (!user) {
