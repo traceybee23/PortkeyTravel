@@ -44,8 +44,8 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     }
 
     if (spot.ownerId === user.id) return res.status(403).json({
-            "message": "Forbidden"
-        })
+        "message": "Forbidden"
+    })
 
     let newStartDate = new Date(startDate)
     let newEndDate = new Date(endDate)
@@ -104,7 +104,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
 
     if (existingSpot.ownerId !== user.id) {
         const bookings = await Booking.findAll({
-            attributes: ['id','spotId', 'startDate', 'endDate'],
+            attributes: ['id', 'spotId', 'startDate', 'endDate'],
             where: {
                 spotId
             }
@@ -514,7 +514,7 @@ router.post('/', requireAuth, async (req, res, next) => {
 
         if (user) {
             const ownerId = user.id
-            console.log(user.id)
+
             const spot = await Spot.create({ ownerId, address, city, state, country, lat, lng, name, description, price })
 
             res.status(201).json(spot)
@@ -529,29 +529,99 @@ router.post('/', requireAuth, async (req, res, next) => {
 })
 
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
 
-    const spots = await Spot.findAll({
-        include: [
-            {
-                model: Review,
-                attributes: ['stars'],
-            },
-            {
-                model: Image,
-                attributes: ['url'],
-            }
-        ],
-    });
+    let errorResult = { status: 400, message: "Bad Request", errors: {} };
+
+    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
 
     let spotsList = [];
 
-    spots.forEach(spot => {
-        //console.log(spot)
-        spotsList.push(spot.toJSON())
-    })
+    if (req.query) {
 
-    ///get avgRating
+        const pagination = {};
+
+        page = !page ? 1 : parseInt(page);
+        size = !size ? 20 : parseInt(size);
+
+        if (size > 20) {
+            pagination.limit = 20
+        } else if (page > 10) {
+            pagination.offset = 10
+        } else if (page >= 1 && size >= 1) {
+            pagination.limit = size;
+            pagination.offset = size * (page - 1)
+        }
+
+        if (!page || page <= 0) {
+            errorResult.errors.page = "Page must be greater than or equal to 1"
+            next(errorResult)
+        }
+        if (!size || size <= 0) {
+            errorResult.errors.size = "Size must be greater than or equal to 1"
+            next(errorResult)
+        }
+        if (maxLat < -90 || maxLat > 90) {
+            errorResult.errors.maxLat = "Maximum latitude is invalid"
+            next(errorResult)
+        }
+        if (minLat < -90 || minLat > 90) {
+            errorResult.errors.minLat = "Minimum latitude is invalid"
+            next(errorResult)
+        }
+        if (maxLng < -180 || maxLng > 180) {
+            errorResult.errors.maxLng = "Maximum longitude is invalid"
+            next(errorResult)
+        }
+        if (minLng < -180 || minLng > 180) {
+            errorResult.errors.minLng = "Minimum longitude is invalid"
+            next(errorResult)
+        }
+        if (parseInt(minPrice) < 0) {
+            errorResult.errors.minPrice = "Minimum price must be greater than or equal to 0"
+            next(errorResult)
+        }
+        if (parseInt(maxPrice) < 0) {
+            errorResult.errors.maxPrice = "Maximum price must be greater than or equal to 0"
+            next(errorResult)
+        }
+
+        let spots = await Spot.findAll({
+            include: [
+                {
+                    model: Review,
+                    attributes: ['stars'],
+                },
+                {
+                    model: Image,
+                    attributes: ['url'],
+                }
+            ],
+            ...pagination
+        });
+        spots.forEach(spot => {
+            spotsList.push(spot.toJSON())
+        })
+
+    } else {
+
+        let spots = await Spot.findAll({
+            include: [
+                {
+                    model: Review,
+                    attributes: ['stars'],
+                },
+                {
+                    model: Image,
+                    attributes: ['url'],
+                }
+            ],
+        });
+        spots.forEach(spot => {
+            spotsList.push(spot.toJSON())
+        })
+    }
+
     let stars = 0;
     spotsList.forEach(spot => {
         spot.Reviews.forEach(review => {
@@ -568,7 +638,6 @@ router.get('/', async (req, res) => {
     //attach images
     spotsList.forEach(spot => {
         spot.Images.forEach(image => {
-            //console.log(image.url)
             if (!spot.Images) {
                 spot.previewImage = "image url"
             } else {
@@ -577,7 +646,89 @@ router.get('/', async (req, res) => {
         })
         delete spot.Images
     })
-    res.json({ Spots: spotsList })
+
+    if (!(req.query)) {
+        res.json({ Spots: spotsList })
+    }
+
+    const filteredResults = [];
+
+    if (minLat || maxLat || minLng || maxLng || minPrice || maxPrice) {
+        spotsList.forEach(spot => {
+            if (minLat && maxLat && minLng && maxLng && minPrice && maxPrice) {
+                if ((spot.lat > minLat) && (spot.lat < maxLat) && (spot.lng > minLng) && (spot.lng < maxLng) &&
+                    (spot.price > minPrice) && (spot.price < maxPrice)) {
+                    if (!filteredResults.includes(spot)) {
+                        filteredResults.push(spot)
+                    }
+                }
+            } else if (!minLat) {
+                if (spot.lat < maxLat) {
+                    if (!filteredResults.includes(spot)) {
+                        filteredResults.push(spot)
+                    }
+                }
+            } else if (!maxLat) {
+                if (spot.lat > minLat) {
+                    if (!filteredResults.includes(spot)) {
+                        filteredResults.push(spot)
+                    }
+                }
+            } else if (minLat && maxLat) {
+                if ((spot.lat > minLat) && (spot.lat < maxLat)) {
+                    if (!filteredResults.includes(spot)) {
+                        filteredResults.push(spot)
+                    }
+                }
+            } else if (!minLng) {
+                if (spot.lng < maxLng) {
+                    if (!filteredResults.includes(spot)) {
+                        filteredResults.push(spot)
+                    }
+                }
+            } else if (!maxLng) {
+                if (spot.lng > minLng) {
+                    if (!filteredResults.includes(spot)) {
+                        filteredResults.push(spot)
+                    }
+                }
+            } else if (minLng && maxLng) {
+                if ((spot.lng > minLng) && (spot.lng < maxLng)) {
+                    if (!filteredResults.includes(spot)) {
+                        filteredResults.push(spot)
+                    }
+                }
+            } else if (minPrice && maxPrice) {
+                if ((spot.price > minPrice) && (spot.price < maxPrice)) {
+                    if (!filteredResults.includes(spot)) {
+                        filteredResults.push(spot)
+                    }
+                }
+
+            } else if (!minPrice) {
+                if (spot.price < maxPrice) {
+                    if (!filteredResults.includes(spot)) {
+                        filteredResults.push(spot)
+                    }
+                }
+            } else if (!maxPrice) {
+                if (spot.price > minPrice) {
+                    if (!filteredResults.includes(spot)) {
+                        filteredResults.push(spot)
+                    }
+                }
+            }
+        })
+        if (!filteredResults.length) {
+            res.status(404).json({
+                message:
+                    "Spot not found"
+            })
+        }
+    } else {
+        res.json({ Spots: spotsList, page, size })
+    }
+    res.json({ Spots: filteredResults, page, size })
 })
 
 module.exports = router;

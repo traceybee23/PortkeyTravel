@@ -78,11 +78,7 @@ app.use((err, _req, res, _next) => {
 
     if (!isProduction) response.stack = err.stack;
 
-    res.json(
-       //title: err.title || 'Server Error',
-        response
-        //stack: isProduction ? null : err.stack
-    );
+    res.json( response );
 });
 
 module.exports = app;

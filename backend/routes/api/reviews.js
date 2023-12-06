@@ -111,24 +111,26 @@ router.get('/current', requireAuth, async (req, res) => {
         let reviewList = [];
 
         reviews.forEach(review => {
-            //console.log(spot)
             reviewList.push(review.toJSON())
         })
 
         //attach preview image to spot info
         reviewList.forEach(review => {
-            //console.log(review.Spot.Images[0].url)
-            if (!review.Spot.Images) {
-                review.Spot.previewImage = "no image found"
+            if (!review.Spot.Images.length) {
+                review.Spot.previewImage = "No Preview Image available"
             } else {
                 review.Spot.previewImage = review.Spot.Images[0].url
             }
-
             delete review.Spot.Images
         })
 
         reviewList.forEach(review => {
-            review.ReviewImages = review.Images;
+            console.log(review.Images.length, '}}}}}')
+            if (!review.Images.length) {
+                review.ReviewImages = "No Review Images available"
+            } else {
+                review.ReviewImages = review.Images;
+            }
             delete review.Images
         })
         res.json({ Reviews: reviewList })
@@ -167,7 +169,7 @@ router.put('/:reviewId', requireAuth, async (req, res, next) => {
             })
         }
 
-        if(user) {
+        if (user) {
             editReview.set({ review, stars });
 
             await editReview.save();
