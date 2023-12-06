@@ -97,14 +97,18 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.FLOAT,
       allowNull: false,
       validate: {
-        notNull: {msg: "Latitude is not valid"}
+        notNull: {msg: "Latitude is not valid"},
+        max: 90,
+        min: -90
       }
     },
     lng: {
       type: DataTypes.FLOAT,
       allowNull: false,
       validate: {
-        notNull: {msg: "Longitude is not valid"}
+        notNull: {msg: "Longitude is not valid"},
+        max: 180,
+        min: -180
       }
     },
     name: {
@@ -126,7 +130,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.FLOAT,
       allowNull: false,
       validate: {
-        notNull: {msg: "Price per day is required"}
+        notNull: {msg: "Price per day is required"},
+        min: 0,
       }
     }
   }, {
