@@ -44,8 +44,8 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     }
 
     if (spot.ownerId === user.id) return res.status(403).json({
-            "message": "Forbidden"
-        })
+        "message": "Forbidden"
+    })
 
     let newStartDate = new Date(startDate)
     let newEndDate = new Date(endDate)
@@ -104,7 +104,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
 
     if (existingSpot.ownerId !== user.id) {
         const bookings = await Booking.findAll({
-            attributes: ['id','spotId', 'startDate', 'endDate'],
+            attributes: ['id', 'spotId', 'startDate', 'endDate'],
             where: {
                 spotId
             }
@@ -529,7 +529,37 @@ router.post('/', requireAuth, async (req, res, next) => {
 })
 
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
+
+    let errorResult = { message: "Bad Request", errors: {} };
+
+    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice} = req.query;
+try {
+
+    if(!page) {
+        errorResult.errors.page = "Page must be greater than or equal to 1"
+        next(errorResult)
+    }
+     if (!size) {
+        errorResult.errors.size = "Size must be greater than or equal to 1"
+        next(errorResult)
+    }
+
+
+    const pagination = {};
+
+    page = parseInt(page);
+    size = parseInt(size);
+
+
+    if (size > 20) {
+        pagination.limit = 20
+    } else if (page > 10) {
+        pagination.offset = 10
+    } else if (page >= 1 && size >= 1) {
+        pagination.limit = size;
+        pagination.offset = size * (page - 1)
+    }
 
     const spots = await Spot.findAll({
         include: [
@@ -542,12 +572,12 @@ router.get('/', async (req, res) => {
                 attributes: ['url'],
             }
         ],
+        ...pagination
     });
 
     let spotsList = [];
 
     spots.forEach(spot => {
-        //console.log(spot)
         spotsList.push(spot.toJSON())
     })
 
@@ -564,7 +594,7 @@ router.get('/', async (req, res) => {
         })
         delete spot.Reviews
     })
-
+    
     //attach images
     spotsList.forEach(spot => {
         spot.Images.forEach(image => {
@@ -577,7 +607,69 @@ router.get('/', async (req, res) => {
         })
         delete spot.Images
     })
-    res.json({ Spots: spotsList })
+
+    const filteredResults = [];
+
+    if(minLat) {
+        spotsList.forEach(spot => {
+            if(spot.lat > minLat) {
+                filteredResults.push(spot)
+            }
+        })
+        res.json({ Spots: filteredResults, page, size })
+    }
+    if(maxLat) {
+        spotsList.forEach(spot => {
+            if(spot.lat < maxLat) {
+                filteredResults.push(spot)
+            }
+        })
+        res.json({ Spots: filteredResults, page, size })
+    }
+    if(minLng) {
+        spotsList.forEach(spot => {
+            if(spot.lng > minLng) {
+                filteredResults.push(spot)
+            }
+        })
+        res.json({ Spots: filteredResults, page, size })
+    }
+    if(maxLng) {
+        spotsList.forEach(spot => {
+            if(spot.lng < maxLng) {
+                filteredResults.push(spot)
+            }
+        })
+        res.json({ Spots: filteredResults, page, size })
+    }
+
+    if(minPrice > 0) {
+        spotsList.forEach(spot => {
+            if(spot.price > minPrice) {
+                filteredResults.push(spot)
+            }
+        })
+        res.json({ Spots: filteredResults, page, size })
+    } else {
+        errorResult.errors.minPrice = "Minimum price must be greater than or equal to 0"
+        next(errorResult)
+    }
+    if(maxPrice > 0) {
+        spotsList.forEach(spot => {
+            if(spot.price < maxPrice) {
+                filteredResults.push(spot)
+            }
+        })
+        res.json({ Spots: filteredResults, page, size })
+    }else {
+        errorResult.errors.maxPrice = "Maximum price must be greater than or equal to 0"
+        next(errorResult)
+    }
+
+  /// res.json({ Spots: spotsList, page, size })
+} catch (error) {
+    res.json(errorResult)
+}
 })
 
 module.exports = router;
