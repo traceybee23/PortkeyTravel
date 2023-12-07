@@ -40,8 +40,8 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
             })
         }
         if (user.id !== booking.userId) return res.status(403).json({
-                "message": "Forbidden"
-            })
+            "message": "Forbidden"
+        })
 
     } catch (error) {
         error.message = "Bad Request"
@@ -81,7 +81,7 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
     if (!existingBooking) return res.status(404).json({
         message: "Booking couldn't be found"
     })
-    console.log(existingBooking)
+
 
     if (existingBooking.userId !== user.id) return res.status(403).json({
         "message": "Forbidden"
@@ -93,16 +93,19 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
         where: { spotId: spotId }
     })
 
-
     let errors = [];
 
     spotBookings.forEach(booking => {
-        if ((newStartDate >= booking.startDate && newStartDate <= booking.endDate) ||
-            (newEndDate >= booking.startDate && newEndDate <= booking.endDate)) {
-            const err = new Error("Sorry, this spot is already booked for the specified dates");
-            errors.push(err)
+        if (booking.id !== existingBooking.id) {
+            if ((newStartDate >= booking.startDate && newStartDate <= booking.endDate) ||
+                (newStartDate <= booking.startDate && newEndDate >= booking.endDate) ||
+                (newEndDate >= booking.startDate && newEndDate <= booking.endDate)) {
+                const err = new Error("Sorry, this spot is already booked for the specified dates");
+                errors.push(err)
+            }
         }
     })
+
     if (errors.length) {
         return res.status(403).json({
             "message": "Sorry, this spot is already booked for the specified dates",

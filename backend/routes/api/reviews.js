@@ -15,7 +15,6 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
     const { url, preview } = req.body;
 
     const reviewId = Number(req.params.reviewId)
-    console.log(req.params)
 
     const review = await Review.findOne({
         where: {
@@ -125,7 +124,6 @@ router.get('/current', requireAuth, async (req, res) => {
         })
 
         reviewList.forEach(review => {
-            console.log(review.Images.length, '}}}}}')
             if (!review.Images.length) {
                 review.ReviewImages = "No Review Images available"
             } else {

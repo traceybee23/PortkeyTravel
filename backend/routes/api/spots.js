@@ -2,6 +2,7 @@ const express = require('express');
 
 const { requireAuth } = require('../../utils/auth');
 const { Spot, Review, Image, User, Booking } = require('../../db/models');
+const review = require('../../db/models/review');
 
 
 const router = express.Router();
@@ -60,6 +61,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
     existingBooking.forEach(booking => {
         if ((newStartDate >= booking.startDate && newStartDate <= booking.endDate) ||
+            (newStartDate <= booking.startDate && newEndDate >= booking.endDate) ||
             (newEndDate >= booking.startDate && newEndDate <= booking.endDate)) {
             const err = new Error("Sorry, this spot is already booked for the specified dates");
             errors.push(err)
@@ -178,25 +180,25 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
             message: "Spot couldn't be found"
         })
     }
-
-    let errors = [];
-
-    spot.Reviews.forEach(review => {
-        if (review.userId === user.id) {
-            const err = new Error("User already has a review for this spot")
-            errors.push(err)
-        }
-    })
-
-    if (errors) {
-        return res.status(500).json({
-            "message": "User already has a review for this spot"
-        })
-    }
-
     try {
+        let errors = [];
+
+        spot.Reviews.forEach(review => {
+            if (review.userId === user.id) {
+                const err = new Error("User already has a review for this spot")
+                errors.push(err)
+            }
+        })
+
+        if(errors.length) {
+            return res.status(500).json({
+                "message": "User already has a review for this spot"
+              })
+        }
+
         const newReview = await Review.create({ userId: user.id, spotId, review, stars })
         res.status(201).json(newReview)
+
     } catch (error) {
         error.message = "Bad Request"
         error.status = 400
@@ -232,7 +234,6 @@ router.get('/:spotId/reviews', async (req, res, next) => {
     let reviewList = [];
 
     reviews.forEach(review => {
-        //console.log(spot)
         reviewList.push(review.toJSON())
     })
 
@@ -243,6 +244,10 @@ router.get('/:spotId/reviews', async (req, res, next) => {
             review.ReviewImages = "No available review images"
         }
     })
+
+    if(!reviewList.length) {
+        res.json({ Reviews: "No reviews found"})
+    }
 
     res.json({ Reviews: reviewList })
 })
@@ -290,6 +295,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     imageBody.url = spotImage.url;
     imageBody.preview = spotImage.preview
 
+
     res.json(imageBody)
 })
 
@@ -302,7 +308,6 @@ router.get('/current', requireAuth, async (req, res) => {
         const safeUser = {
             ownerId: user.id
         }
-        //console.log(safeUser)
         const spots = await Spot.findAll({
             where: safeUser,
             include: [
@@ -329,7 +334,6 @@ router.get('/current', requireAuth, async (req, res) => {
         let spotsList = [];
 
         spots.forEach(spot => {
-            //console.log(spot)
             spotsList.push(spot.toJSON())
         })
 
@@ -350,7 +354,6 @@ router.get('/current', requireAuth, async (req, res) => {
         //attach images
         spotsList.forEach(spot => {
             spot.Images.forEach(image => {
-                //console.log(image.url)
                 if (!spot.Images) {
                     spot.previewImage = "image url"
                 } else {
@@ -602,8 +605,6 @@ router.get('/', async (req, res, next) => {
         spotsList.push(spot.toJSON())
     })
 
-
-
     let stars = 0;
     spotsList.forEach(spot => {
         spot.Reviews.forEach(review => {
@@ -616,8 +617,6 @@ router.get('/', async (req, res, next) => {
         })
         delete spot.Reviews
     })
-
-
 
     //attach images
     spotsList.forEach(spot => {
@@ -709,8 +708,6 @@ router.get('/', async (req, res, next) => {
                 })
             }
         }
-
-
         res.json({ Spots: filteredResults, page, size })
     }
 })
