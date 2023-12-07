@@ -57,7 +57,7 @@ const demoSpots = [
     "price": 111
   },
   {
-    "ownerId": 4,
+    "ownerId": 3,
     "address": "234 Easy Street",
     "city": "New Orleans",
     "state": "Louisiana",
