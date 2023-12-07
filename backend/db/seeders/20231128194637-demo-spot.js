@@ -55,6 +55,18 @@ const demoSpots = [
     "name": "BBQ Place",
     "description": "Place where BBQ is created",
     "price": 111
+  },
+  {
+    "ownerId": 4,
+    "address": "234 Easy Street",
+    "city": "New Orleans",
+    "state": "Louisiana",
+    "country": "United States of America",
+    "lat": 32.266666,
+    "lng": 37.733330,
+    "name": "Jazz Corner",
+    "description": "Music, food, and drinks!",
+    "price": 65
   }
 ]
 
