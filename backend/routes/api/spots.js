@@ -8,11 +8,13 @@ const router = express.Router();
 router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
     const { user } = req;
+
     if (!user) {
         return res.status(401).json({
             "message": "Authentication required"
         })
     }
+    
     const { startDate, endDate } = req.body;
 
     if (!startDate || !endDate || (startDate >= endDate)) {
@@ -62,7 +64,6 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
         if ((newStartDate === currStartDate && newEndDate === currEndDate) ||
             (newStartDate >= currStartDate && newEndDate <= currEndDate)) {
-            console.log("ERROR HANDLER 1")
             const err = new Error("Sorry, this spot is already booked for the specified dates");
             err.status = 403
             err.errors = {
@@ -74,7 +75,6 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
         if (newStartDate === currStartDate || newStartDate === currEndDate ||
             (newStartDate >= currStartDate && newStartDate <= currEndDate)) {
-            console.log("ERROR HANDLER 2")
             const err = new Error("Sorry, this spot is already booked for the specified dates");
             err.status = 403
             err.errors = {
@@ -85,7 +85,6 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
         if (newEndDate === currStartDate || newEndDate === currEndDate ||
             (newEndDate >= currStartDate && newEndDate <= currEndDate)) {
-            console.log("ERROR HANDLER 3")
             const err = new Error("Sorry, this spot is already booked for the specified dates");
             err.status = 403
             err.errors = {
