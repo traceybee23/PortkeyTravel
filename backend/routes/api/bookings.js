@@ -96,6 +96,9 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
     let newStartDate = new Date(startDate).getTime()
     let newEndDate = new Date(endDate).getTime()
 
+
+    let errors = [];
+
     spotBookings.forEach(booking => {
 
         if (booking.id !== existingBooking.id) {
@@ -111,6 +114,7 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
                     startDate: "startDate conflicts with an existing booking",
                     endDate: "endDate conflicts with an existing booking"
                 }
+                errors.push(err)
                 next(err)
             }
 
@@ -121,6 +125,7 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
                 err.errors = {
                     startDate: "startDate conflicts with an existing booking"
                 }
+                errors.push(err)
                 next(err)
             }
 
@@ -131,26 +136,29 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
                 err.errors = {
                     endDate: "endDate conflicts with an existing booking"
                 }
+                errors.push(err)
                 next(err)
             }
         }
     })
 
-    existingBooking.set({ newStartDate, newEndDate });
+    if (!errors.length) {
 
-    await existingBooking.save();
+        existingBooking.set({ newStartDate, newEndDate });
 
-    let bookingData = {
-        id: existingBooking.id,
-        spotId: existingBooking.spotId,
-        userId: existingBooking.userId,
-        startDate: startDate,
-        endDate: endDate,
-        createdAt: existingBooking.createdAt,
-        updatedAt: existingBooking.updatedAt
-    }
-    res.status(200).json(bookingData);
+        await existingBooking.save();
 
+        let bookingData = {
+            id: existingBooking.id,
+            spotId: existingBooking.spotId,
+            userId: existingBooking.userId,
+            startDate: startDate,
+            endDate: endDate,
+            createdAt: existingBooking.createdAt,
+            updatedAt: existingBooking.updatedAt
+        }
+        res.status(200).json(bookingData);
+}
 })
 
 router.get('/current', requireAuth, async (req, res) => {
