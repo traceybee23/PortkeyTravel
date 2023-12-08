@@ -14,7 +14,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
             "message": "Authentication required"
         })
     }
-    
+
     const { startDate, endDate } = req.body;
 
     if (!startDate || !endDate || (startDate >= endDate)) {
@@ -63,7 +63,8 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
         let currEndDate = booking.endDate.getTime()
 
         if ((newStartDate === currStartDate && newEndDate === currEndDate) ||
-            (newStartDate >= currStartDate && newEndDate <= currEndDate)) {
+            (newStartDate >= currStartDate && newEndDate <= currEndDate) ||
+            (newStartDate <= currStartDate && newEndDate >= currEndDate)) {
             const err = new Error("Sorry, this spot is already booked for the specified dates");
             err.status = 403
             err.errors = {
