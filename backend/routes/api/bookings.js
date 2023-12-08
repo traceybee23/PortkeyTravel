@@ -210,9 +210,9 @@ router.get('/current', requireAuth, async (req, res) => {
             }
             bookingData = {
                 id: booking.id,
-                spotId: booking.Spot.id,
+                spotId: +booking.Spot.id,
                 Spot: {
-                    id: booking.Spot.id,
+                    id: +booking.Spot.id,
                     ownerId: booking.Spot.ownerId,
                     address: booking.Spot.address,
                     city: booking.Spot.city,

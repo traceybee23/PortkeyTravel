@@ -409,19 +409,31 @@ router.get('/current', requireAuth, async (req, res) => {
         spotsList.forEach(spot => {
             spot.Reviews.forEach(review => {
                 stars += review.stars
-            })
-            spot.avgRating = stars / spot.Reviews.length || "No available rating"
+                if (spot.Reviews.length > 1) {
+                    spot.avgRating = stars / spot.Reviews.length
+                } else {
+                    spot.avgRating = review.stars
+                }
+            });
+            if (!spot.avgRating) {
+                spot.avgRating = "No ratings available"
+            }
+            delete spot.Reviews
+        })
+        spotsList.forEach(spot => {
             spot.Images.forEach(image => {
                 if (!spot.Images) {
                     spot.previewImage = "image url"
                 } else {
                     spot.previewImage = image.url
                 }
-            })
-            delete spot.Reviews
+            });
+            if (!spot.previewImage) {
+                spot.previewImage = "No preview image available"
+            }
             delete spot.Images
         })
-        
+
         res.json({ Spots: spotsList })
     }
 })
@@ -547,9 +559,15 @@ router.get('/:spotId', async (req, res, next) => {
             if (spot.Reviews.length > 1) {
                 spotData.avgStarRating = stars / spotData.Reviews.length
             } else {
-                spot.avgStarRating = review.stars
+                spotData.avgStarRating = review.stars
             }
         })
+        if(!spotData.numReviews){
+            spotData.numReviews = "No available reviews"
+        }
+        if(!spotData.avgStarRating) {
+            spotData.avgStarRating = "No available ratings"
+        }
         delete spotData.Reviews
 
         spotData.Images.forEach(image => {
@@ -559,6 +577,9 @@ router.get('/:spotId', async (req, res, next) => {
                 spotData.SpotImages = spot.Images
             }
         })
+        if(!spotData.SpotImages) {
+            spotData.SpotImages = "No available spot images"
+        }
         delete spotData.Images
 
 
@@ -600,7 +621,7 @@ router.get('/', validateQueries, async (req, res, next) => {
 
     const where = {};
 
-    if (req.query) {
+    if (req.query.page || req.query.size) {
 
         page = !page ? 1 : parseInt(page);
         size = !size ? 20 : parseInt(size);
@@ -670,16 +691,28 @@ router.get('/', validateQueries, async (req, res, next) => {
     spotsList.forEach(spot => {
         spot.Reviews.forEach(review => {
             stars += review.stars
-        })
-        spot.avgRating = stars / spot.Reviews.length || "No available rating"
+            if (spot.Reviews.length > 1) {
+                spot.avgRating = stars / spot.Reviews.length
+            } else {
+                spot.avgRating = review.stars
+            }
+        });
+        if (!spot.avgRating) {
+            spot.avgRating = "No ratings available"
+        }
+        delete spot.Reviews
+    })
+    spotsList.forEach(spot => {
         spot.Images.forEach(image => {
             if (!spot.Images) {
                 spot.previewImage = "image url"
             } else {
                 spot.previewImage = image.url
             }
-        })
-        delete spot.Reviews
+        });
+        if (!spot.previewImage) {
+            spot.previewImage = "No preview image available"
+        }
         delete spot.Images
     })
 
