@@ -26,7 +26,6 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
             "message": "Authentication required"
         })
 
-        console.log(booking.Spot.ownerId, user.id)
         if ((user.id === booking.Spot.ownerId) || (user.id === booking.userId)) {
 
             await booking.destroy(booking)

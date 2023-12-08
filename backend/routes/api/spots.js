@@ -409,17 +409,8 @@ router.get('/current', requireAuth, async (req, res) => {
         spotsList.forEach(spot => {
             spot.Reviews.forEach(review => {
                 stars += review.stars
-                if (spot.Reviews.length > 1) {
-                    spot.avgRating = stars / spot.Reviews.length
-                } else {
-                    spot.avgRating = review.stars
-                }
             })
-            delete spot.Reviews
-        })
-
-        //attach images
-        spotsList.forEach(spot => {
+            spot.avgRating = stars / spot.Reviews.length || "No available rating"
             spot.Images.forEach(image => {
                 if (!spot.Images) {
                     spot.previewImage = "image url"
@@ -427,8 +418,10 @@ router.get('/current', requireAuth, async (req, res) => {
                     spot.previewImage = image.url
                 }
             })
+            delete spot.Reviews
             delete spot.Images
         })
+        
         res.json({ Spots: spotsList })
     }
 })
