@@ -158,7 +158,7 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
             updatedAt: existingBooking.updatedAt
         }
         res.status(200).json(bookingData);
-}
+    }
 })
 
 router.get('/current', requireAuth, async (req, res) => {
