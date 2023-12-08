@@ -19,19 +19,19 @@ const validateQueries = [
         .withMessage('Size must be greater than or equal to 1')
         .optional(),
     check('minLat')
-        .isFloat({ min: -90 })
+        .isFloat({ min: -90, max: 90 })
         .withMessage("Minimum latitude is invalid")
         .optional(),
     check('maxLat')
-        .isFloat({ max: 90 })
+        .isFloat({ min: -90, max: 90 })
         .withMessage("Maximum latitude is invalid")
         .optional(),
     check('minLng')
-        .isFloat({ min: -180 })
+        .isFloat({ min: -180, max: 180 })
         .withMessage("Minimum longitude is invalid")
         .optional(),
     check('maxLng')
-        .isFloat({ max: 180 })
+        .isFloat({ min: -180, max: 180 })
         .withMessage("Maximum longitude is invalid")
         .optional(),
     check('minPrice')
