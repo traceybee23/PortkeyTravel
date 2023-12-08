@@ -33,6 +33,12 @@ const demoImages = [
     "preview": true
   },
   {
+    "imageableId": "5",
+    "imageableType": "Spot",
+    "url": "https://images.unsplash.com/photo-1631571592741-c28339e0e5ee?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aG91c2UlMjBpbiUyMG5ldyUyMG9ybGVhbnN8ZW58MHx8MHx8fDA%3D",
+    "preview": true
+  },
+  {
     "imageableId": "1",
     "imageableType": "Review",
     "url": "https://plus.unsplash.com/premium_photo-1674815329488-c4fc6bf4ced8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW50ZXJpb3J8ZW58MHx8MHx8fDA%3D",
@@ -54,6 +60,12 @@ const demoImages = [
     "imageableId": "4",
     "imageableType": "Review",
     "url": "https://plus.unsplash.com/premium_photo-1680100256127-e73d3f1f3376?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGludGVyaW9yfGVufDB8fDB8fHww",
+    "preview": true
+  },
+  {
+    "imageableId": "5",
+    "imageableType": "Review",
+    "url": "https://images.unsplash.com/photo-1661796428181-ffc414240d58?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzB8fGhvdXNlJTIwaW4lMjBuZXclMjBvcmxlYW5zJTIwaW5kb29yc3xlbnwwfHwwfHx8MA%3D%3D",
     "preview": true
   },
 ]
