@@ -9,7 +9,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
 
     const { user } = req;
 
-    const { url, preview } = req.body;
+    const { url } = req.body;
 
     const reviewId = Number(req.params.reviewId)
 
@@ -50,7 +50,6 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
         imageableId: reviewId,
         imageableType: "Review",
         url: url,
-        preview: preview
     }
 
     const reviewImage = await Image.create(newImage);
@@ -58,7 +57,6 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
     const imageBody = {};
     imageBody.id = reviewImage.id;
     imageBody.url = reviewImage.url;
-    imageBody.preview = reviewImage.preview
 
     res.json(imageBody)
 })
