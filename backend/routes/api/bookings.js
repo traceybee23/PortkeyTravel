@@ -95,7 +95,7 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
 
     let newStartDate = new Date(startDate).getTime()
     let newEndDate = new Date(endDate).getTime()
-    
+
     spotBookings.forEach(booking => {
 
         if (booking.id !== existingBooking.id) {
@@ -103,8 +103,8 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
             let currEndDate = booking.endDate.getTime()
 
             if ((newStartDate === currStartDate && newEndDate === currEndDate) ||
-            (newStartDate >= currStartDate && newEndDate <= currEndDate) ||
-            (newStartDate <= currStartDate && newEndDate >= currEndDate)) {
+                (newStartDate >= currStartDate && newEndDate <= currEndDate) ||
+                (newStartDate <= currStartDate && newEndDate >= currEndDate)) {
                 const err = new Error("Sorry, this spot is already booked for the specified dates");
                 err.status = 403
                 err.errors = {
