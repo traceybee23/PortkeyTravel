@@ -76,7 +76,7 @@ app.use((err, _req, res, _next) => {
         errors: err.errors,
     }
 
-    if (!isProduction) response.stack = err.stack;
+    // if (!isProduction) response.stack = err.stack;
 
     res.json( response );
 });

@@ -721,7 +721,6 @@ router.get('/', validateQueries, async (req, res, next) => {
     }
 
     res.json({ Spots: spotsList, page, size })
-
 })
 
 module.exports = router;
