@@ -10,9 +10,15 @@ if (process.env.NODE_ENV === 'production') {
 const demoBookings = [
   {
     "userId": 1,
-    "spotId": 1,
+    "spotId": 2,
     "startDate": "2024-11-19",
     "endDate": "2024-11-23"
+  },
+  {
+    "userId": 2,
+    "spotId": 1,
+    "startDate": "2023-06-10",
+    "endDate": "2023-06-13"
   },
   {
     "userId": 3,
@@ -23,6 +29,12 @@ const demoBookings = [
   {
     "userId": 2,
     "spotId": 2,
+    "startDate": "2024-09-23",
+    "endDate": "2024-09-28"
+  },
+  {
+    "userId": 1,
+    "spotId": 4,
     "startDate": "2024-09-23",
     "endDate": "2024-09-28"
   }
