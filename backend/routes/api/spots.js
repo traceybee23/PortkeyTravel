@@ -173,7 +173,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
 
     if (existingSpot.ownerId !== user.id) {
         const bookings = await Booking.findAll({
-            attributes: ['id', 'spotId', 'startDate', 'endDate'],
+            attributes: ['spotId', 'startDate', 'endDate'],
             where: {
                 spotId
             }
@@ -201,7 +201,6 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
                     firstName: booking.User.firstName,
                     lastName: booking.User.lastName
                 },
-                id: booking.id,
                 spotId: spotId,
                 userId: booking.User.id,
                 startDate: booking.startDate,
@@ -716,9 +715,10 @@ router.get('/', validateQueries, async (req, res, next) => {
         delete spot.Images
     })
 
-    if(spotsList.length < size ) {
-        size = spotsList.length
-    }
+    //if we want results to be the same size of instances returned
+    // if(spotsList.length < size ) {
+    //     size = spotsList.length
+    // }
 
     res.json({ Spots: spotsList, page, size })
 })
