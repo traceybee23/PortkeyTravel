@@ -201,6 +201,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
                     firstName: booking.User.firstName,
                     lastName: booking.User.lastName
                 },
+                id: booking.id,
                 spotId: spotId,
                 userId: booking.User.id,
                 startDate: booking.startDate,
