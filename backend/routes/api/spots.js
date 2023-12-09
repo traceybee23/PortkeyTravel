@@ -202,7 +202,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
                     lastName: booking.User.lastName
                 },
                 id: booking.id,
-                spotId: spotId,
+                spotId: +spotId,
                 userId: booking.User.id,
                 startDate: booking.startDate,
                 endDate: booking.endDate,
@@ -384,7 +384,7 @@ router.get('/current', requireAuth, async (req, res) => {
                 },
                 {
                     model: Image,
-                    attributes: ['url'],
+                    attributes: ['url', 'preview'],
                 }
             ],
         })
@@ -424,7 +424,7 @@ router.get('/current', requireAuth, async (req, res) => {
             spot.Images.forEach(image => {
                 if (!spot.Images) {
                     spot.previewImage = "image url"
-                } else {
+                } else if (image.preview){
                     spot.previewImage = image.url
                 }
             });

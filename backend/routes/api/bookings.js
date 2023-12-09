@@ -210,7 +210,7 @@ router.get('/current', requireAuth, async (req, res) => {
                     include: [
                         {
                             model: Image,
-                            attributes: ['url']
+                            attributes: ['url', 'preview']
                         }
                     ]
                 },
@@ -231,10 +231,10 @@ router.get('/current', requireAuth, async (req, res) => {
         let bookingData = {};
         let spotImg;
         bookings.forEach(booking => {
-            if (booking.Spot.Images.length) {
-                spotImg = booking.Spot.Images[0].url
-            } else {
+            if (!booking.Spot.Images.length) {
                 spotImg = "No Preview Image Available"
+            } else if(booking.Spot.Images[0].preview) {
+                spotImg = booking.Spot.Images[0].url
             }
             bookingData = {
                 id: booking.id,
