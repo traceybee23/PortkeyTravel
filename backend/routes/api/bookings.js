@@ -239,6 +239,8 @@ router.get('/current', requireAuth, async (req, res) => {
                 spotImg = "No Preview Image Available"
             } else if(booking.Spot.Images[0].preview) {
                 spotImg = booking.Spot.Images[0].url
+            } else {
+                spotImg = "No Preview Image Available"
             }
             bookingData = {
                 id: booking.id,
