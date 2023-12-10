@@ -422,9 +422,7 @@ router.get('/current', requireAuth, async (req, res) => {
         })
         spotsList.forEach(spot => {
             spot.Images.forEach(image => {
-                if (!spot.Images) {
-                    spot.previewImage = "image url"
-                } else if (image.preview){
+                if (image.preview){
                     spot.previewImage = image.url
                 }
             });
@@ -672,7 +670,7 @@ router.get('/', validateQueries, async (req, res, next) => {
             },
             {
                 model: Image,
-                attributes: ['url'],
+                attributes: ['url', 'preview'],
             }
         ],
         where: {...where},
@@ -704,9 +702,7 @@ router.get('/', validateQueries, async (req, res, next) => {
     })
     spotsList.forEach(spot => {
         spot.Images.forEach(image => {
-            if (!spot.Images) {
-                spot.previewImage = "image url"
-            } else {
+            if(image.preview) {
                 spot.previewImage = image.url
             }
         });

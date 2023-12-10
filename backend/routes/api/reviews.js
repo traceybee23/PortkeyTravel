@@ -110,10 +110,7 @@ router.get('/current', requireAuth, async (req, res) => {
 
         //attach preview image to spot info
         reviewList.forEach(review => {
-            if (!review.Spot.Images.length) {
-                review.Spot.previewImage = "No Preview Image available"
-            } else if(review.Spot.Images[0].preview) {
-                
+            if(review.Spot.Images[0].preview) {
                 review.Spot.previewImage = review.Spot.Images[0].url
             }
             delete review.Spot.Images
