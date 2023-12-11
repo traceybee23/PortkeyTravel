@@ -1,11 +1,10 @@
 const express = require('express');
-const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation')
+
 const { Op } = require('sequelize');
 
 
 const { requireAuth } = require('../../utils/auth');
-const { Spot, Review, Image, User, Booking } = require('../../db/models');
+const { Spot, Image, Booking } = require('../../db/models');
 
 const router = express.Router();
 
@@ -66,7 +65,7 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
         let newEndDate = new Date(endDate).getTime()
 
         if(newStartDate < Date.now() && newEndDate < Date.now()) {
-            return res.status(500).json({
+            return res.status(400).json({
                 "message": "Bad Request",
                 "errors": {
                     "startDate": "startDate cannot be in the past",
@@ -74,14 +73,14 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
                 }
             })
         } else if(newStartDate < Date.now()) {
-            return res.status(500).json({
+            return res.status(400).json({
                 "message": "Bad Request",
                 "errors": {
                     "startDate": "startDate cannot be in the past"
                 }
             })
         } else if(newEndDate < Date.now()) {
-            return res.status(500).json({
+            return res.status(400).json({
                 "message": "Bad Request",
                 "errors": {
                     "endDate": "endDate cannot be in the past"
