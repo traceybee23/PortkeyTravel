@@ -1,0 +1,28 @@
+li {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  height: auto;
+  width: 80px;
+  font-size: 15px;
+  padding: 3px;
+  align-self: flex-start;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.profile-dropdown {
+  background-color: rgb(238, 227, 236);
+  width: fit-content;
+  padding: 10px;
+  margin-bottom: 10px;
+  align-self: center;
+}

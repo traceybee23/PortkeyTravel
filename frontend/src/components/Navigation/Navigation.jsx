@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import * as sessionActions from '../../store/session'
+import './Navigation.css'
 
 function Navigation({ isLoaded }) {
   const dispatch = useDispatch();
@@ -18,8 +19,8 @@ function Navigation({ isLoaded }) {
         <ProfileButton user={sessionUser} />
       </li>
       <li>
-        <button onClick={logout}>Log Out</button>
-      </li>
+          <button onClick={logout}>Log Out</button>
+        </li>
     </>
   ) : (
     <>
@@ -35,7 +36,7 @@ function Navigation({ isLoaded }) {
   return (
     <ul>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/" className="home">Home</NavLink>
       </li>
       {isLoaded && sessionLinks}
     </ul>
