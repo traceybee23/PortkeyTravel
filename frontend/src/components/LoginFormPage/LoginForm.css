@@ -1,0 +1,49 @@
+form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: auto;
+}
+
+h1 {
+  align-self: center;
+  margin: auto;
+}
+div {
+  width: 50vw;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  display: flex;
+  margin-bottom: 20px;
+  height: 20px;
+  padding-left: 100px;
+  align-items: center;
+}
+
+
+.inputBox {
+  justify-content: right;
+  align-items: right;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  height: 40px;
+  width: 100px;
+  background: rgba(221, 127, 193, 0.979);
+  color: rgb(255, 255, 255);
+  font-size: 1.1em;
+  align-self: center;
+}
+
+button:hover {
+  cursor: pointer;
+}
