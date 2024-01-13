@@ -7,8 +7,9 @@ button {
   height: auto;
   width: 80px;
   font-size: 15px;
-  padding: 3px;
-  align-self: flex-start;
+  padding: 5px;
+  align-self: flex-end;
+  margin: 5px 0 0 0;
 }
 
 button:hover {
@@ -24,5 +25,10 @@ button:hover {
   width: fit-content;
   padding: 10px;
   margin-bottom: 10px;
-  align-self: center;
+  align-self: flex-end;
+}
+
+.home {
+  display: flex;
+  font-size: larger;
 }
