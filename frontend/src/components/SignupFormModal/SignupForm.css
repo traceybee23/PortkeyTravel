@@ -1,15 +1,19 @@
 form {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   margin: auto;
 }
 
-h1 {
+.inputForm {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
 
+}
+
+h1 {
 display: flex;
 justify-content: center;
-
 }
 
 div {
@@ -37,15 +41,11 @@ input {
   flex-direction: column;
 }
 
-button {
-  height: 40px;
-  width: 100px;
-  background: rgba(221, 127, 193, 0.979);
-  color: rgb(255, 255, 255);
-  font-size: 20px;
-  align-self: center;
-}
 
 button:hover {
   cursor: pointer;
+}
+
+div {
+  width: auto;
 }
