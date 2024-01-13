@@ -1,0 +1,49 @@
+form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.inputForm {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+
+}
+
+h1 {
+  align-self: center;
+  margin: auto;
+  padding-bottom: 20px;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+button {
+  height: 40px;
+  width: 100px;
+  background: rgba(221, 127, 193, 0.979);
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  align-self: center;
+}
+
+
+button:hover {
+  cursor: pointer;
+}
+
+.inputBox {
+  display: flex;
+  width: fit-content;
+  align-content: start;
+  margin: auto;
+}
+
+div {
+  width: auto;
+}

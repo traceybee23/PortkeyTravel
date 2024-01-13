@@ -1,0 +1,57 @@
+form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.inputForm {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+
+}
+
+h1 {
+display: flex;
+justify-content: center;
+}
+
+div {
+  width: 50vw;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  display: flex;
+  margin-bottom: 20px;
+  height: 20px;
+  padding-left: 100px;
+
+}
+
+.inputBox {
+  justify-content: right;
+  align-items: right;
+  display: flex;
+  flex-direction: column;
+}
+
+.submitButton {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+
+button:hover {
+  cursor: pointer;
+}
+
+div {
+  width: auto;
+}
