@@ -38,6 +38,12 @@ const demoReviews = [
     "review": "This was a CLEAN spot!",
     "stars": 4
   },
+  {
+    "userId": 3,
+    "spotId": 5,
+    "review": "Was very fun!",
+    "stars": 3
+  },
 ]
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {

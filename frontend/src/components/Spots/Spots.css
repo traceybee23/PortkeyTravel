@@ -1,0 +1,22 @@
+
+.spotsContainer{
+  display: flex;
+  flex-wrap: wrap;
+  flex: 0 0 0 30%;
+  justify-content: space-between;
+}
+
+.spotsCards {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  max-width: 20%;
+}
+
+.spotDeets {
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
