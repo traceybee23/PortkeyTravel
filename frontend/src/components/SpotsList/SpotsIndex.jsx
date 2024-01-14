@@ -12,6 +12,7 @@ const SpotsIndex = () => {
 
   const spots = Object.values(useSelector((state) => state.spots))
 
+
   useEffect(() => {
     dispatch(fetchSpots())
   }, [dispatch])
@@ -22,7 +23,7 @@ const SpotsIndex = () => {
       <ul className='spotsContainer'>
         {spots && spots.map((spot) => (
           <li
-            onClick={() => navigate('/')}
+            onClick={() => navigate(`/api/spots/${spot.id}`)}
             className='spotsCards'
             key={spot.id}>
             <img src={spot.previewImage} alt={spot.name} />
