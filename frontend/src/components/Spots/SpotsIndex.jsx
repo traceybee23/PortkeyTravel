@@ -1,11 +1,14 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSpots } from '../../store/spots';
+import { useNavigate } from 'react-router-dom'
 import './Spots.css'
 
 const SpotsIndex = () => {
 
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const spots = Object.values(useSelector((state) => state.spots))
 
@@ -15,10 +18,11 @@ const SpotsIndex = () => {
 
   return (
     <div className='spots'>
-      <h1>Spots</h1>
+      <h1>LairBnB</h1>
       <ul className='spotsContainer'>
         {spots && spots.map((spot) => (
           <li
+            onClick={() => navigate('/')}
             className='spotsCards'
             key={spot.id}>
             <img src={spot.previewImage} alt={spot.name} />

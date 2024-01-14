@@ -3,15 +3,18 @@ li {
   flex-direction: column;
 }
 
+#header {
+  display: flex;
+  justify-content: space-between;
+}
+
 button {
-  height: auto;
-  width: 80px;
+  width: 70px;
   font-size: 15px;
-  padding: 5px;
   align-self: flex-end;
-  margin: 5px 0 0 0;
+  margin: 1px;
   position: relative;
-  z-index: 100;
+  z-index: 2;
 }
 
 button:hover {
@@ -24,16 +27,19 @@ button:hover {
 }
 
 .profile-dropdown {
-  background-color: rgb(238, 227, 236);
+  background-color: rgba(253, 229, 223, 0.63);
   width: fit-content;
   height: fit-content;
-  padding: 10px;
-  margin: 35px 0 10px 0;
+  padding: 15px;
+  margin: 40px 0 0 0;
   align-self: flex-end;
   position: absolute;
-  z-index: 1;
 }
 
-.home {
-  font-size: larger;
+i.fa-dragon {
+  color: rgb(235, 50, 3);
+}
+
+.profileButton {
+  padding-top: 2px;
 }
