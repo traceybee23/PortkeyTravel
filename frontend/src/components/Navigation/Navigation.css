@@ -10,6 +10,8 @@ button {
   padding: 5px;
   align-self: flex-end;
   margin: 5px 0 0 0;
+  position: relative;
+  z-index: 100;
 }
 
 button:hover {
@@ -18,17 +20,20 @@ button:hover {
 
 .hidden {
   display: none;
+
 }
 
 .profile-dropdown {
   background-color: rgb(238, 227, 236);
   width: fit-content;
+  height: fit-content;
   padding: 10px;
-  margin-bottom: 10px;
+  margin: 35px 0 10px 0;
   align-self: flex-end;
+  position: absolute;
+  z-index: 1;
 }
 
 .home {
-  display: flex;
   font-size: larger;
 }

@@ -56,6 +56,6 @@ div {
   width: auto;
 }
 
-span {
+.errors {
   color: red;
 }

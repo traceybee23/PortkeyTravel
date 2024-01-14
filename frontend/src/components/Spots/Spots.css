@@ -1,22 +1,33 @@
+img {
+ height: 251.42px;
+ width: 377.52px;
+}
 
-.spotsContainer{
+.spotsContainer {
   display: flex;
   flex-wrap: wrap;
-  flex: 0 0 0 30%;
-  justify-content: space-between;
+  padding-top: 50px;
 }
 
 .spotsCards {
-  display: flex;
-  flex-direction: column;
-  padding: 5px;
-  max-width: 20%;
+  padding-bottom: 20px;
+  padding-left: 20px;
 }
 
 .spotDeets {
   display: flex;
   flex-direction: row;
-  padding: 5px;
+  padding: 10px 0 10px 0;
   justify-content: space-between;
   flex-wrap: wrap;
+}
+
+.price {
+
+  font-weight: bold;
+
+}
+
+.text {
+  font-weight: normal;
 }

@@ -23,10 +23,11 @@ const SpotsIndex = () => {
             key={spot.id}>
             <img src={spot.previewImage} alt={spot.name} />
             <div className='spotDeets'>
-            <p>{spot.city},{spot.state}</p>
-            <p>{spot.avgRating}</p>
+            <span>{spot.city},{spot.state}</span>
+            <span><i className="fa-solid fa-star" />{spot.avgRating}</span>
             </div>
-            <p>${spot.price} night</p>
+            <span className='price'>${spot.price}<span className='text'> night</span></span>
+
           </li>
         ))}
       </ul>
