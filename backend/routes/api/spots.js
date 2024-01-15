@@ -313,7 +313,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
     })
 
     if (!reviewList.length) {
-        res.json({ Reviews: "No reviews found" })
+        res.json({ Reviews: "New" })
     }
 
     res.json({ Reviews: reviewList })
@@ -412,11 +412,11 @@ router.get('/current', requireAuth, async (req, res) => {
                 if (spot.Reviews.length > 1) {
                     spot.avgRating = stars / spot.Reviews.length
                 } else {
-                    spot.avgRating = review.stars
+                    spot.avgRating = review.stars.toFixed(1)
                 }
             });
             if (!spot.avgRating) {
-                spot.avgRating = "No ratings available"
+                spot.avgRating = "New"
             }
             delete spot.Reviews
         })
@@ -694,11 +694,11 @@ router.get('/', validateQueries, async (req, res, next) => {
             if (spot.Reviews.length > 1) {
                 spot.avgRating = stars / spot.Reviews.length
             } else {
-                spot.avgRating = review.stars
+                spot.avgRating = review.stars.toFixed(1)
             }
         });
         if (!spot.avgRating) {
-            spot.avgRating = "No ratings available"
+            spot.avgRating = "New"
         }
         delete spot.Reviews
     })
