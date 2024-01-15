@@ -559,14 +559,14 @@ router.get('/:spotId', async (req, res, next) => {
             if (spot.Reviews.length > 1) {
                 spotData.avgStarRating = stars / spotData.Reviews.length
             } else {
-                spotData.avgStarRating = review.stars
+                spotData.avgStarRating = review.stars.toFixed(1)
             }
         })
         if(!spotData.numReviews){
-            spotData.numReviews = "No available reviews"
+            spotData.numReviews = null
         }
         if(!spotData.avgStarRating) {
-            spotData.avgStarRating = "No available ratings"
+            spotData.avgStarRating = "New"
         }
         delete spotData.Reviews
 
