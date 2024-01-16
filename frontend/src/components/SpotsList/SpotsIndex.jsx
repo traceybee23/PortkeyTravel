@@ -18,11 +18,12 @@ const SpotsIndex = () => {
     <div className='spots'>
       <ul className='spotsContainer'>
         {spots && spots.map((spot) => (
+
           <li
             className='spotsCards'
             key={spot.id}>
             <Link style={{textDecoration: 'none', color: 'black'}} to={`/spots/${spot.id}`}>
-              <img src={spot.previewImage} title={spot.name} />
+              <img src={spot.previewImage} title={spot.name}/>
               <div className='spotDeets'>
                 <span>{spot.city},{spot.state}</span>
                 <span><i className="fa-solid fa-star" />{spot.avgRating}</span>
