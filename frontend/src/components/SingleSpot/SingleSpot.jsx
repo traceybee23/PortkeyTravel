@@ -51,7 +51,6 @@ const SingleSpot = () => {
         {spot.numReviews && spot.numReviews > 1 &&
           <>
             <span>&nbsp;·&nbsp;{spot.numReviews} Reviews </span>
-            <span>{ }</span>
           </>
         }
         {spot.numReviews === 1 &&

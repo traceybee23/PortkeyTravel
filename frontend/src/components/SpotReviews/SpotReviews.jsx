@@ -16,6 +16,14 @@ const SpotReviews = () => {
     dispatch(fetchSpotReviews(spotId))
   }, [dispatch, spotId])
 
+
+  const getDate = (date) => {
+    const newDate = new Date(date);
+    const month = newDate.toLocaleString('default', { month: 'long' });
+    const year = newDate.getFullYear();
+    return [month,' ',year]
+  }
+
   return (
     <>
       {reviews && reviews.map((review) => (
@@ -27,10 +35,9 @@ const SpotReviews = () => {
           </span>
           <span style={{ fontSize: '14px', color: 'grey' }}>
             {review.createdAt &&
-            review.createdAt
+              getDate(review.createdAt)
             }
           </span>
-
           <span style={{ fontSize: '12px' }}>
             {review.review} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Lorem ipsum dolor sit amet consectetur adipiscing elit ut aliquam. Pulvinar elementum integer enim neque volutpat ac tincidunt vitae semper. Mauris sit amet massa vitae tortor condimentum lacinia quis.
           </span>
