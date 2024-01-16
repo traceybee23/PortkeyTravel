@@ -6,6 +6,9 @@ li {
 #header {
   display: flex;
   justify-content: space-between;
+  padding-left: 0;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgb(214, 214, 214);
 }
 
 button {
@@ -38,8 +41,15 @@ button:hover {
 
 i.fa-dragon {
   color: rgb(235, 50, 3);
+
 }
 
 .profileButton {
   padding-top: 2px;
+}
+
+.logo {
+  color: rgb(235, 50, 3);
+  font-weight: bold;
+  text-decoration: none;
 }

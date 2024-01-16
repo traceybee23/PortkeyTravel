@@ -11,7 +11,7 @@ function Navigation({ isLoaded }) {
   return (
     <ul id="header">
       <li>
-        <NavLink to="/"><i className="fa-solid fa-dragon fa-3x"/></NavLink>
+        <NavLink className='logo' to="/"><i className="fa-solid fa-dragon fa-3x"/>LairBnB</NavLink>
       </li>
       {isLoaded && (
         <li className="profileButton">

@@ -27,6 +27,18 @@ const demoImages = [
     "preview": true
   },
   {
+    "imageableId": "1",
+    "imageableType": "Spot",
+    "url": "https://images.unsplash.com/photo-1556912173-3bb406ef7e77?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGtpdGNoZW58ZW58MHx8MHx8fDA%3D",
+    "preview": true
+  },
+  {
+    "imageableId": "1",
+    "imageableType": "Spot",
+    "url": "https://images.unsplash.com/photo-1521747116042-5a810fda9664?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzd8fGJhY2t5YXJkJTIwc2FuJTIwZnJhbmNpc2NvfGVufDB8fDB8fHww",
+    "preview": true
+  },
+  {
     "imageableId": "2",
     "imageableType": "Spot",
     "url": "https://images.unsplash.com/photo-1594064424123-5ef1eb9070ee?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHRyb3BpY2FsJTIwaG91c2V8ZW58MHx8MHx8fDA%3D",
