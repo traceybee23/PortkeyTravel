@@ -6,6 +6,7 @@ import * as sessionActions from './store/session'
 import SpotsIndex from './components/SpotsList/SpotsIndex';
 import SingleSpot from './components/SingleSpot/SingleSpot';
 import { Navigate } from 'react-router-dom';
+import SpotReviews from './components/SpotReviews';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: '/spots/:spotId',
         element: <SingleSpot />
+      },
+      {
+        path: '/spots/:spotId/reviews',
+        element: <SpotReviews />
       }
     ]
   },

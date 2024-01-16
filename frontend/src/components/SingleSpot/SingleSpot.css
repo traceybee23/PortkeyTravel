@@ -1,5 +1,4 @@
 .singleSpotDeets {
-  border-bottom: solid grey 1px;
   padding-bottom: 15px;
   max-width: 980px;
   margin: auto;
@@ -92,7 +91,8 @@
 }
 
 .reviewContainer {
-  margin-bottom: 0px;
+  border-top: solid grey 1px;
+  margin: auto;
   font-size: larger;
   font-weight: bold;
 }

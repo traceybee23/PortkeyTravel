@@ -33,7 +33,7 @@ export const fetchSingleSpot = (spotId) => async (dispatch) => {
   }
 }
 
-const spotsReducer = (state = { }, action) => {
+const spotsReducer = (state = {}, action) => {
   switch (action.type) {
     case LOAD_SPOTS: {
       const spotsState = {...state}
