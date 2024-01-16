@@ -9,12 +9,12 @@ function Navigation({ isLoaded }) {
 
 
   return (
-    <ul>
+    <ul id="header">
       <li>
-        <NavLink to="/" className="home">Home</NavLink>
+        <NavLink className='logo' to="/"><i className="fa-solid fa-dragon fa-3x"/>LairBnB</NavLink>
       </li>
       {isLoaded && (
-        <li>
+        <li className="profileButton">
           <ProfileButton user={sessionUser} />
         </li>
       )}

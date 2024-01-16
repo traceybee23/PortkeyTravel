@@ -1,0 +1,94 @@
+.singleSpotDeets {
+  border-bottom: solid grey 1px;
+  padding-bottom: 15px;
+  max-width: 980px;
+}
+
+.imageContainer {
+  display: grid;
+  grid-template-areas:
+      "a a b c"
+      "a a d e";
+  grid-template-columns: 50% ;
+  grid-gap: 7px;
+}
+
+.imageContainer img:nth-child(1) {
+  grid-area: a;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-width: fit-content;
+  max-height: fit-content;
+}
+.imageContainer img:nth-child(2) {
+  grid-area: b;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  }
+
+.imageContainer img:nth-child(3) {
+  grid-area: c;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imageContainer img:nth-child(4) {
+  grid-area: d;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  }
+
+.imageContainer img:nth-child(5) {
+  grid-area: e;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.spotImages {
+  padding: 3px;
+  display: flex;
+}
+
+.spotDescription {
+  max-width: 700px;
+  display: flex;
+  margin: 0;
+}
+
+.reserveContainer {
+  width: 300px;
+  height: 100px;
+  border: solid black 1px;
+  border-radius: 10px;
+  padding: 5px;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.detailsContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+h3 {
+  margin: 10px 0 5px 0;
+
+}
+
+.reserveContainer button {
+  align-self: center;
+  width: 250px;
+}
+
+.reserveSpans {
+
+  width: fit-content;
+  align-self: center;
+  padding: 15px;
+}

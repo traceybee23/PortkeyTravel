@@ -53,9 +53,12 @@ function LoginFormModal() {
             />
           </div>
         </label>
-        {errors.credential && <p>{errors.credential}</p>}
+        {errors.credential && <span className='errors'>{errors.credential}</span>}
         <div className="login">
-          <button type="submit">Log In</button>
+          <button
+          type="submit"
+          disabled={credential.length < 4}
+          >Log In</button>
         </div>
       </form>
     </div>

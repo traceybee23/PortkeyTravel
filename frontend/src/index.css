@@ -1,1 +1,5 @@
 /* TODO: Add sitewide styles */
+html {
+  max-width: 1666px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

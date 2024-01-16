@@ -55,7 +55,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
+        {errors.email && <span className='errors'>{errors.email}</span>}
         <label>
           Username
           <input
@@ -65,7 +65,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.username && <p>{errors.username}</p>}
+        {errors.username && <span className='errors'>{errors.username}</span>}
         <label>
           First Name
           <input
@@ -75,7 +75,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.firstName && <p>{errors.firstName}</p>}
+        {errors.firstName && <span className='errors'>{errors.firstName}</span>}
         <label>
           Last Name
           <input
@@ -85,7 +85,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.lastName && <p>{errors.lastName}</p>}
+        {errors.lastName && <span className='errors'>{errors.lastName}</span>}
         <label>
           Password
           <input
@@ -95,7 +95,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.password && <p>{errors.password}</p>}
+        {errors.password && <span className='errors'>{errors.password}</span>}
         <label>
           Confirm Password
           <input
@@ -105,7 +105,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+        {errors.confirmPassword && <span className='errors'>{errors.confirmPassword}</span>}
         <div className='submitButton'>
           <button type="submit">Sign Up</button>
         </div>

@@ -318,7 +318,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
     })
 
     if (!reviewList.length) {
-        res.json({ Reviews: "No reviews found" })
+        res.json({ Reviews: "New" })
     }
 
     res.json({ Reviews: reviewList })
@@ -417,11 +417,11 @@ router.get('/current', requireAuth, async (req, res) => {
                 if (spot.Reviews.length > 1) {
                     spot.avgRating = stars / spot.Reviews.length
                 } else {
-                    spot.avgRating = review.stars
+                    spot.avgRating = review.stars.toFixed(1)
                 }
             });
             if (!spot.avgRating) {
-                spot.avgRating = "No ratings available"
+                spot.avgRating = "New"
             }
             delete spot.Reviews
         })
@@ -562,14 +562,14 @@ router.get('/:spotId', async (req, res, next) => {
             if (spot.Reviews.length > 1) {
                 spotData.avgStarRating = stars / spotData.Reviews.length
             } else {
-                spotData.avgStarRating = review.stars
+                spotData.avgStarRating = review.stars.toFixed(1)
             }
         })
-        if (!spotData.numReviews) {
-            spotData.numReviews = "No available reviews"
+        if(!spotData.numReviews){
+            spotData.numReviews = null
         }
-        if (!spotData.avgStarRating) {
-            spotData.avgStarRating = "No available ratings"
+        if(!spotData.avgStarRating) {
+            spotData.avgStarRating = "New"
         }
         delete spotData.Reviews
 
@@ -697,11 +697,11 @@ router.get('/', validateQueries, async (req, res, next) => {
             if (spot.Reviews.length > 1) {
                 spot.avgRating = stars / spot.Reviews.length
             } else {
-                spot.avgRating = review.stars
+                spot.avgRating = review.stars.toFixed(1)
             }
         });
         if (!spot.avgRating) {
-            spot.avgRating = "No ratings available"
+            spot.avgRating = "New"
         }
         delete spot.Reviews
     })

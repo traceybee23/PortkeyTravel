@@ -13,8 +13,6 @@ form {
 
 h1 {
   align-self: center;
-  margin: auto;
-  padding-bottom: 20px;
 }
 
 .login {
@@ -26,7 +24,7 @@ h1 {
 button {
   height: 40px;
   width: 100px;
-  background: rgba(221, 127, 193, 0.979);
+  background: rgb(235, 50, 3);
   color: rgb(255, 255, 255);
   font-size: 20px;
   align-self: center;
