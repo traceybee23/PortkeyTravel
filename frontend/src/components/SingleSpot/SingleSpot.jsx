@@ -58,7 +58,7 @@ const SingleSpot = () => {
           <span> · {spot.numReviews} Review </span>
         }
       </div>
-      <div className="reviewsList">
+      <div>
         <SpotReviews />
       </div>
     </div>

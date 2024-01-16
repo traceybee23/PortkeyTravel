@@ -93,6 +93,8 @@
 .reviewContainer {
   border-top: solid grey 1px;
   margin: auto;
-  font-size: larger;
+  font-size: 20px;
   font-weight: bold;
+  padding: 10px 0;
 }
+
