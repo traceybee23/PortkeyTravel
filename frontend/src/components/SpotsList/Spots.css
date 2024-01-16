@@ -1,21 +1,20 @@
 img {
  height: 251.42px;
  width: 377.52px;
- flex-grow: inherit;
+
 }
 
 .spotsContainer {
   display: flex;
   flex-wrap: wrap;
-  padding: 15px 0 0 0;
-  margin: 10px 20px;
+  padding: 15px 15px 0 0;
 
 }
 
 .spotsCards {
   padding-bottom: 20px;
   padding-left: 20px;
-
+  margin: auto;
 }
 
 .spotDeets {
@@ -28,7 +27,6 @@ img {
 }
 
 .price {
-
   font-weight: bold;
 
 }
@@ -40,4 +38,5 @@ img {
 
 .spotsCards:hover {
   cursor: pointer;
+
 }
