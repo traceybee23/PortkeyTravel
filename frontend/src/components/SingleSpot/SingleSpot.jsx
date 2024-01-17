@@ -15,9 +15,7 @@ const SingleSpot = () => {
 
   useEffect(() => {
     dispatch(fetchSingleSpot(spotId));
-    // return () => {
-    //   dispatch(clearSpotReviews());
-    // }
+
   }, [dispatch, spotId])
 
   return (
