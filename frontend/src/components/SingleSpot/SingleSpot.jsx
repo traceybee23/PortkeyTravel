@@ -14,9 +14,11 @@ const SingleSpot = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchSingleSpot(spotId))
+    dispatch(fetchSingleSpot(spotId));
+    // return () => {
+    //   dispatch(clearSpotReviews());
+    // }
   }, [dispatch, spotId])
-
 
   return (
     spot && spot.Owner &&
@@ -59,11 +61,11 @@ const SingleSpot = () => {
           }
         </div>
         <div>
+        </div>
           {
             spot.numReviews >= 1 &&
-            <SpotReviews />
+            <SpotReviews spotId={spotId} />
           }
-        </div>
       </div>
     </>
   )

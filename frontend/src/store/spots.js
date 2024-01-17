@@ -37,14 +37,16 @@ export const fetchSingleSpot = (spotId) => async (dispatch) => {
 const spotsReducer = (state = {}, action) => {
   switch (action.type) {
     case LOAD_SPOTS: {
-      const spotsState = {...state}
+      const spotsState = {}
       action.spots.Spots.forEach((spot) => {
         spotsState[spot.id] = spot;
       })
       return spotsState
     }
     case SINGLE_SPOT: {
-      return { ...state, [action.spot.id]: action.spot }
+      const spotsState = {}
+       spotsState[action.spot.id]= action.spot
+       return spotsState
     }
     default:
       return state

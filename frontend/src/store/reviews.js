@@ -1,9 +1,14 @@
 const LOAD_SPOT_REVIEWS = 'reviews/LOAD_REVIEWS'
+const CLEAR_SPOT_REVIEWS = 'reviews/CLEAR_SPOT_REVIEWS'
 
 const loadSpotReviews = (reviews, spotId) => ({
   type: LOAD_SPOT_REVIEWS,
   reviews,
   spotId
+})
+
+export const clearSpotReviews = () => ({
+  type: CLEAR_SPOT_REVIEWS
 })
 
 export const fetchSpotReviews = (spotId) => async (dispatch) => {
@@ -26,6 +31,9 @@ const reviewsReducer = (state = {}, action) => {
           reviewState[review.id] = review
         })
       return reviewState
+    }
+    case CLEAR_SPOT_REVIEWS: {
+      return {};
     }
     default:
       return state

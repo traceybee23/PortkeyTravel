@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSpotReviews } from "../../store/reviews";
+import { fetchSpotReviews, clearSpotReviews } from "../../store/reviews";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+
 import './SpotReviews.css'
 
 const SpotReviews = () => {
@@ -12,8 +13,12 @@ const SpotReviews = () => {
 
   const reviews = Object.values(useSelector((state) => state.reviews))
 
+
   useEffect(() => {
     dispatch(fetchSpotReviews(spotId))
+    return () => {
+      dispatch(clearSpotReviews());
+    }
   }, [dispatch, spotId])
 
 
