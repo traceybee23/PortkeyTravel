@@ -36,7 +36,16 @@ img {
 
 }
 
-.spotsCards:hover {
+.tooltip {
+  display: none;
+  position: absolute;
+  border: 1px solid black;
+  background-color: white;
+  padding: 3px;
   cursor: pointer;
+  margin: 130px;
+}
 
+.spotsCards:hover .tooltip {
+  display: block;
 }

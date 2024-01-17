@@ -21,7 +21,8 @@ const SpotsIndex = () => {
           className='spotsCards'
           key={spot.id}>
           <Link style={{ textDecoration: 'none', color: 'black' }} to={`/spots/${spot.id}`}>
-            <img src={spot.previewImage} title={spot.name} />
+            <span className='tooltip'>{spot.name}</span>
+            <img src={spot.previewImage} alt={spot.name} />
             <div className='spotDeets'>
               <span>{spot.city},{spot.state}</span>
               <span><i className="fa-solid fa-star" />&nbsp;{spot.avgRating}</span>
