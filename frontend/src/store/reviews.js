@@ -1,8 +1,9 @@
 const LOAD_SPOT_REVIEWS = 'reviews/LOAD_REVIEWS'
 
-const loadSpotReviews = (reviews) => ({
+const loadSpotReviews = (reviews, spotId) => ({
   type: LOAD_SPOT_REVIEWS,
-  reviews
+  reviews,
+  spotId
 })
 
 export const fetchSpotReviews = (spotId) => async (dispatch) => {
@@ -10,7 +11,7 @@ export const fetchSpotReviews = (spotId) => async (dispatch) => {
 
   if (response.ok) {
     const spotReviews = await response.json();
-    dispatch(loadSpotReviews(spotReviews))
+    dispatch(loadSpotReviews(spotReviews, spotId))
   } else {
     const errors = await response.json();
     return errors;

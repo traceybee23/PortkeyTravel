@@ -6,9 +6,10 @@ const loadSpots = (spots) => ({
   spots
 })
 
-const loadSingleSpot = (spot) => ({
+const loadSingleSpot = (spot, spotId) => ({
   type: SINGLE_SPOT,
-  spot
+  spot,
+  spotId
 })
 
 
@@ -26,7 +27,7 @@ export const fetchSingleSpot = (spotId) => async (dispatch) => {
 
   if (response.ok) {
     const spotDeets = await response.json();
-    dispatch(loadSingleSpot(spotDeets))
+    dispatch(loadSingleSpot(spotDeets, spotId))
   } else {
     const errors = await response.json();
     return errors;

@@ -55,7 +55,7 @@ const SingleSpot = () => {
             </>
           }
           {spot.numReviews === 1 &&
-            <span> · {spot.numReviews} Review </span>
+            <span>&nbsp;·&nbsp;{spot.numReviews} Review </span>
           }
         </div>
         <div>
