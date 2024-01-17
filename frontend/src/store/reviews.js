@@ -8,7 +8,7 @@ const loadSpotReviews = (reviews) => ({
 export const fetchSpotReviews = (spotId) => async (dispatch) => {
   const response = await fetch(`/api/spots/${spotId}/reviews`)
 
-  if(response.ok) {
+  if (response.ok) {
     const spotReviews = await response.json();
     dispatch(loadSpotReviews(spotReviews))
   } else {
@@ -21,11 +21,9 @@ const reviewsReducer = (state = {}, action) => {
   switch (action.type) {
     case LOAD_SPOT_REVIEWS: {
       const reviewState = {}
-      if (action.reviews.Reviews !== "New" ) {
-      action.reviews.Reviews.forEach((review) => {
-        reviewState[review.id] = review
-      })
-      }
+        action.reviews.Reviews.forEach((review) => {
+          reviewState[review.id] = review
+        })
       return reviewState
     }
     default:
