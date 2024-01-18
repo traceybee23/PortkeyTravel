@@ -23,7 +23,7 @@ div {
 label {
   display: flex;
   flex-direction: column;
-  align-items: center;
+
 }
 
 input {
