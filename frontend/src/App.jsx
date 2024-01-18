@@ -7,6 +7,7 @@ import SpotsIndex from './components/SpotsList/SpotsIndex';
 import SingleSpot from './components/SingleSpot/SingleSpot';
 import { Navigate } from 'react-router-dom';
 import SpotReviews from './components/SpotReviews';
+import CreateSpotForm from './components/CreateSpotForm/CreateSpotForm';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <SpotsIndex/>
+        element: <SpotsIndex />
       },
       {
         path: '/spots/:spotId',
@@ -41,7 +42,11 @@ const router = createBrowserRouter([
       {
         path: '/spots/:spotId/reviews',
         element: <SpotReviews />
-      }
+      },
+      {
+        path: '/spots/new',
+        element: <CreateSpotForm />
+      },
     ]
   },
   {

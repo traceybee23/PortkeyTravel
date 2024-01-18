@@ -1,5 +1,7 @@
+import { csrfFetch } from './csrf'
 const LOAD_SPOTS = 'spots/LOAD_SPOTS'
 const SINGLE_SPOT = 'spots/SINGLE_SPOT'
+
 
 const loadSpots = (spots) => ({
   type: LOAD_SPOTS,
@@ -24,7 +26,6 @@ export const fetchSpots = () => async (dispatch) => {
 
 export const fetchSingleSpot = (spotId) => async (dispatch) => {
   const response = await fetch(`/api/spots/${spotId}`)
-
   if (response.ok) {
     const spotDeets = await response.json();
     dispatch(loadSingleSpot(spotDeets, spotId))
@@ -33,6 +34,22 @@ export const fetchSingleSpot = (spotId) => async (dispatch) => {
     return errors;
   }
 }
+
+export const createSpot = (spot) => async (dispatch) => {
+
+  let response = await csrfFetch("/api/spots", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(spot)
+  });
+  response = await response.json();
+  console.log(response)
+  if(response.ok) {
+    dispatch(loadSingleSpot(response));
+    return response
+  }
+}
+
 
 const spotsReducer = (state = {}, action) => {
   switch (action.type) {
