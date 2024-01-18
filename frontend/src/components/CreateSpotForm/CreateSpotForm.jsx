@@ -166,7 +166,7 @@ const CreateSpotForm = () => {
           />
           {errors.previewImage && <span className="errors">{errors.previewImage}</span>}
           <input
-            type="src"
+            type="text"
             value={image1}
             onChange={(e) => setImage1(e.target.value)}
             placeholder="Image URL"
@@ -174,7 +174,7 @@ const CreateSpotForm = () => {
           />
           {errors.image && <span className="errors">{errors.image}</span>}
           <input
-            type="src"
+            type="text"
             value={image2}
             onChange={(e) => setImage2(e.target.value)}
             placeholder="Image URL"
@@ -182,7 +182,7 @@ const CreateSpotForm = () => {
           />
           {errors.image && <span className="errors">{errors.image}</span>}
           <input
-            type="src"
+            type="text"
             value={image3}
             onChange={(e) => setImage3(e.target.value)}
             placeholder="Image URL"
@@ -190,7 +190,7 @@ const CreateSpotForm = () => {
           />
           {errors.image && <span className="errors">{errors.image}</span>}
           <input
-            type="src"
+            type="text"
             value={image4}
             onChange={(e) => setImage4(e.target.value)}
             placeholder="Image URL"

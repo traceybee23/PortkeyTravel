@@ -15,8 +15,8 @@ const SingleSpot = () => {
 
   useEffect(() => {
     dispatch(fetchSingleSpot(spotId));
-
   }, [dispatch, spotId])
+
 
   return (
     spot && spot.Owner &&
@@ -26,7 +26,7 @@ const SingleSpot = () => {
           <h2>{spot.name}</h2>
           <h4>{spot.city}, {spot.state}, {spot.country}</h4>
           <div className="imageContainer">
-            {spot.SpotImages && spot.SpotImages.map(image => (
+            {spot.SpotImages !== "No available spot images" && spot.SpotImages.map(image => (
               <img className="spotImages" key={image.id} src={image.url} />
             ))}
           </div>
