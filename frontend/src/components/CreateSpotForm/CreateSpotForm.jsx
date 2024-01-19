@@ -75,7 +75,7 @@ const CreateSpotForm = () => {
   const reset = () => {
     setCountry('');
     setAddress(''),
-      setCity('');
+    setCity('');
     setState('');
     setLat('');
     setLng('');

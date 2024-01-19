@@ -101,7 +101,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.FLOAT,
       allowNull: false,
       validate: {
-        notNull: { msg: "Latitude is not valid" },
+        notEmpty: { msg: "Latitude is not valid" },
         max: { args: 90, msg: "Latitude is not valid" },
         min: { args: -90, msg: "Latitude is not valid" }
       }
@@ -110,7 +110,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.FLOAT,
       allowNull: false,
       validate: {
-        notNull: {msg: "Longitude is not valid"},
+        notEmpty: {msg: "Longitude is not valid"},
         max: { args: 180, msg: "Longitude is not valid" },
         min: { args: -180, msg: "Longitude is not valid" },
       }
@@ -121,7 +121,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: { args: [4, 50], msg: "Name must be less than 50 characters"},
         notNull: {msg: "Name must be less than 50 characters"},
-        notEmpty: { msg: "Name must be less than 50 characters" }
+        notEmpty: { msg: "Name is required" }
       }
     },
     description: {
@@ -129,14 +129,14 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notNull: {msg: "Description is required"},
-        notEmpty: {msg: "Description is required"}
+        notEmpty: {msg: "Description needs a minimum of 30 characters"}
       }
     },
     price: {
       type: DataTypes.FLOAT,
       allowNull: false,
       validate: {
-        notNull: {msg: "Price per day is required"},
+        notEmpty: {msg: "Price is required"},
         min: { args: 1, msg: "Price per day is required" },
       }
     }
