@@ -51,7 +51,6 @@ const CreateSpotForm = () => {
 
     dispatch(createSpot(newSpot))
       .then((spot) => {
-        console.log(spot)
         const imageArr = Object.values(imageInfo)
         let spotImg;
         imageArr.map(img => {
@@ -70,6 +69,7 @@ const CreateSpotForm = () => {
           setErrors(data.errors)
         }
       })
+
   }
 
   const reset = () => {
@@ -157,17 +157,17 @@ const CreateSpotForm = () => {
           {errors.description && <span className="errors">{errors.description}</span>}
           <span>Create a title for your spot</span>
           <span>Catch guests&apos; attention with a spot title that highlights what makes your place special.</span>
-          <input
+          <input style={{marginBottom: "0"}}
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Name of your spot"
             name="name"
           />
-          {errors.name && <span className="errors">{errors.name}</span>}
+          {errors.name && <span className="errors" >{errors.name}</span>}
           <span>Set a base price for your spot</span>
           <span>Competitive pricing can help your listing stand out and rank higher in search results.</span>
-          <input
+          <input style={{marginBottom: "0"}}
             type="text"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
@@ -188,7 +188,7 @@ const CreateSpotForm = () => {
             placeholder="Preview Image URL"
             name="previewImage"
           />
-          {errors.previewImage && <span className="errors">{errors.previewImage}</span>}
+          {errors.url && <span className="errors">{errors.url}</span>}
           <label>Image</label>
           <input
             type="text"
