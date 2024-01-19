@@ -93,6 +93,7 @@ const CreateSpotForm = () => {
           <span>Where&apos;s your place located?</span>
           <span>Guests will only get your exact address once they booked a reservation</span>
           <label>Country</label>
+          {errors.country && <span className="errors">{errors.country}</span>}
           <input
             type="text"
             value={country}
@@ -100,8 +101,8 @@ const CreateSpotForm = () => {
             placeholder="Country"
             name="country"
           />
-          {errors.country && <span className="errors">{errors.country}</span>}
           <label>Address</label>
+          {errors.address && <span className="errors">{errors.address}</span>}
           <input
             type="text"
             value={address}
@@ -109,8 +110,8 @@ const CreateSpotForm = () => {
             placeholder="Address"
             name="address"
           />
-          {errors.address && <span className="errors">{errors.address}</span>}
           <label>City</label>
+          {errors.city && <span className="errors">{errors.city}</span>}
           <input
             type="text"
             value={city}
@@ -118,8 +119,8 @@ const CreateSpotForm = () => {
             placeholder="City"
             name="city"
           />
-          {errors.city && <span className="errors">{errors.city}</span>}
           <label>State</label>
+          {errors.state && <span className="errors">{errors.state}</span>}
           <input
             type="text"
             value={state}
@@ -127,8 +128,8 @@ const CreateSpotForm = () => {
             placeholder="State"
             name="state"
           />
-          {errors.state && <span className="errors">{errors.state}</span>}
           <label>Latitude</label>
+          {errors.lat && <span className="errors">{errors.lat}</span>}
           <input
             type="text"
             value={lat}
@@ -136,8 +137,8 @@ const CreateSpotForm = () => {
             placeholder="Latitude"
             name="lat"
           />
-          {errors.lat && <span className="errors">{errors.lat}</span>}
           <label>Longitude</label>
+          {errors.lng && <span className="errors">{errors.lng}</span>}
           <input
             type="text"
             value={lng}
@@ -145,8 +146,8 @@ const CreateSpotForm = () => {
             placeholder="Longitude"
             name="lng"
           />
-          {errors.lng && <span className="errors">{errors.lng}</span>}
-          <label>Description</label>
+          <span>Describe your place to guests</span>
+          <span>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</span>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -154,7 +155,8 @@ const CreateSpotForm = () => {
             name="description"
           />
           {errors.description && <span className="errors">{errors.description}</span>}
-          <label>Name</label>
+          <span>Create a title for your spot</span>
+          <span>Catch guests&apos; attention with a spot title that highlights what makes your place special.</span>
           <input
             type="text"
             value={name}
@@ -163,7 +165,8 @@ const CreateSpotForm = () => {
             name="name"
           />
           {errors.name && <span className="errors">{errors.name}</span>}
-          <label>Price</label>
+          <span>Set a base price for your spot</span>
+          <span>Competitive pricing can help your listing stand out and rank higher in search results.</span>
           <input
             type="text"
             value={price}
@@ -172,7 +175,8 @@ const CreateSpotForm = () => {
             name="price"
           />
           {errors.price && <span className="errors">{errors.price}</span>}
-          <label>PreviewImage</label>
+          <span>Liven up your spot with photos</span>
+          <span>Submit a link to at least one photo to publish your spot.</span>
           <input
             type="text"
             value={url}
