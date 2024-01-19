@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { createSpot } from "../../store/spots";
+import { createSpot, createSpotImage } from "../../store/spots";
 import './CreateSpotForm.css'
 
 const CreateSpotForm = () => {
@@ -18,19 +18,17 @@ const CreateSpotForm = () => {
   const [description, setDescription] = useState('');
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
-  const [previewImage, setPreviewImage] = useState('');
-  const [image1, setImage1] = useState('');
-  const [image2, setImage2] = useState('');
-  const [image3, setImage3] = useState('');
-  const [image4, setImage4] = useState('');
+  const [url, setUrl] = useState('')
+  const [img1, setImg1] = useState('')
+  const [img2, setImg2] = useState('')
+  const [img3, setImg3] = useState('')
+  const [img4, setImg4] = useState('')
   const [errors, setErrors] = useState({});
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors({})
-
-    if(!lat.length) setErrors(errors.lat ='Latitude is required')
 
     const newSpot = {
       country,
@@ -41,41 +39,50 @@ const CreateSpotForm = () => {
       lng,
       description,
       name,
-      price,
-      previewImage,
-      image1,
-      image2,
-      image3,
-      image4
+      price
     }
-    return dispatch(createSpot(newSpot))
-    .then(reset())
-    .catch(
-      async (res) => {
-        const data = await res.json();
+    const imageInfo = {
+      url,
+      img1,
+      img2,
+      img3,
+      img4
+    }
+
+    dispatch(createSpot(newSpot))
+      .then((spot) => {
+        console.log(spot)
+        const imageArr = Object.values(imageInfo)
+        let spotImg;
+        imageArr.map(img => {
+          spotImg = {
+            id: spot.id,
+            url: img,
+            preview: true
+          }
+          return dispatch(createSpotImage(spot.id, spotImg))
+        })
+      })
+      .then(reset())
+      .catch(async (response) => {
+        const data = await response.json();
         if (data && data.errors) {
           setErrors(data.errors)
         }
-      }
-    )
-
+      })
   }
 
   const reset = () => {
     setCountry('');
     setAddress(''),
-    setCity('');
+      setCity('');
     setState('');
     setLat('');
     setLng('');
     setDescription('');
     setName('');
     setPrice('');
-    setPreviewImage('');
-    setImage1('');
-    setImage2('');
-    setImage3('');
-    setImage4('');
+    setUrl('')
   }
 
   return (
@@ -94,6 +101,7 @@ const CreateSpotForm = () => {
             name="country"
           />
           {errors.country && <span className="errors">{errors.country}</span>}
+          <label>Address</label>
           <input
             type="text"
             value={address}
@@ -102,6 +110,7 @@ const CreateSpotForm = () => {
             name="address"
           />
           {errors.address && <span className="errors">{errors.address}</span>}
+          <label>City</label>
           <input
             type="text"
             value={city}
@@ -110,6 +119,7 @@ const CreateSpotForm = () => {
             name="city"
           />
           {errors.city && <span className="errors">{errors.city}</span>}
+          <label>State</label>
           <input
             type="text"
             value={state}
@@ -118,6 +128,7 @@ const CreateSpotForm = () => {
             name="state"
           />
           {errors.state && <span className="errors">{errors.state}</span>}
+          <label>Latitude</label>
           <input
             type="text"
             value={lat}
@@ -126,6 +137,7 @@ const CreateSpotForm = () => {
             name="lat"
           />
           {errors.lat && <span className="errors">{errors.lat}</span>}
+          <label>Longitude</label>
           <input
             type="text"
             value={lng}
@@ -134,6 +146,7 @@ const CreateSpotForm = () => {
             name="lng"
           />
           {errors.lng && <span className="errors">{errors.lng}</span>}
+          <label>Description</label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -141,6 +154,7 @@ const CreateSpotForm = () => {
             name="description"
           />
           {errors.description && <span className="errors">{errors.description}</span>}
+          <label>Name</label>
           <input
             type="text"
             value={name}
@@ -149,6 +163,7 @@ const CreateSpotForm = () => {
             name="name"
           />
           {errors.name && <span className="errors">{errors.name}</span>}
+          <label>Price</label>
           <input
             type="text"
             value={price}
@@ -157,46 +172,68 @@ const CreateSpotForm = () => {
             name="price"
           />
           {errors.price && <span className="errors">{errors.price}</span>}
+          <label>PreviewImage</label>
           <input
-            type="src"
-            value={previewImage}
-            onChange={(e) => setPreviewImage(e.target.value)}
+            type="text"
+            value={url}
+            onChange={(e) => ({
+              previewImage: true,
+              url: setUrl(e.target.value)
+            })
+            }
             placeholder="Preview Image URL"
             name="previewImage"
           />
           {errors.previewImage && <span className="errors">{errors.previewImage}</span>}
+          <label>Image</label>
           <input
             type="text"
-            value={image1}
-            onChange={(e) => setImage1(e.target.value)}
-            placeholder="Image URL"
-            name="image1"
-          />
-          {errors.image && <span className="errors">{errors.image}</span>}
-          <input
-            type="text"
-            value={image2}
-            onChange={(e) => setImage2(e.target.value)}
+            value={img1}
+            onChange={(e) => ({
+              previewImage: false,
+              url: setImg1(e.target.value)
+            })
+            }
             placeholder="Image URL"
             name="image"
           />
           {errors.image && <span className="errors">{errors.image}</span>}
+          <label>Image</label>
           <input
             type="text"
-            value={image3}
-            onChange={(e) => setImage3(e.target.value)}
+            value={img2}
+            onChange={(e) => ({
+              previewImage: false,
+              url: setImg2(e.target.value)
+            })
+            }
             placeholder="Image URL"
             name="image"
           />
-          {errors.image && <span className="errors">{errors.image}</span>}
+          <label>Image</label>
           <input
             type="text"
-            value={image4}
-            onChange={(e) => setImage4(e.target.value)}
+            value={img3}
+            onChange={(e) => ({
+              previewImage: false,
+              url: setImg3(e.target.value)
+            })
+            }
             placeholder="Image URL"
             name="image"
           />
-          {errors.image && <span className="errors">{errors.image}</span>}
+          <label>Image</label>
+          <input
+            type="text"
+            value={img4}
+            onChange={(e) => ({
+              previewImage: false,
+              url: setImg4(e.target.value)
+            })
+            }
+            placeholder="Image URL"
+            name="image"
+          />
           <button type="submit">Create Spot</button>
         </form>
       }

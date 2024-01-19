@@ -1,18 +1,23 @@
 import { csrfFetch } from './csrf'
 const LOAD_SPOTS = 'spots/LOAD_SPOTS'
 const SINGLE_SPOT = 'spots/SINGLE_SPOT'
-
+const LOAD_SPOT_IMAGES = 'images/LOAD_SPOT_IMAGES'
 
 const loadSpots = (spots) => ({
   type: LOAD_SPOTS,
   spots
 })
 
-const loadSingleSpot = (spot, spotId) => ({
+const loadSingleSpot = (spot) => ({
   type: SINGLE_SPOT,
-  spot,
-  spotId
+  spot
 })
+
+export const loadSpotImages = (spotImage, spotId) => ({
+  type: LOAD_SPOT_IMAGES,
+  spotImage,
+  spotId
+});
 
 
 export const fetchSpots = () => async (dispatch) => {
@@ -36,17 +41,30 @@ export const fetchSingleSpot = (spotId) => async (dispatch) => {
 }
 
 export const createSpot = (spot) => async (dispatch) => {
-
-  let response = await csrfFetch("/api/spots", {
+  const response = await csrfFetch("/api/spots", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(spot)
   });
-  response = await response.json();
-  console.log(response)
-  if(response.ok) {
-    dispatch(loadSingleSpot(response));
-    return response
+  console.log("CREATE SPOT",response)
+  if (response.ok) {
+    const newSpot = await response.json();
+    dispatch(loadSingleSpot(newSpot));
+    return newSpot
+  }
+}
+
+export const createSpotImage = (spotId, spotImage) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}/images`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(spotImage)
+  })
+  console.log("CREATE IMAGE",response)
+  if (response.ok) {
+    const image = await response.json();
+    dispatch(loadSpotImages(image, spotId))
+    return image
   }
 }
 
@@ -62,9 +80,11 @@ const spotsReducer = (state = {}, action) => {
     }
     case SINGLE_SPOT: {
       const spotsState = {}
-       spotsState[action.spot.id]= action.spot
-       return spotsState
+      spotsState[action.spot.id] = action.spot
+      return spotsState
     }
+    case LOAD_SPOT_IMAGES:
+      return { ...state, [action.spotId]: action.spotImage }
     default:
       return state
   }

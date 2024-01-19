@@ -17,7 +17,7 @@ const SingleSpot = () => {
     dispatch(fetchSingleSpot(spotId));
   }, [dispatch, spotId])
 
-
+  
   return (
     spot && spot.Owner &&
     <>

@@ -14,8 +14,6 @@ const SpotsIndex = () => {
     dispatch(fetchSpots())
   }, [dispatch])
 
-  console.log(spots)
-
   return (
     <ul className='spotsContainer'>
       {spots && spots.map((spot) => (
