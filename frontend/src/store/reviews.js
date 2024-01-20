@@ -1,5 +1,8 @@
+import { csrfFetch } from "./csrf"
+
 const LOAD_SPOT_REVIEWS = 'reviews/LOAD_REVIEWS'
 const CLEAR_SPOT_REVIEWS = 'reviews/CLEAR_SPOT_REVIEWS'
+const CREATE_REVIEW = 'reviews/CREATE_REVIEW'
 
 const loadSpotReviews = (reviews, spotId) => ({
   type: LOAD_SPOT_REVIEWS,
@@ -11,12 +14,35 @@ export const clearSpotReviews = () => ({
   type: CLEAR_SPOT_REVIEWS
 })
 
+export const receiveReview = (review, spotId) => ({
+  type: CREATE_REVIEW,
+  review,
+  spotId
+})
+
 export const fetchSpotReviews = (spotId) => async (dispatch) => {
   const response = await fetch(`/api/spots/${spotId}/reviews`)
 
   if (response.ok) {
     const spotReviews = await response.json();
     dispatch(loadSpotReviews(spotReviews, spotId))
+  } else {
+    const errors = await response.json();
+    return errors;
+  }
+}
+
+export const createReview = (review, spotId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(review)
+  })
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(receiveReview(data))
+    return data
   } else {
     const errors = await response.json();
     return errors;

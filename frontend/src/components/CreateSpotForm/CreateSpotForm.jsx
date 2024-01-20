@@ -12,7 +12,6 @@ const CreateSpotForm = () => {
 
   const sessionUser = useSelector(state => state.session.user);
 
-
   const [country, setCountry] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');

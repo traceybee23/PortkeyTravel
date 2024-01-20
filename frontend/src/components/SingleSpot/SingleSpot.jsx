@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchSingleSpot } from "../../store/spots";
 import SpotReviews from "../SpotReviews";
+import ReviewButton from "../SpotReviews/ReviewButton"
 import './SingleSpot.css'
 
 const SingleSpot = () => {
@@ -13,11 +14,16 @@ const SingleSpot = () => {
 
   const dispatch = useDispatch();
 
+  const sessionUser = useSelector(state => state.session.user);
+
+  const reviews = Object.values(useSelector((state) => state.reviews))
+  const userId = reviews.map((review) => (review.userId)).join()
+
   useEffect(() => {
     dispatch(fetchSingleSpot(spotId));
   }, [dispatch, spotId])
 
-console.log(spot)
+
   return (
     spot && spot.Owner &&
     <>
@@ -64,11 +70,18 @@ console.log(spot)
           }
         </div>
         <div>
-        </div>
-          {
-            spot.numReviews >= 1 &&
-            <SpotReviews spotId={spotId} />
+          {sessionUser && sessionUser.id !== spot.Owner.id && +(userId) !== sessionUser.id &&
+            <ReviewButton />
           }
+        </div>
+        {
+          spot.numReviews >= 1 &&
+          <SpotReviews spotId={spotId} />
+        }
+        {
+          spot.numReviews < 1 &&
+          <span>Be the first to post a review!</span>
+        }
       </div>
     </>
   )
