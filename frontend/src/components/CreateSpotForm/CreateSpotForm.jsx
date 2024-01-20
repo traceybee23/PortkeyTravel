@@ -98,7 +98,11 @@ const CreateSpotForm = () => {
     if(!name) errObj.name =  ("Name required")
     if(!url) errObj.url = ("Image required")
     if(!price) errObj.price =  ("Price required")
-    
+
+    if(price && price <= 0) errObj.price = ("Price is required")
+
+    if(lat && (lat > 90 || lat < -90)) errObj.lat = ("Latitude is not valid")
+    if(lng && (lng > 180 || lng < -180)) errObj.lng = ("Longitude is not valid")
 
     const urlFormat = url.split('.').pop()
     if(url && (urlFormat !== "png" && urlFormat !== "jpg" && urlFormat !== "jpeg")) errObj.image = ("Image URL must end in .png, .jpg, or .jpeg")
