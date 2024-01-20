@@ -25,10 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     imageableId: DataTypes.INTEGER,
     imageableType: DataTypes.STRING,
     url: {
-      type: DataTypes.STRING,
-      validate: {
-        isUrl: true,
-      }
+      type: DataTypes.STRING
     },
     preview: DataTypes.BOOLEAN,
   }, {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { createSpot, createSpotImage } from "../../store/spots";
 import './CreateSpotForm.css'
@@ -73,12 +73,12 @@ const CreateSpotForm = () => {
           dispatch(createSpotImage(spot.id, spotImg))
         })
       })
-      .catch(async (response) => {
-        const data = await response.json();
-        if (data && data.errors) {
-          setErrors(data.errors)
-        }
-      })
+      // .catch(async (response) => {
+      //   const data = await response.json();
+      //   if (data && data.errors) {
+      //     setErrors(data.errors)
+      //   }
+      // })
     if (!Object.values(errors)) {
       navigate('/')
     }
@@ -95,6 +95,41 @@ const CreateSpotForm = () => {
   //   setPrice('');
   //   setUrl('')
   // }
+
+  useEffect(() => {
+
+    let errObj = {}
+    if(!country) errObj.country = ( "Country required")
+    if(!address) errObj.address =  ("Address required")
+    if(!city) errObj.city =  ("City required")
+    if(!state) errObj.state =  ("State required")
+    if(!lat) errObj.lat =  ("Latitude required")
+    if(!lng) errObj.lng =  ("Longitude required")
+    if(!description || description.length < 30) errObj.description =  ("Description must be 30 characters")
+    if(!name) errObj.name =  ("Name required")
+    if(!url) errObj.url = ("Image required")
+    if(!price) errObj.price =  ("Price required")
+
+    const urlFormat = url.split('.').pop()
+    if(url && (urlFormat !== "png" && urlFormat !== "jpg" && urlFormat !== "jpeg")) errObj.image = ("Image URL must end in .png, .jpg, or .jpeg")
+
+    const urlFormat1 = img1.split('.').pop()
+    if(img1 && (urlFormat1 !== "png" && urlFormat1 !== "jpg" && urlFormat1 !== "jpeg")) errObj.img1 = ("Image URL must end in .png, .jpg, or .jpeg")
+
+    const urlFormat2 = img2.split('.').pop()
+    if(img2 && (urlFormat2 !== "png" && urlFormat2 !== "jpg" && urlFormat2 !== "jpeg")) errObj.img2 = ("Image URL must end in .png, .jpg, or .jpeg")
+
+
+    const urlFormat3 = img3.split('.').pop()
+    if(img3 && (urlFormat3 !== "png" && urlFormat3 !== "jpg" && urlFormat3 !== "jpeg")) errObj.img3 = ("Image URL must end in .png, .jpg, or .jpeg")
+
+    const urlFormat4 = img4.split('.').pop()
+    if(img4 && (urlFormat4 !== "png" && urlFormat4 !== "jpg" && urlFormat4 !== "jpeg")) errObj.img4 = ("Image URL must end in .png, .jpg, or .jpeg")
+
+    setErrors(errObj)
+
+  }, [address, city, state, description, lat, lng, name, url, price, country, img1, img2, img3, img4])
+
 
   return (
     <div className="spotFormContainer">
@@ -213,7 +248,7 @@ const CreateSpotForm = () => {
             <h4>Liven up your spot with photos</h4>
             <span style={{fontSize: "small", marginBottom: "10px"}}>Submit a link to at least one photo to publish your spot.</span>
             <input
-              type="url"
+              type="text"
               value={url}
               onChange={(e) => ({
                 previewImage: true,
@@ -224,6 +259,7 @@ const CreateSpotForm = () => {
               name="previewImage"
             />
             {errors.url && <span className="errors">{errors.url}</span>}
+            {errors.image && <span className="errors">{errors.image}</span>}
             <input
               type="text"
               value={img1}
@@ -235,8 +271,7 @@ const CreateSpotForm = () => {
               placeholder="Image URL"
               name="image"
             />
-            {errors.image && <span className="errors">{errors.image}</span>}
-
+            {errors.img1 && <span className="errors">{errors.img1}</span>}
             <input
               type="text"
               value={img2}
@@ -248,7 +283,7 @@ const CreateSpotForm = () => {
               placeholder="Image URL"
               name="image"
             />
-
+            {errors.img2 && <span className="errors">{errors.img2}</span>}
             <input
               type="text"
               value={img3}
@@ -260,7 +295,7 @@ const CreateSpotForm = () => {
               placeholder="Image URL"
               name="image"
             />
-
+            {errors.img3 && <span className="errors">{errors.img3}</span>}
             <input
               type="text"
               value={img4}
@@ -272,8 +307,9 @@ const CreateSpotForm = () => {
               placeholder="Image URL"
               name="image"
             />
+            {errors.img4 && <span className="errors">{errors.img4}</span>}
           </div>
-          <button type="submit">Create Spot</button>
+          <button type="submit" disabled={!!Object.values(errors).length}>Create Spot</button>
         </form>
       }
     </div>
