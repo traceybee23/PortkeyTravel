@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'production') {
 
 const demoReviews = [
   {
-    "userId": 1,
+    "userId": 3,
     "spotId": 1,
     "review": "This was an awesome spot!",
     "stars": 5
@@ -21,13 +21,13 @@ const demoReviews = [
     "stars": 5
   },
   {
-    "userId": 3,
+    "userId": 1,
     "spotId": 3,
     "review": "Very Nice!",
     "stars": 5
   },
   {
-    "userId": 1,
+    "userId": 2,
     "spotId": 4,
     "review": "Was OKAY.",
     "stars": 3
