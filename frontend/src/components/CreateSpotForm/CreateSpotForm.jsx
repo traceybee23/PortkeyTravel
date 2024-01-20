@@ -12,6 +12,7 @@ const CreateSpotForm = () => {
 
   const sessionUser = useSelector(state => state.session.user);
 
+
   const [country, setCountry] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
@@ -27,6 +28,7 @@ const CreateSpotForm = () => {
   const [img3, setImg3] = useState('')
   const [img4, setImg4] = useState('')
   const [errors, setErrors] = useState({});
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -71,17 +73,16 @@ const CreateSpotForm = () => {
             }
           }
           dispatch(createSpotImage(spot.id, spotImg))
+          .then(navigate(`/spots/${spot.id}`))
         })
       })
-      // .catch(async (response) => {
-      //   const data = await response.json();
-      //   if (data && data.errors) {
-      //     setErrors(data.errors)
-      //   }
-      // })
-    if (!Object.values(errors)) {
-      navigate('/')
-    }
+      .catch(async (response) => {
+        const data = await response.json();
+        if (data && data.errors) {
+          setErrors(data.errors)
+        }
+      })
+
   }
   // const reset = () => {
   //   setCountry('');
