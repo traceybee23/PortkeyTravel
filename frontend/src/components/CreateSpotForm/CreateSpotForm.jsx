@@ -84,18 +84,6 @@ const CreateSpotForm = () => {
       })
 
   }
-  // const reset = () => {
-  //   setCountry('');
-  //   setAddress(''),
-  //     setCity('');
-  //   setState('');
-  //   setLat('');
-  //   setLng('');
-  //   setDescription('');
-  //   setName('');
-  //   setPrice('');
-  //   setUrl('')
-  // }
 
   useEffect(() => {
 
@@ -110,6 +98,7 @@ const CreateSpotForm = () => {
     if(!name) errObj.name =  ("Name required")
     if(!url) errObj.url = ("Image required")
     if(!price) errObj.price =  ("Price required")
+    
 
     const urlFormat = url.split('.').pop()
     if(url && (urlFormat !== "png" && urlFormat !== "jpg" && urlFormat !== "jpeg")) errObj.image = ("Image URL must end in .png, .jpg, or .jpeg")
