@@ -101,7 +101,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.FLOAT,
       allowNull: false,
       validate: {
-        notEmpty: { msg: "Latitude is not valid" },
+        notEmpty: { msg: "Latitude is required" },
         max: { args: 90, msg: "Latitude is not valid" },
         min: { args: -90, msg: "Latitude is not valid" }
       }
@@ -110,7 +110,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.FLOAT,
       allowNull: false,
       validate: {
-        notEmpty: {msg: "Longitude is not valid"},
+        notEmpty: {msg: "Longitude is required"},
         max: { args: 180, msg: "Longitude is not valid" },
         min: { args: -180, msg: "Longitude is not valid" },
       }

@@ -11,23 +11,29 @@ form {
 
 }
 
-h1 {
-  align-self: center;
-}
 
 .login {
   display: flex;
   justify-content: center;
   margin: 10px;
+
 }
 
 button {
   height: 40px;
-  width: 100px;
+  width: 100%;
   background: rgb(235, 50, 80);
   color: rgb(255, 255, 255);
   font-size: 20px;
   align-self: center;
+}
+
+.loginButtonModal {
+  width: 100%;
+}
+
+#modal-content {
+  border-radius: 30px;
 }
 
 
@@ -40,8 +46,14 @@ button:hover {
   width: fit-content;
   align-content: start;
   margin: auto;
+
 }
 
 div {
   width: auto;
+}
+
+
+.loginButton {
+  width: 100%;
 }

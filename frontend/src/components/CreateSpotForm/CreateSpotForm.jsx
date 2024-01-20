@@ -83,7 +83,6 @@ const CreateSpotForm = () => {
       navigate('/')
     }
   }
-
   // const reset = () => {
   //   setCountry('');
   //   setAddress(''),
@@ -202,7 +201,7 @@ const CreateSpotForm = () => {
             <h4>Set a base price for your spot</h4>
             <span style={{fontSize: "small"}}>Competitive pricing can help your listing stand out and rank higher in search results.</span><br></br>
             $ <input style={{ marginBottom: "0", width: "94%", marginRight: "3px" }}
-              type="text"
+              type="number"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               placeholder="Price per night (USD)"
@@ -214,7 +213,7 @@ const CreateSpotForm = () => {
             <h4>Liven up your spot with photos</h4>
             <span style={{fontSize: "small", marginBottom: "10px"}}>Submit a link to at least one photo to publish your spot.</span>
             <input
-              type="text"
+              type="url"
               value={url}
               onChange={(e) => ({
                 previewImage: true,
