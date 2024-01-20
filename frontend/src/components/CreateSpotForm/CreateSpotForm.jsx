@@ -2,10 +2,13 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { createSpot, createSpotImage } from "../../store/spots";
 import './CreateSpotForm.css'
+import { useNavigate } from "react-router-dom";
 
 const CreateSpotForm = () => {
 
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const sessionUser = useSelector(state => state.session.user);
 
@@ -25,9 +28,9 @@ const CreateSpotForm = () => {
   const [img4, setImg4] = useState('')
   const [errors, setErrors] = useState({});
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
+
     setErrors({})
 
     const newSpot = {
@@ -53,191 +56,224 @@ const CreateSpotForm = () => {
       .then((spot) => {
         const imageArr = Object.values(imageInfo)
         let spotImg;
-        imageArr.map(img => {
-          spotImg = {
-            id: spot.id,
-            url: img,
-            preview: true
+        imageArr.map((img, index) => {
+          if (index <= 0) {
+            spotImg = {
+              id: spot.id,
+              url: img,
+              preview: true
+            }
+          } else {
+            spotImg = {
+              id: spot.id,
+              url: img,
+              preview: false
+            }
           }
-          return dispatch(createSpotImage(spot.id, spotImg))
+          dispatch(createSpotImage(spot.id, spotImg))
         })
       })
-      .then(reset())
       .catch(async (response) => {
         const data = await response.json();
         if (data && data.errors) {
           setErrors(data.errors)
         }
       })
-
+    if (!Object.values(errors)) {
+      navigate('/')
+    }
   }
 
-  const reset = () => {
-    setCountry('');
-    setAddress(''),
-    setCity('');
-    setState('');
-    setLat('');
-    setLng('');
-    setDescription('');
-    setName('');
-    setPrice('');
-    setUrl('')
-  }
+  // const reset = () => {
+  //   setCountry('');
+  //   setAddress(''),
+  //     setCity('');
+  //   setState('');
+  //   setLat('');
+  //   setLng('');
+  //   setDescription('');
+  //   setName('');
+  //   setPrice('');
+  //   setUrl('')
+  // }
 
   return (
     <div className="spotFormContainer">
       {sessionUser &&
         <form onSubmit={handleSubmit}>
-          <h1>Create a new Spot</h1>
-          <span>Where&apos;s your place located?</span>
-          <span>Guests will only get your exact address once they booked a reservation</span>
-          <label>Country</label>
-          {errors.country && <span className="errors">{errors.country}</span>}
-          <input
-            type="text"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
-            placeholder="Country"
-            name="country"
-          />
-          <label>Address</label>
-          {errors.address && <span className="errors">{errors.address}</span>}
-          <input
-            type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            placeholder="Address"
-            name="address"
-          />
-          <label>City</label>
-          {errors.city && <span className="errors">{errors.city}</span>}
-          <input
-            type="text"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            placeholder="City"
-            name="city"
-          />
-          <label>State</label>
-          {errors.state && <span className="errors">{errors.state}</span>}
-          <input
-            type="text"
-            value={state}
-            onChange={(e) => setState(e.target.value)}
-            placeholder="State"
-            name="state"
-          />
-          <label>Latitude</label>
-          {errors.lat && <span className="errors">{errors.lat}</span>}
-          <input
-            type="text"
-            value={lat}
-            onChange={(e) => setLat(e.target.value)}
-            placeholder="Latitude"
-            name="lat"
-          />
-          <label>Longitude</label>
-          {errors.lng && <span className="errors">{errors.lng}</span>}
-          <input
-            type="text"
-            value={lng}
-            onChange={(e) => setLng(e.target.value)}
-            placeholder="Longitude"
-            name="lng"
-          />
-          <span>Describe your place to guests</span>
-          <span>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</span>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            placeholder="Description"
-            name="description"
-          />
-          {errors.description && <span className="errors">{errors.description}</span>}
-          <span>Create a title for your spot</span>
-          <span>Catch guests&apos; attention with a spot title that highlights what makes your place special.</span>
-          <input style={{marginBottom: "0"}}
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Name of your spot"
-            name="name"
-          />
-          {errors.name && <span className="errors" >{errors.name}</span>}
-          <span>Set a base price for your spot</span>
-          <span>Competitive pricing can help your listing stand out and rank higher in search results.</span>
-          <input style={{marginBottom: "0"}}
-            type="text"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            placeholder="Price per night (USD)"
-            name="price"
-          />
-          {errors.price && <span className="errors">{errors.price}</span>}
-          <span>Liven up your spot with photos</span>
-          <span>Submit a link to at least one photo to publish your spot.</span>
-          <input
-            type="text"
-            value={url}
-            onChange={(e) => ({
-              previewImage: true,
-              url: setUrl(e.target.value)
-            })
-            }
-            placeholder="Preview Image URL"
-            name="previewImage"
-          />
-          {errors.url && <span className="errors">{errors.url}</span>}
-          <label>Image</label>
-          <input
-            type="text"
-            value={img1}
-            onChange={(e) => ({
-              previewImage: false,
-              url: setImg1(e.target.value)
-            })
-            }
-            placeholder="Image URL"
-            name="image"
-          />
-          {errors.image && <span className="errors">{errors.image}</span>}
-          <label>Image</label>
-          <input
-            type="text"
-            value={img2}
-            onChange={(e) => ({
-              previewImage: false,
-              url: setImg2(e.target.value)
-            })
-            }
-            placeholder="Image URL"
-            name="image"
-          />
-          <label>Image</label>
-          <input
-            type="text"
-            value={img3}
-            onChange={(e) => ({
-              previewImage: false,
-              url: setImg3(e.target.value)
-            })
-            }
-            placeholder="Image URL"
-            name="image"
-          />
-          <label>Image</label>
-          <input
-            type="text"
-            value={img4}
-            onChange={(e) => ({
-              previewImage: false,
-              url: setImg4(e.target.value)
-            })
-            }
-            placeholder="Image URL"
-            name="image"
-          />
+          <div className="createLocation">
+            <h2>Create a new Spot</h2>
+            <h4>Where&apos;s your place located?</h4>
+            <span style={{fontSize: "small", borderBottom: 0}}>Guests will only get your exact address once they booked a reservation</span>
+            <span className="labels">Country{errors.country && <span className="errors">&nbsp;{errors.country}</span>}</span>
+            <input
+              type="text"
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+              placeholder="Country"
+              name="country"
+            />
+            <span className="labels">Address{errors.address && <span className="errors">&nbsp;{errors.address}</span>}</span>
+            <input
+              type="text"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              placeholder="Address"
+              name="address"
+            />
+            <div className="cityState">
+              <div>
+                <span className="labels">City{errors.city && <span className="errors">&nbsp;{errors.city}</span>}</span>
+                <input
+                  className="city"
+                  type="text"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  placeholder="City"
+                  name="city"
+                />
+                <>&nbsp;,&nbsp;</>
+              </div>
+              <div>
+                <span className="labels">State{errors.state && <span className="errors">&nbsp;{errors.state}</span>}</span>
+                <input
+                  className="state"
+                  type="text"
+                  value={state}
+                  onChange={(e) => setState(e.target.value)}
+                  placeholder="State"
+                  name="state"
+                />
+              </div>
+            </div>
+            <div className="latlngContainer">
+              <div>
+                <span className="labels">Latitude{errors.lat && <span className="errors">&nbsp;{errors.lat}</span>}</span>
+                <input
+                  className="lat"
+                  type="text"
+                  value={lat}
+                  onChange={(e) => setLat(e.target.value)}
+                  placeholder="Latitude"
+                  name="lat"
+                />
+              <>&nbsp;,&nbsp;</>
+              </div>
+              <div>
+                <span className="labels">Longitude{errors.lng && <span className="errors">&nbsp;{errors.lng}</span>}</span>
+                <input
+                  className="lng"
+                  type="text"
+                  value={lng}
+                  onChange={(e) => setLng(e.target.value)}
+                  placeholder="Longitude"
+                  name="lng"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="placeDescription">
+            <h4>Describe your place to guests</h4>
+            <span style={{fontSize: "small"}}>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</span><br></br>
+            <textarea
+              className="textBox"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Description"
+              name="description"
+              rows="6"
+            />
+            {errors.description && <span className="errors">{errors.description}</span>}
+          </div>
+          <div className="spotTitle">
+            <h4>Create a title for your spot</h4>
+            <span style={{fontSize: "small"}}>Catch guests&apos; attention with a spot title that highlights what makes your place special.</span><br></br>
+            <input
+              className="newName"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Name of your spot"
+              name="name"
+            />
+            {errors.name && <span className="errors" >{errors.name}</span>}
+          </div>
+          <div className="spotPrice">
+            <h4>Set a base price for your spot</h4>
+            <span style={{fontSize: "small"}}>Competitive pricing can help your listing stand out and rank higher in search results.</span><br></br>
+            $ <input style={{ marginBottom: "0", width: "94%", marginRight: "3px" }}
+              type="text"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              placeholder="Price per night (USD)"
+              name="price"
+            />
+            {errors.price && <span className="errors">{errors.price}</span>}
+          </div>
+          <div className="spotsPhotos">
+            <h4>Liven up your spot with photos</h4>
+            <span style={{fontSize: "small", marginBottom: "10px"}}>Submit a link to at least one photo to publish your spot.</span>
+            <input
+              type="text"
+              value={url}
+              onChange={(e) => ({
+                previewImage: true,
+                url: setUrl(e.target.value)
+              })
+              }
+              placeholder="Preview Image URL"
+              name="previewImage"
+            />
+            {errors.url && <span className="errors">{errors.url}</span>}
+            <input
+              type="text"
+              value={img1}
+              onChange={(e) => ({
+                previewImage: false,
+                url: setImg1(e.target.value)
+              })
+              }
+              placeholder="Image URL"
+              name="image"
+            />
+            {errors.image && <span className="errors">{errors.image}</span>}
+
+            <input
+              type="text"
+              value={img2}
+              onChange={(e) => ({
+                previewImage: false,
+                url: setImg2(e.target.value)
+              })
+              }
+              placeholder="Image URL"
+              name="image"
+            />
+
+            <input
+              type="text"
+              value={img3}
+              onChange={(e) => ({
+                previewImage: false,
+                url: setImg3(e.target.value)
+              })
+              }
+              placeholder="Image URL"
+              name="image"
+            />
+
+            <input
+              type="text"
+              value={img4}
+              onChange={(e) => ({
+                previewImage: false,
+                url: setImg4(e.target.value)
+              })
+              }
+              placeholder="Image URL"
+              name="image"
+            />
+          </div>
           <button type="submit">Create Spot</button>
         </form>
       }

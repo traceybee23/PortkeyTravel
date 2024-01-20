@@ -13,7 +13,7 @@ function Navigation({ isLoaded }) {
         <NavLink className='logo' to="/"><i className="fa-solid fa-dragon fa-3x" />LairBnB</NavLink>
       </li>
       {isLoaded && (
-        <>
+        <div className="createNewSpotContainer">
           <li>
             {sessionUser &&
               <NavLink to='/spots/new'>Create a new Spot</NavLink>
@@ -22,7 +22,7 @@ function Navigation({ isLoaded }) {
           <li className="profileButton">
             <ProfileButton user={sessionUser} />
           </li>
-        </>
+        </div>
       )}
     </ul>
   )

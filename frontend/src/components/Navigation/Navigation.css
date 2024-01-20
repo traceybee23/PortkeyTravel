@@ -11,14 +11,22 @@ li {
   border-bottom: 1px solid rgb(214, 214, 214);
 
 }
-
 button {
+  width: fit-content;
+}
+
+.menu {
   width: 70px;
   font-size: 15px;
   align-self: flex-end;
   margin: 1px;
   position: relative;
-  z-index: 2;
+  border-radius: 37%;
+}
+
+.logout {
+  width: fit-content;
+  border-radius: 15%;
 }
 
 button:hover {
@@ -44,6 +52,7 @@ button:disabled {
   margin: 40px 0 0 0;
   align-self: flex-end;
   position: absolute;
+  border-radius: 5%;
 }
 
 i.fa-dragon {
@@ -52,7 +61,13 @@ i.fa-dragon {
 }
 
 .profileButton {
-  padding-top: 2px;
+  padding: 5px;
+  margin-left: 5px;
+}
+
+.createNewSpotContainer {
+  display: flex;
+  align-items: center;
 }
 
 .logo {

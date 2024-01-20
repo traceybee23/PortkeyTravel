@@ -20,19 +20,6 @@ div {
   width: 50vw;
 }
 
-label {
-  display: flex;
-  flex-direction: column;
-
-}
-
-input {
-  display: flex;
-  margin-bottom: 20px;
-  height: 20px;
-  padding-left: 100px;
-
-}
 
 .inputBox {
   justify-content: right;
@@ -58,4 +45,8 @@ div {
 
 .errors {
   color: red;
+  font-size: small;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }

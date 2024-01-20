@@ -17,7 +17,7 @@ const SingleSpot = () => {
     dispatch(fetchSingleSpot(spotId));
   }, [dispatch, spotId])
 
-  
+console.log(spot)
   return (
     spot && spot.Owner &&
     <>
@@ -27,6 +27,11 @@ const SingleSpot = () => {
           <h4>{spot.city}, {spot.state}, {spot.country}</h4>
           <div className="imageContainer">
             {spot.SpotImages !== "No available spot images" && spot.SpotImages.map(image => (
+              image.preview &&
+              <img className="spotImages" key={image.id} src={image.url} />
+            ))}
+            {spot.SpotImages !== "No available spot images" && spot.SpotImages.map(image => (
+              !image.preview &&
               <img className="spotImages" key={image.id} src={image.url} />
             ))}
           </div>
