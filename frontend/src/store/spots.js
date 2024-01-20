@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf'
 const LOAD_SPOTS = 'spots/LOAD_SPOTS'
 const SINGLE_SPOT = 'spots/SINGLE_SPOT'
 const LOAD_SPOT_IMAGES = 'images/LOAD_SPOT_IMAGES'
+const DELETE_SPOT = 'spots/DELETE_SPOT'
 
 const loadSpots = (spots) => ({
   type: LOAD_SPOTS,
@@ -18,6 +19,11 @@ export const loadSpotImages = (spotImage, spotId) => ({
   spotImage,
   spotId
 });
+
+export const deleteSpot = (spotId) => ({
+  type: DELETE_SPOT,
+  spotId
+})
 
 
 export const fetchSpots = () => async (dispatch) => {

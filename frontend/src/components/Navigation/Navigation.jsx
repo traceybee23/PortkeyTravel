@@ -16,7 +16,7 @@ function Navigation({ isLoaded }) {
         <div className="createNewSpotContainer">
           <li>
             {sessionUser &&
-              <NavLink to='/spots/new'>Create a new Spot</NavLink>
+              <NavLink to='/spots/new' style={{textDecoration: "none", color: "rgb(2, 114, 179)", fontWeight: '600'}}>Create a new Spot</NavLink>
             }
           </li>
           <li className="profileButton">
