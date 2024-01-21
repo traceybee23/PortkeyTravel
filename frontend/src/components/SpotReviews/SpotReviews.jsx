@@ -35,9 +35,10 @@ const SpotReviews = () => {
         <li
           className="reviewsList"
           key={review.id}>
-          <span style={{ fontSize: '18px' }}>
-            {review.User.firstName}
+          {review.User.firstName &&
+          <span style={{ fontSize: '18px' }}>{review.User.firstName}
           </span>
+          }
           <span style={{ fontSize: '14px', color: 'grey' }}>
             {review.createdAt &&
               getDate(review.createdAt)

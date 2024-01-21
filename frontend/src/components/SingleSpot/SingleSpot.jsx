@@ -17,9 +17,6 @@ const SingleSpot = () => {
   const sessionUser = useSelector(state => state.session.user);
 
   const reviews = Object.values(useSelector((state) => state.reviews))
-  const userId = reviews.every((review) => review.userId !== sessionUser.id)
-
-  console.log(userId)
 
   useEffect(() => {
     dispatch(fetchSingleSpot(spotId));
@@ -72,12 +69,10 @@ const SingleSpot = () => {
           }
         </div>
         <div>
-          {sessionUser && (sessionUser.id !== spot.Owner.id ) && userId &&
+          {sessionUser && (sessionUser.id !== spot.Owner.id )  && reviews.every((review) => review.userId !== sessionUser.id) &&
             <ReviewButton />
           }
-          {
 
-          }
         </div>
         {
           spot.numReviews >= 1 &&
