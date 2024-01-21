@@ -14,9 +14,9 @@ export const clearSpotReviews = () => ({
   type: CLEAR_SPOT_REVIEWS
 })
 
-export const receiveReview = (spotId, review) => ({
+export const receiveReview = (review) => ({
   type: CREATE_REVIEW,
-  spotId
+  review
 })
 
 export const fetchSpotReviews = (spotId) => async (dispatch) => {
@@ -32,6 +32,7 @@ export const fetchSpotReviews = (spotId) => async (dispatch) => {
 }
 
 export const createReview = (spotId, review) => async (dispatch) => {
+  console.log(spotId, review)
   const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -40,7 +41,7 @@ export const createReview = (spotId, review) => async (dispatch) => {
 
   if (response.ok) {
     const data = await response.json();
-    dispatch(loadSpotReviews(data))
+    dispatch(receiveReview(data))
     return data
   } else {
     const errors = await response.json();
@@ -62,7 +63,7 @@ const reviewsReducer = (state = {}, action) => {
     }
     case CREATE_REVIEW : {
       const reviewState = {}
-      console.log(action.review)
+      reviewState[action.review.id] = action.review
       return reviewState
     }
     default:
