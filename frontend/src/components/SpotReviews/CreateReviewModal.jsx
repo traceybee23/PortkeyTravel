@@ -1,12 +1,19 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../context/Modal';
+import { createReview } from '../../store/reviews';
+import StarRatingInput from './StarRatingInput';
 
-const createReview = () => {
+
+const CreateReview = () => {
+
 
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
+  const spot = useSelector(state => state.spots)
+
+  const spotId = ((Object.keys(spot).join()))
 
   const [review, setReview] = useState('');
   const [stars, setStars] = useState(0)
@@ -14,6 +21,19 @@ const createReview = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const newReview = {
+      review,
+      stars
+    }
+
+    dispatch(createReview(spotId, newReview))
+    .then(closeModal)
+
+  }
+
+  const onChange = (e) => {
+    const number = e.target.value;
+    setStars(parseInt(number))
   }
 
   return (
@@ -25,11 +45,15 @@ const createReview = () => {
           value={review}
           onChange={(e) => setReview(e.target.value)}
         />
-        <div>Stars</div>
+        <StarRatingInput
+          onChange={onChange}
+          stars={stars}
+          />
+        <button type='submit'></button>
 
       </form>
     </div>
   )
 }
 
-export default createReview;
+export default CreateReview;
