@@ -58,9 +58,10 @@ const reviewsReducer = (state = {}, action) => {
   switch (action.type) {
     case LOAD_SPOT_REVIEWS: {
       const reviewState = {...state}
+      if(action.reviews.Reviews !== "New"){
         action.reviews.Reviews.forEach((review) => {
           reviewState[review.id] = review
-        })
+        })}
       return reviewState
     }
     case CLEAR_SPOT_REVIEWS: {

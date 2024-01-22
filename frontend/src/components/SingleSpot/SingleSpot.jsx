@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { fetchSingleSpot } from "../../store/spots";
 import SpotReviews from "../SpotReviews";
 import ReviewButton from "../SpotReviews/ReviewButton"
@@ -18,13 +18,12 @@ const SingleSpot = () => {
   const sessionUser = useSelector(state => state.session.user);
   const reviews = Object.values(useSelector((state) => state.reviews))
 
-  const [isDataLoaded, setIsDataLoaded] = useState(false);
+
 
   useEffect(() => {
     const fetchData = async () => {
     await dispatch(fetchSingleSpot(spotId));
     await dispatch(fetchSpotReviews(spotId));
-    setIsDataLoaded(true);
     }
     fetchData()
   }, [dispatch, spotId])
@@ -32,7 +31,6 @@ const SingleSpot = () => {
 
 
   const shouldDisplayReviewButton =
-  isDataLoaded &&
   sessionUser &&
   spot &&
   spot.Owner &&
@@ -95,7 +93,7 @@ const SingleSpot = () => {
           <SpotReviews spotId={spotId} />
         }
         {
-          spot.numReviews < 1 &&
+          spot.numReviews < 1  && shouldDisplayReviewButton &&
           <span>Be the first to post a review!</span>
         }
       </div>
