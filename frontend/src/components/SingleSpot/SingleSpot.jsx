@@ -41,6 +41,7 @@ const SingleSpot = () => {
 
 
   return (
+    isDataLoaded &&
     spot && spot.Owner &&
     <>
       <div className="singleSpotDeets">

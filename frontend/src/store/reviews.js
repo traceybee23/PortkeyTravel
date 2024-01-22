@@ -1,4 +1,5 @@
 import { csrfFetch } from "./csrf"
+import { fetchSingleSpot } from "./spots"
 
 const LOAD_SPOT_REVIEWS = 'reviews/LOAD_REVIEWS'
 const CLEAR_SPOT_REVIEWS = 'reviews/CLEAR_SPOT_REVIEWS'
@@ -44,7 +45,7 @@ export const createReview = (spotId, review) => async (dispatch, getState) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(receiveReview(data));
-    // Fetch spot reviews after creating the review to get the latest data
+    dispatch(fetchSingleSpot(spotId));
     dispatch(fetchSpotReviews(spotId));
     return data;
   } else {
