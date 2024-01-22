@@ -16,7 +16,7 @@ button {
 }
 
 .menu {
-  width: 70px;
+  width: fit-content;
   font-size: 15px;
   align-self: flex-end;
   margin: 1px;

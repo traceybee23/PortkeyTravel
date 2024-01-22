@@ -8,6 +8,7 @@ import SingleSpot from './components/SingleSpot/SingleSpot';
 import { Navigate } from 'react-router-dom';
 import SpotReviews from './components/SpotReviews';
 import CreateSpotForm from './components/CreateSpotForm/CreateSpotForm';
+import CurrUserSpots from './components/CurrUserSpots';
 
 
 function Layout() {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: '/spots/new',
         element: <CreateSpotForm />
+      },
+      {
+        path: '/spots/current',
+        element: <CurrUserSpots />
       },
     ]
   },

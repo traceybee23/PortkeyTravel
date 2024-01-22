@@ -51,10 +51,18 @@ function ProfileButton({ user }) {
             <li>Hello, {user.firstName}.</li>
             <li>{user.email}</li>
             <li>
-              <Link to={`/current`} className='menuBorders' style={{ fontWeight: "600", color: "rgb(2, 114, 179)", textDecoration: "none" }}>Manage Spots</Link>
+              <Link to={`/spots/current`}
+              className='menuBorders'
+              style={{ fontWeight: "600", color: "rgb(2, 114, 179)", textDecoration: "none" }}
+              onClick={closeMenu}
+              >Manage Spots</Link>
             </li>
             <li>
-              <Link to={`/reviews/current`} style={{ fontWeight: "600", color: "rgb(2, 114, 179)", textDecoration: "none" }}>Manage Reviews</Link>
+              <Link
+              to={`/reviews/current`}
+              style={{ fontWeight: "600", color: "rgb(2, 114, 179)", textDecoration: "none" }}
+              onClick={closeMenu}
+              >Manage Reviews</Link>
             </li>
             <li className='menuBorders'>
               <button className="logout" onClick={logout}>Log Out</button>

@@ -70,6 +70,9 @@ export const createSpot = (spot) => async (dispatch) => {
     const newSpot = await response.json();
     dispatch(loadSingleSpot(newSpot));
     return newSpot
+  }else {
+    const errors = await response.json();
+    return errors;
   }
 }
 
@@ -84,6 +87,23 @@ export const createSpotImage = (spotId, spotImage) => async (dispatch) => {
     const image = await response.json();
     dispatch(loadSpotImages(image, spotId))
     return image
+  }else {
+    const errors = await response.json();
+    return errors;
+  }
+}
+
+export const loadCurrUserSpots = () => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/current`)
+
+  if(response.ok) {
+    const spots = await response.json();
+    dispatch(loadSpots(spots))
+    return spots;
+
+  }else {
+    const errors = await response.json();
+    return errors;
   }
 }
 
