@@ -27,6 +27,7 @@ button {
 .logout {
   width: fit-content;
   border-radius: 15%;
+  margin: 5px;
 }
 
 button:hover {
@@ -45,11 +46,11 @@ button:disabled {
 }
 
 .profile-dropdown {
-  background-color: rgba(235, 50, 80, 0.20);
+  background-color: rgb(255, 191, 201);
   width: fit-content;
   height: fit-content;
   padding: 15px;
-  margin: 40px 0 0 0;
+  margin: 43px 0 0 0;
   align-self: flex-end;
   position: absolute;
   border-radius: 5%;
@@ -74,4 +75,9 @@ i.fa-dragon {
   color: rgb(235, 50, 80);
   font-weight: bold;
   text-decoration: none;
+}
+
+.menuBorders {
+  margin-top: 2px;
+  border-top: 1px solid black;
 }

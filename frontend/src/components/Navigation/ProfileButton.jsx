@@ -4,6 +4,7 @@ import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import { Link } from 'react-router-dom'
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -47,10 +48,10 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
       {user ? (
           <div>
-            <li>{user.username}</li>
-            <li>{user.firstName} {user.lastName}</li>
+            <li>Hello, {user.firstName}.</li>
             <li>{user.email}</li>
-            <li>
+            <Link to={`/current`} className='menuBorders' style={{ fontWeight:"600", color: "rgb(2, 114, 179)" ,textDecoration: "none"}}>Manage Spots</Link>
+            <li className='menuBorders'>
               <button className="logout" onClick={logout}>Log Out</button>
             </li>
           </div>

@@ -27,6 +27,7 @@ export const fetchSpotReviews = (spotId) => async (dispatch) => {
   if (response.ok) {
     const spotReviews = await response.json();
     dispatch(loadSpotReviews(spotReviews, spotId))
+
   } else {
     const errors = await response.json();
     return errors;
