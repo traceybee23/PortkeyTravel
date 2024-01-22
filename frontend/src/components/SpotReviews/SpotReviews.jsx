@@ -2,7 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchSpotReviews, clearSpotReviews } from "../../store/reviews";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import DeleteReviewButton from "./DeleteReviewButton";
 import './SpotReviews.css'
+
+
 
 const SpotReviews = () => {
 
@@ -37,8 +40,11 @@ const SpotReviews = () => {
           <span style={{ fontSize: '18px' }}>
             {sessionUser && sessionUser.id === review.User?.id
               ? sessionUser.firstName
-              : (review.User?.firstName)}
+              : (review.User?.firstName)
+            }
+
           </span>
+          {sessionUser && sessionUser.id === review.User?.id && <DeleteReviewButton />}
           <span style={{ fontSize: '14px', color: 'grey' }}>
             {review.createdAt &&
               getDate(review.createdAt)
