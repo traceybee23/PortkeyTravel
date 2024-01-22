@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import { deleteReview } from '../../store/reviews';
 
@@ -9,10 +9,14 @@ const DeleteReview = ({reviewId}) => {
 
   const {closeModal} = useModal();
 
-  const handleDelete = async (e) => {
+  const handleDelete = (e) => {
     e.preventDefault();
-    await dispatch(deleteReview(reviewId))
+    dispatch(deleteReview(reviewId.reviewId))
     .then(closeModal)
+    .catch(async (response) => {
+      const data = await response.json();
+      return data;
+    })
   }
 
   return (

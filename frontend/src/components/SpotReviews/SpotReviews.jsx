@@ -44,7 +44,6 @@ const SpotReviews = () => {
             }
 
           </span>
-          {sessionUser && sessionUser.id === review.User?.id && <DeleteReviewButton />}
           <span style={{ fontSize: '14px', color: 'grey' }}>
             {review.createdAt &&
               getDate(review.createdAt)
@@ -53,6 +52,9 @@ const SpotReviews = () => {
           <span style={{ fontSize: '12px' }}>
             {review.review}
           </span>
+            {sessionUser && sessionUser.id === review.User?.id &&
+            <span><DeleteReviewButton reviewId={review.id}/></span>
+            }
         </li>
       ))}
     </>

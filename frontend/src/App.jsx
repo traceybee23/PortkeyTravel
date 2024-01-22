@@ -9,6 +9,7 @@ import { Navigate } from 'react-router-dom';
 import SpotReviews from './components/SpotReviews';
 import CreateSpotForm from './components/CreateSpotForm/CreateSpotForm';
 
+
 function Layout() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
