@@ -560,15 +560,15 @@ router.get('/:spotId', async (req, res, next) => {
             stars += review.stars
             spotData.numReviews = spotData.Reviews.length
             if (spot.Reviews.length > 1) {
-                spotData.avgStarRating = stars / spotData.Reviews.length
+                spotData.avgStarRating = (stars / spotData.Reviews.length).toFixed(1)
             } else {
                 spotData.avgStarRating = review.stars.toFixed(1)
             }
         })
-        if(!spotData.numReviews){
+        if (!spotData.numReviews) {
             spotData.numReviews = null
         }
-        if(!spotData.avgStarRating) {
+        if (!spotData.avgStarRating) {
             spotData.avgStarRating = "New"
         }
         delete spotData.Reviews
@@ -690,21 +690,21 @@ router.get('/', validateQueries, async (req, res, next) => {
         spotsList.push(spot.toJSON())
     })
 
-    let stars = 0;
+
     spotsList.forEach(spot => {
         spot.Reviews.forEach(review => {
-            stars += review.stars
-            if (spot.Reviews.length > 1) {
-                spot.avgRating = stars / spot.Reviews.length
-            } else {
-                spot.avgRating = review.stars.toFixed(1)
+            if (review.stars) {
+                let totalStars = spot.Reviews.reduce((sum, review) => (sum + review.stars), 0)
+                avgStars = totalStars / spot.Reviews.length
+                spot.avgRating = avgStars.toFixed(1);
             }
         });
         if (!spot.avgRating) {
             spot.avgRating = "New"
         }
         delete spot.Reviews
-    })
+    });
+
     spotsList.forEach(spot => {
         spot.Images.forEach(image => {
             if (image.preview) {

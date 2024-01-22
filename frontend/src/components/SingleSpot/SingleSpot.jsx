@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchSingleSpot } from "../../store/spots";
 import SpotReviews from "../SpotReviews";
 import ReviewButton from "../SpotReviews/ReviewButton"
+import { fetchSpotReviews } from "../../store/reviews";
 import './SingleSpot.css'
 
 const SingleSpot = () => {
@@ -15,12 +16,28 @@ const SingleSpot = () => {
   const dispatch = useDispatch();
 
   const sessionUser = useSelector(state => state.session.user);
-
   const reviews = Object.values(useSelector((state) => state.reviews))
 
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+
   useEffect(() => {
-    dispatch(fetchSingleSpot(spotId));
+    const fetchData = async () => {
+    await dispatch(fetchSingleSpot(spotId));
+    await dispatch(fetchSpotReviews(spotId));
+    setIsDataLoaded(true);
+    }
+    fetchData()
   }, [dispatch, spotId])
+
+
+
+  const shouldDisplayReviewButton =
+  isDataLoaded &&
+  sessionUser &&
+  spot &&
+  spot.Owner &&
+  sessionUser.id !== spot.Owner.id &&
+  !reviews.some((review) => review.userId === sessionUser.id && review.spotId === spot.id);
 
 
   return (
@@ -69,10 +86,9 @@ const SingleSpot = () => {
           }
         </div>
         <div>
-          {sessionUser && (sessionUser.id !== spot.Owner.id )  && reviews.every((review) => review.userId !== sessionUser.id) &&
+          {shouldDisplayReviewButton &&
             <ReviewButton />
           }
-
         </div>
         {
           spot.numReviews >= 1 &&

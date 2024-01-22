@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchSpotReviews, clearSpotReviews } from "../../store/reviews";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-
 import './SpotReviews.css'
 
 const SpotReviews = () => {
@@ -12,12 +11,12 @@ const SpotReviews = () => {
   const dispatch = useDispatch();
 
   const reviews = Object.values(useSelector((state) => state.reviews))
-
+  const sessionUser = useSelector(state => state.session.user);
 
   useEffect(() => {
     dispatch(fetchSpotReviews(spotId))
     return () => {
-      dispatch(clearSpotReviews());
+      dispatch(clearSpotReviews())
     }
   }, [dispatch, spotId])
 
@@ -26,7 +25,7 @@ const SpotReviews = () => {
     const newDate = new Date(date);
     const month = newDate.toLocaleString('default', { month: 'long' });
     const year = newDate.getFullYear();
-    return [month,' ',year]
+    return [month, ' ', year]
   }
 
   return (
@@ -35,10 +34,11 @@ const SpotReviews = () => {
         <li
           className="reviewsList"
           key={review.id}>
-          {review.User.firstName &&
-          <span style={{ fontSize: '18px' }}>{review.User.firstName}
+          <span style={{ fontSize: '18px' }}>
+            {sessionUser && sessionUser.id === review.User?.id
+              ? sessionUser.firstName
+              : (review.User?.firstName)}
           </span>
-          }
           <span style={{ fontSize: '14px', color: 'grey' }}>
             {review.createdAt &&
               getDate(review.createdAt)

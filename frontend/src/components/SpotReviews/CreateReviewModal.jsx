@@ -3,31 +3,36 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import { createReview } from '../../store/reviews';
 import StarRatingInput from './StarRatingInput';
-
+import { clearSpotReviews } from '../../store/reviews';
 
 const CreateReview = () => {
 
-
   const dispatch = useDispatch();
+
   const { closeModal } = useModal();
 
   const spot = useSelector(state => state.spots)
 
   const spotId = ((Object.keys(spot).join()))
 
+  const sessionUser = useSelector(state => state.session.user);
+
+  const [firstName, setFirstName] = useState('')
   const [review, setReview] = useState('');
   const [stars, setStars] = useState(0)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if(sessionUser) setFirstName(sessionUser.firstName)
     const newReview = {
       review,
-      stars
+      stars,
+      firstName: firstName
     }
-
-    dispatch(createReview(spotId, newReview))
+    await dispatch(createReview(spotId, newReview))
     .then(closeModal)
+
+    .then(dispatch(clearSpotReviews()))
 
   }
 
@@ -49,7 +54,7 @@ const CreateReview = () => {
           onChange={onChange}
           stars={stars}
           />
-        <button type='submit'></button>
+        <button type='submit'>Submit Your Review</button>
 
       </form>
     </div>
