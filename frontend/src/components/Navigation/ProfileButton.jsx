@@ -42,15 +42,20 @@ function ProfileButton({ user }) {
   return (
     <>
       <button className='menu' onClick={toggleMenu}>
-      <i className="fa-solid fa-bars" />&nbsp;
-      <i className="fas fa-user-circle fa-xl" />
+        <i className="fa-solid fa-bars" />&nbsp;
+        <i className="fas fa-user-circle fa-xl" />
       </button>
       <ul className={ulClassName} ref={ulRef}>
-      {user ? (
+        {user ? (
           <div>
             <li>Hello, {user.firstName}.</li>
             <li>{user.email}</li>
-            <Link to={`/current`} className='menuBorders' style={{ fontWeight:"600", color: "rgb(2, 114, 179)" ,textDecoration: "none"}}>Manage Spots</Link>
+            <li>
+              <Link to={`/current`} className='menuBorders' style={{ fontWeight: "600", color: "rgb(2, 114, 179)", textDecoration: "none" }}>Manage Spots</Link>
+            </li>
+            <li>
+              <Link to={`/reviews/current`} style={{ fontWeight: "600", color: "rgb(2, 114, 179)", textDecoration: "none" }}>Manage Reviews</Link>
+            </li>
             <li className='menuBorders'>
               <button className="logout" onClick={logout}>Log Out</button>
             </li>
