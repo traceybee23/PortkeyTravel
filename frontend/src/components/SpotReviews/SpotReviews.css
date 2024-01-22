@@ -4,3 +4,23 @@
 .reviewsList span {
   margin: 2px 0 ;
 }
+
+.reviewForm {
+  margin: 10px;
+  padding: 10px;
+
+}
+
+.rating-input {
+  display: flex;
+  margin-right: 4px;
+  justify-content: space-evenly;
+}
+
+.rating-input .filled {
+  color: black;
+}
+
+.rating-input .empty {
+  color: rgb(168, 168, 168)
+}

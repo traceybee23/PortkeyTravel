@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import { createReview } from '../../store/reviews';
 import StarRatingInput from './StarRatingInput';
-import { clearSpotReviews } from '../../store/reviews';
+
 
 const CreateReview = () => {
 
@@ -32,12 +32,10 @@ const CreateReview = () => {
     await dispatch(createReview(spotId, newReview))
     .then(closeModal)
 
-    .then(dispatch(clearSpotReviews()))
-
   }
 
-  const onChange = (e) => {
-    const number = e.target.value;
+  const onChange = (number) => {
+
     setStars(parseInt(number))
   }
 
