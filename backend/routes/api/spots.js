@@ -300,7 +300,8 @@ router.get('/:spotId/reviews', async (req, res, next) => {
                 model: Image,
                 attributes: ['id', 'url']
             }
-        ]
+        ],
+        order: [['createdAt', 'DESC']]
     })
 
     let reviewList = [];

@@ -35,11 +35,9 @@ const CreateReview = () => {
   }
 
   const onChange = (number) => {
-
     setStars(parseInt(number))
   }
 
-  console.log(review.length)
   return (
     <div className='reviewForm'>
       <h1>How was your stay?</h1>
@@ -54,7 +52,7 @@ const CreateReview = () => {
           onChange={onChange}
           stars={stars}
           />
-        <button type='submit' disabled={review.length < 10}>Submit Your Review</button>
+        <button type='submit' disabled={(review.length < 10) || (!stars)}>Submit Your Review</button>
 
       </form>
     </div>
