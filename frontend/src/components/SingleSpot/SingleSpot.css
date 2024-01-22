@@ -70,10 +70,10 @@
 .reserveContainer {
   border: solid black 1px;
   border-radius: 10px;
-  width: 300px;
+  width: 250px;
   height: 90px;
   padding: 5px 15px;
-  margin-left: 10px;
+  margin-bottom: 10px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;

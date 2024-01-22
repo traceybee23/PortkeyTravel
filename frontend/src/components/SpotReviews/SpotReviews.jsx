@@ -45,7 +45,7 @@ const SpotReviews = () => {
             }
           </span>
           <span style={{ fontSize: '12px' }}>
-            {review.review} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Lorem ipsum dolor sit amet consectetur adipiscing elit ut aliquam. Pulvinar elementum integer enim neque volutpat ac tincidunt vitae semper. Mauris sit amet massa vitae tortor condimentum lacinia quis.
+            {review.review}
           </span>
         </li>
       ))}

@@ -39,6 +39,7 @@ const CreateReview = () => {
     setStars(parseInt(number))
   }
 
+  console.log(review.length)
   return (
     <div className='reviewForm'>
       <h1>How was your stay?</h1>
@@ -47,12 +48,13 @@ const CreateReview = () => {
           placeholder='Leave your review here...'
           value={review}
           onChange={(e) => setReview(e.target.value)}
+          rows="4"
         />
         <StarRatingInput
           onChange={onChange}
           stars={stars}
           />
-        <button type='submit'>Submit Your Review</button>
+        <button type='submit' disabled={review.length < 10}>Submit Your Review</button>
 
       </form>
     </div>
