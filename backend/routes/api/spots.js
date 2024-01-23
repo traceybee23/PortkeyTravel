@@ -411,21 +411,19 @@ router.get('/current', requireAuth, async (req, res) => {
         })
 
         ///get avgRating
-        let stars = 0;
         spotsList.forEach(spot => {
             spot.Reviews.forEach(review => {
-                stars += review.stars
-                if (spot.Reviews.length > 1) {
-                    spot.avgRating = stars / spot.Reviews.length
-                } else {
-                    spot.avgRating = review.stars.toFixed(1)
+                if (review.stars) {
+                    let totalStars = spot.Reviews.reduce((sum, review) => (sum + review.stars), 0)
+                    avgStars = (totalStars / spot.Reviews.length)
+                    spot.avgRating = avgStars.toFixed(1);
                 }
             });
             if (!spot.avgRating) {
                 spot.avgRating = "New"
             }
             delete spot.Reviews
-        })
+        });
         spotsList.forEach(spot => {
             spot.Images.forEach(image => {
                 if (image.preview) {
