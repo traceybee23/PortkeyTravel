@@ -100,7 +100,6 @@ export const loadCurrUserSpots = () => async (dispatch) => {
     const spots = await response.json();
     dispatch(loadSpots(spots))
     return spots;
-
   }else {
     const errors = await response.json();
     return errors;

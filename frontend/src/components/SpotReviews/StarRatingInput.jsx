@@ -21,7 +21,7 @@ const StarRatingInput = ({ stars, onChange }) => {
           >
             <i className="fa fa-star"></i>
           </div>
-        ))}
+        ))}Stars
       </div>
     </>
   )
