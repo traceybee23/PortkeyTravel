@@ -260,8 +260,8 @@ const UpdateSpotForm = () => {
           />
           {errors.price && <span className="errors">{errors.price}</span>}
         </div>
-        <div className="spotsPhotos">
-          <h4>Liven up your spot with photos</h4>
+        {/* <div className="spotsPhotos">
+          <h4>Liven up your spot with photos</h4> */}
           {/* <span style={{fontSize: "small", marginBottom: "10px"}}>Submit a link to at least one photo to publish your spot.</span>
             <input
               type="text"
@@ -324,12 +324,9 @@ const UpdateSpotForm = () => {
               name="image"
             />
             {errors.img4 && <span className="errors">{errors.img4}</span>} */}
-        </div>
-        <button type="submit" disabled={!!Object.values(errors).length}>Update Spot</button>
+        {/* </div> */}
+        <button type="submit" disabled={!!Object.values(errors).length}>Update your Spot</button>
       </form>
-
-
-
     </div>
   )
 }
