@@ -206,7 +206,7 @@ const CreateSpotForm = () => {
               className="textBox"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Description"
+              placeholder="Please write at least 30 characters"
               name="description"
               rows="6"
             />
