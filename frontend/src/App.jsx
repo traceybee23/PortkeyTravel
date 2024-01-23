@@ -9,7 +9,7 @@ import { Navigate } from 'react-router-dom';
 import SpotReviews from './components/SpotReviews';
 import CreateSpotForm from './components/CreateSpotForm/CreateSpotForm';
 import CurrUserSpots from './components/CurrUserSpots';
-
+import UpdateSpotForm from './components/UpdateSpotForm';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -52,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: '/spots/current',
         element: <CurrUserSpots />
+      },
+      {
+        path: '/spots/:spotId/edit',
+        element: <UpdateSpotForm />
       },
     ]
   },

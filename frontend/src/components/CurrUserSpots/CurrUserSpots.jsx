@@ -43,7 +43,10 @@ const CurrUserSpots = () => {
               </div>
               <span className='price'>${spot.price}<span className='text'> night</span></span>
             </div>
-            <span><DeleteSpotButton spotId={spot.id} /></span>
+            <span>
+            <button onClick={()=>navigate(`/spots/${spot.id}/edit`)}>Update</button>
+            <DeleteSpotButton spotId={spot.id} />
+            </span>
           </li>
         ))
         }

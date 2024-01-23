@@ -3,6 +3,7 @@ const LOAD_SPOTS = 'spots/LOAD_SPOTS'
 const SINGLE_SPOT = 'spots/SINGLE_SPOT'
 const LOAD_SPOT_IMAGES = 'images/LOAD_SPOT_IMAGES'
 const REMOVE_SPOT = 'spots/DELETE_SPOT'
+const UPDATE_SPOT = 'spots/UPDATE_SPOT'
 
 const loadSpots = (spots) => ({
   type: LOAD_SPOTS,
@@ -19,6 +20,12 @@ export const loadSpotImages = (spotImage, spotId) => ({
   spotImage,
   spotId
 });
+
+export const editSpot = (spotId, spot) => ({
+  type: UPDATE_SPOT,
+  spotId,
+  spot
+})
 
 export const removeSpot = (spotId) => ({
   type: REMOVE_SPOT,
@@ -106,6 +113,24 @@ export const loadCurrUserSpots = () => async (dispatch) => {
   }
 }
 
+export const updateSpot = (spotId, spot) => async (dispatch) => {
+  console.log(spot, spotId)
+  const response = await csrfFetch( `/api/spots/${spotId}`,{
+  method: 'PUT',
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(spot)
+  })
+
+  if (response.ok) {
+    const updatedSpot = await response.json();
+    dispatch(editSpot(updatedSpot));
+    return updatedSpot;
+  } else {
+    const errors = await response.json();
+    return errors;
+  }
+}
+
 
 const spotsReducer = (state = {}, action) => {
   switch (action.type) {
@@ -123,6 +148,8 @@ const spotsReducer = (state = {}, action) => {
     }
     case LOAD_SPOT_IMAGES:
       return { ...state, [action.spotId]: action.spotImage }
+    case UPDATE_SPOT:
+      return {...state, [action.spot.id]: action.spot };
     case REMOVE_SPOT: {
       const newState = {...state}
       delete newState[action.spotId]

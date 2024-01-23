@@ -20,9 +20,13 @@ const CreateReview = () => {
   const [firstName, setFirstName] = useState('')
   const [review, setReview] = useState('');
   const [stars, setStars] = useState(0)
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setErrors({})
+
     if(sessionUser) setFirstName(sessionUser.firstName)
     const newReview = {
       review,
@@ -31,6 +35,12 @@ const CreateReview = () => {
     }
     await dispatch(createReview(spotId, newReview))
     .then(closeModal)
+    .catch(async (response) => {
+      const data = await response.json();
+      if (data && data.errors) {
+        setErrors(data.errors)
+      }
+    })
 
   }
 
@@ -42,6 +52,8 @@ const CreateReview = () => {
     <div className='reviewForm'>
       <h1>How was your stay?</h1>
       <form onSubmit={handleSubmit}>
+        {errors.review && <span className='errors'>{errors.review}</span>}
+        {errors.stars && <span className='errors'>{errors.stars}</span>}
         <textarea
           placeholder='Leave your review here...'
           value={review}
