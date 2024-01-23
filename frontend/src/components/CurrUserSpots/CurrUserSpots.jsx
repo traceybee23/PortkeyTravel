@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadCurrUserSpots } from "../../store/spots";
 import { useNavigate } from "react-router-dom";
+import DeleteSpotButton from "./DeleteSpotButton";
 
 const CurrUserSpots = () => {
 
@@ -42,6 +43,7 @@ const CurrUserSpots = () => {
               </div>
               <span className='price'>${spot.price}<span className='text'> night</span></span>
             </div>
+            <span><DeleteSpotButton spotId={spot.id} /></span>
           </li>
         ))
         }

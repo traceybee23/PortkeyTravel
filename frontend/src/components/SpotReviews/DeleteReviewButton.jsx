@@ -1,4 +1,4 @@
-import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import OpenModalButton from "../OpenModalButton";
 import DeleteReviewModal from "./DeleteReviewModal"
 
 const DeleteReviewButton = (reviewId) => {
