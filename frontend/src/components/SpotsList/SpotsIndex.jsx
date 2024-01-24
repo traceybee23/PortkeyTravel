@@ -24,7 +24,7 @@ const SpotsIndex = () => {
             <span className='tooltip'>{spot.name}</span>
             <img src={spot.previewImage} alt={spot.name} />
             <div className='spotDeets'>
-              <span>{spot.city},{spot.state}</span>
+              <span>{spot.city},&nbsp;{spot.state}</span>
               <span><i className="fa-solid fa-star" />&nbsp;{spot.avgRating}</span>
             </div>
             <span className='price'>${Number.parseFloat(`${spot.price}`).toFixed(2)}<span className='text'> night</span></span>
