@@ -27,7 +27,7 @@ const SpotsIndex = () => {
               <span>{spot.city},{spot.state}</span>
               <span><i className="fa-solid fa-star" />&nbsp;{spot.avgRating}</span>
             </div>
-            <span className='price'>${spot.price}<span className='text'> night</span></span>
+            <span className='price'>${Number.parseFloat(`${spot.price}`).toFixed(2)}<span className='text'> night</span></span>
           </Link>
         </li>
       ))}

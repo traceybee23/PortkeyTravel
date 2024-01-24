@@ -54,17 +54,16 @@ function ProfileButton({ user }) {
           <div>
             <li>Hello, {user.firstName}.</li>
             <li>{user.email}</li>
-            <li>
+            <li className='menuBorders'>
               <Link to={`/spots/current`}
-              className='menuBorders'
-              style={{ fontWeight: "600", color: "rgb(2, 114, 179)", textDecoration: "none" }}
+              className='createSpotLink '
               onClick={closeMenu}
               >Manage Spots</Link>
             </li>
             <li>
               <Link
               to={`/reviews/current`}
-              style={{ fontWeight: "600", color: "rgb(2, 114, 179)", textDecoration: "none" }}
+              className='createSpotLink'
               onClick={closeMenu}
               >Manage Reviews</Link>
             </li>

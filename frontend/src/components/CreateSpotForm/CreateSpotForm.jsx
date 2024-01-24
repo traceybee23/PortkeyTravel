@@ -230,8 +230,9 @@ const CreateSpotForm = () => {
             <span style={{fontSize: "small"}}>Competitive pricing can help your listing stand out and rank higher in search results.</span><br></br>
             $ <input style={{ marginBottom: "0", width: "94%", marginRight: "3px" }}
               type="number"
+              step=".01"
               value={price}
-              onChange={(e) => setPrice(e.target.value)}
+              onChange={(e) => setPrice(Number.parseFloat(e.target.value).toFixed(2))}
               placeholder="Price per night (USD)"
               name="price"
             />

@@ -126,6 +126,7 @@ const UpdateSpotForm = () => {
 
     if (price && price <= 0) errObj.price = ("Price is required")
 
+
     if (lat && (lat > 90 || lat < -90)) errObj.lat = ("Latitude is not valid")
     if (lng && (lng > 180 || lng < -180)) errObj.lng = ("Longitude is not valid")
 
@@ -253,8 +254,9 @@ const UpdateSpotForm = () => {
           <span style={{ fontSize: "small" }}>Competitive pricing can help your listing stand out and rank higher in search results.</span><br></br>
           $ <input style={{ marginBottom: "0", width: "94%", marginRight: "3px" }}
             type="number"
+            step=".01"
             value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            onChange={(e) => setPrice(Number.parseFloat(e.target.value).toFixed(2))}
             placeholder="Price per night (USD)"
             name="price"
           />

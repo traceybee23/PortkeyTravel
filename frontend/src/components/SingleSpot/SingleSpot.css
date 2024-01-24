@@ -68,8 +68,8 @@
 }
 
 .reserveContainer {
-  border: solid black 1px;
-  border-radius: 10px;
+  border: 1px solid rgba(2, 114, 179);
+  border-radius: 6px;
   width: 250px;
   height: 90px;
   padding: 5px 15px;
@@ -84,6 +84,7 @@
 .reserveContainer button {
   align-self: center;
   width: 250px;
+  margin-top: 5px;
 }
 
 .reserveSpans {
@@ -91,7 +92,7 @@
 }
 
 .reviewContainer {
-  border-top: solid grey 1px;
+  border-top: 1px solid rgba(2, 114, 179);
   margin: auto;
   font-size: 20px;
   font-weight: bold;

@@ -11,12 +11,10 @@ form {
 
 }
 
-
 .login {
   display: flex;
   justify-content: center;
   margin: 10px;
-
 }
 
 button {
@@ -24,6 +22,7 @@ button {
   width: 100%;
   background: rgb(235, 50, 80);
   color: rgb(255, 255, 255);
+  border: 2.80px solid rgba(2, 114, 179);
   font-size: 20px;
   align-self: center;
 }

@@ -8,13 +8,18 @@ img {
   display: flex;
   flex-wrap: wrap;
   padding: 15px 15px 0 0;
-
 }
 
 .spotsCards {
   padding-bottom: 20px;
-  padding-left: 20px;
+  padding: 20px;
   margin: auto;
+  margin-bottom: 20px;
+
+}
+
+.spotsCards:hover {
+  box-shadow: 5px 5px 5px 5px rgba(2, 114, 179, 0.247);
 }
 
 .spotDeets {

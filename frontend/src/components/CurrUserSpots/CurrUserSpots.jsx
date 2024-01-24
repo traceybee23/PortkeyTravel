@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadCurrUserSpots } from "../../store/spots";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import './CurrUserSpots.css'
+
 import DeleteSpotButton from "./DeleteSpotButton";
 
 const CurrUserSpots = () => {
@@ -26,27 +28,29 @@ const CurrUserSpots = () => {
   return (
     <>
       <h2>Manage Spots</h2>
-      <button
-        onClick={()=> navigate('/spots/new')}
-      >Create a New Spot</button>
+      <Link className="createSpotLink"
+        onClick={() => navigate('/spots/new')}
+      >Create a New Spot</Link>
       <ul className="spotsContainer">
         {userSpots && userSpots.map(spot => (
           <li
             className="spotsCards"
             key={spot.id}
           >
-            <div className="userSpotCards">
-              <img src={spot.previewImage} alt={spot.name} />
-              <div className='spotDeets'>
-                <span>{spot.city},{spot.state}</span>
-                <span><i className="fa-solid fa-star" />&nbsp;{spot.avgRating}</span>
+            <Link style={{ textDecoration: 'none', color: 'black' }} to={`/spots/${spot.id}`}>
+              <div className="userSpotCards">
+                <img src={spot.previewImage} alt={spot.name} />
+                <div className='spotDeets'>
+                  <span>{spot.city},{spot.state}</span>
+                  <span><i className="fa-solid fa-star" />&nbsp;{spot.avgRating}</span>
+                </div>
+                <span className='price'>${Number.parseFloat(`${spot.price}`).toFixed(2)}<span className='text'> night</span></span>
               </div>
-              <span className='price'>${spot.price}<span className='text'> night</span></span>
+            </Link>
+            <div className="updateDeleteButtons">
+              <button onClick={() => navigate(`/spots/${spot.id}/edit`)}>Update</button>
+              <DeleteSpotButton spotId={spot.id} />
             </div>
-            <span>
-            <button onClick={()=>navigate(`/spots/${spot.id}/edit`)}>Update</button>
-            <DeleteSpotButton spotId={spot.id} />
-            </span>
           </li>
         ))
         }

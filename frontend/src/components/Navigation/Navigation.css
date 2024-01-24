@@ -8,7 +8,7 @@ li {
   justify-content: space-between;
   padding-left: 0;
   padding-bottom: 20px;
-  border-bottom: 1px solid rgb(214, 214, 214);
+  border-bottom: 1px solid rgba(2, 114, 179, 0.521);
 
 }
 button {
@@ -21,13 +21,11 @@ button {
   align-self: flex-end;
   margin: 1px;
   position: relative;
-  border-radius: 50% 50%;
   padding: 10px;
 }
 
 .logout {
   width: fit-content;
-  border-radius: 50% 50%;
   margin: 10px 0 0;
   padding: 0 10px;
 }
@@ -48,14 +46,13 @@ button:disabled {
 }
 
 .profile-dropdown {
-  background-color: rgb(255, 191, 201);
+  background-color: rgba(213,232,242,255);
   width: fit-content;
   height: fit-content;
   padding: 15px;
   margin: 43px 0 0 0;
   align-self: flex-end;
   position: absolute;
-  border-radius: 5%;
 }
 
 i.fa-dragon {
@@ -82,4 +79,14 @@ i.fa-dragon {
 .menuBorders {
   margin-top: 2px;
   border-top: 1px solid black;
+}
+
+.createSpotLink {
+  text-decoration: none;
+  color: rgb(2, 114, 179);
+  font-weight: 600;
+}
+
+.createSpotLink:hover {
+  color: rgb(235, 50, 80);
 }

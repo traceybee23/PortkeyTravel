@@ -19,14 +19,15 @@ const SingleSpot = () => {
   const reviews = Object.values(useSelector((state) => state.reviews))
 
 
-
   useEffect(() => {
-    const fetchData = async () => {
-    await dispatch(fetchSingleSpot(spotId));
-    await dispatch(fetchSpotReviews(spotId));
-    }
-    fetchData()
-  }, [dispatch, spotId])
+
+    dispatch(fetchSingleSpot(spotId));
+
+    if(reviews.length){
+    dispatch(fetchSpotReviews(spotId));}
+
+
+  }, [dispatch, spotId, reviews.length])
 
 
 
@@ -35,7 +36,8 @@ const SingleSpot = () => {
   spot &&
   spot.Owner &&
   sessionUser.id !== spot.Owner.id &&
-  !reviews.some((review) => review.userId === sessionUser.id && review.spotId === spot.id);
+  !reviews.some((review) => review.userId === sessionUser.id && review.spotId === spot.id)
+
 
 
   return (
@@ -59,7 +61,7 @@ const SingleSpot = () => {
           <div className="detailsContainer">
             <p className="spotDescription">&nbsp;&nbsp;&nbsp;{spot.description}</p>
             <div className="reserveContainer">
-              <span style={{ fontWeight: 'bold' }}>${spot.price}&nbsp;night&nbsp;</span>
+              <span style={{ fontWeight: 'bold' }}>${Number.parseFloat(`${spot.price}`).toFixed(2)}&nbsp;night&nbsp;</span>
               <span style={{ fontSize: '13px' }}><i className="fa-solid fa-star" />&nbsp;{spot.avgStarRating}
                 {spot.numReviews && spot.numReviews > 1 &&
                   <span style={{ fontSize: '13px' }}>&nbsp;·&nbsp;{spot.numReviews}&nbsp;Reviews </span>
