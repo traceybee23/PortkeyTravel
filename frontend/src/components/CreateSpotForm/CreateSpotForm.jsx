@@ -54,6 +54,7 @@ const CreateSpotForm = () => {
     }
 
     dispatch(createSpot(newSpot))
+
       .then((spot) => {
         const imageArr = Object.values(imageInfo)
         let spotImg;
@@ -71,6 +72,7 @@ const CreateSpotForm = () => {
               preview: false
             }
           }
+
           dispatch(createSpotImage(spot.id, spotImg))
           .then(navigate(`/spots/${spot.id}`))
         })
@@ -85,7 +87,6 @@ const CreateSpotForm = () => {
   }
 
   useEffect(() => {
-
     let errObj = {}
     if(!country) errObj.country = ( "Country required")
     if(!address) errObj.address =  ("Address required")
@@ -229,10 +230,9 @@ const CreateSpotForm = () => {
             <h4>Set a base price for your spot</h4>
             <span style={{fontSize: "small"}}>Competitive pricing can help your listing stand out and rank higher in search results.</span><br></br>
             $ <input style={{ marginBottom: "0", width: "94%", marginRight: "3px" }}
-              type="number"
-              step=".01"
+              type="text"
               value={price}
-              onChange={(e) => setPrice(Number.parseFloat(e.target.value).toFixed(2))}
+              onChange={(e) => setPrice(e.target.value)}
               placeholder="Price per night (USD)"
               name="price"
             />
