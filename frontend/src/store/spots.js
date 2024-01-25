@@ -21,10 +21,9 @@ export const loadSpotImages = (spotImage, spotId) => ({
   spotId
 });
 
-export const editSpot = (spotId, spot) => ({
+export const editSpot = (spotId) => ({
   type: UPDATE_SPOT,
-  spotId,
-  spot
+  spotId
 })
 
 export const removeSpot = (spotId) => ({
@@ -114,7 +113,7 @@ export const loadCurrUserSpots = () => async (dispatch) => {
 }
 
 export const updateSpot = (spotId, spot) => async (dispatch) => {
-  console.log(spot, spotId)
+
   const response = await csrfFetch( `/api/spots/${spotId}`,{
   method: 'PUT',
   headers: { "Content-Type": "application/json" },
@@ -147,9 +146,9 @@ const spotsReducer = (state = {}, action) => {
       return spotsState
     }
     case LOAD_SPOT_IMAGES:
-      return { ...state, [action.spotId]: action.spotImage }
+      return { ...state, [action.spotId.id]: action.spotImage }
     case UPDATE_SPOT:
-      return {...state, [action.spot.id]: action.spot };
+      return {...state, [action.spotId.id]: action.spot };
     case REMOVE_SPOT: {
       const newState = {...state}
       delete newState[action.spotId]

@@ -1,8 +1,7 @@
 /* TODO: Add sitewide styles */
-@media screen and (max-width: 1000px) {
-  html {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: auto;
-    max-width: 1000px;
-  }
+
+html {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: auto;
+  max-width: 1702px;
 }

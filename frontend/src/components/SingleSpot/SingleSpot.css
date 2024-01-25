@@ -55,9 +55,9 @@
 }
 
 .spotDescription {
-  max-width: 700px;
+  max-width: 680px;
   display: flex;
-
+  word-break: break-all;
 }
 
 
