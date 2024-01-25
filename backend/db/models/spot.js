@@ -4,11 +4,7 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Spot extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
     static associate(models) {
       // define association here
       Spot.belongsTo(
@@ -22,8 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         otherKey: 'userId',
         onDelete: 'CASCADE',
         hooks: true
-      }
-      );
+      });
 
       Spot.belongsToMany(
         models.User, {
@@ -34,13 +29,12 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       Spot.belongsToMany(
-        models.User,
-        {
+        models.User, {
           through: models.Review,
           foreignKey: 'spotId',
           otherKey: 'userId',
           onDelete: 'CASCADE'
-        });
+      });
 
       Spot.hasMany(models.Image, {
         foreignKey: 'imageableId',
@@ -69,24 +63,24 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull: {msg: "Street address is required"},
-        notEmpty: {msg: "Street address is required"},
+        notNull: { msg: "Street address is required" },
+        notEmpty: { msg: "Street address is required" },
       }
     },
     city: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull: {msg: "City is required"},
-        notEmpty:  {msg: "City is required"},
+        notNull: { msg: "City is required" },
+        notEmpty: { msg: "City is required" },
       }
     },
     state: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull: {msg: "State is required"},
-        notEmpty: {msg: "State is required"},
+        notNull: { msg: "State is required" },
+        notEmpty: { msg: "State is required" },
       }
     },
     country: {
@@ -110,7 +104,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.FLOAT,
       allowNull: false,
       validate: {
-        notEmpty: {msg: "Longitude is required"},
+        notEmpty: { msg: "Longitude is required" },
         max: { args: 180, msg: "Longitude is not valid" },
         min: { args: -180, msg: "Longitude is not valid" },
       }
@@ -119,8 +113,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: { args: [4, 50], msg: "Name must be less than 50 characters"},
-        notNull: {msg: "Name must be less than 50 characters"},
+        len: { args: [4, 50], msg: "Name must be less than 50 characters" },
+        notNull: { msg: "Name must be less than 50 characters" },
         notEmpty: { msg: "Name is required" }
       }
     },
@@ -128,16 +122,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: { args: [30, 200], msg: "Description must be less than 200 characters"},
-        notNull: {msg: "Description is required"},
-        notEmpty: {msg: "Description needs a minimum of 30 characters"}
+        len: { args: [30, 200], msg: "Description must be less than 200 characters" },
+        notNull: { msg: "Description is required" },
+        notEmpty: { msg: "Description needs a minimum of 30 characters" }
       }
     },
     price: {
       type: DataTypes.FLOAT,
       allowNull: false,
       validate: {
-        notEmpty: {msg: "Price is required"},
+        notEmpty: { msg: "Price is required" },
         min: { args: 1, msg: "Price per day is required" },
       }
     }
