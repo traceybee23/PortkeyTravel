@@ -82,6 +82,7 @@ const CreateSpotForm = () => {
         const data = await response.json();
         if (data && data.errors) {
           setErrors(data.errors)
+          console.log(data.errors)
         }
       })
 

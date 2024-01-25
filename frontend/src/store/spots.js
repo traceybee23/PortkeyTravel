@@ -21,10 +21,9 @@ export const loadSpotImages = (spotImage, spotId) => ({
   spotId
 });
 
-export const editSpot = (spotId, spot) => ({
+export const editSpot = (spotId) => ({
   type: UPDATE_SPOT,
-  spotId,
-  spot
+  spotId
 })
 
 export const removeSpot = (spotId) => ({
@@ -147,7 +146,7 @@ const spotsReducer = (state = {}, action) => {
       return spotsState
     }
     case LOAD_SPOT_IMAGES:
-      return { ...state, [action.spotId]: action.spotImage }
+      return { ...state, [action.spotId.id]: action.spotImage }
     case UPDATE_SPOT:
       return {...state, [action.spotId.id]: action.spot };
     case REMOVE_SPOT: {

@@ -38,6 +38,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
+        len: { args: [10, 200], msg: "Review must be between 10 and 200 characters"},
         notNull: {msg: "Review text is required"},
         notEmpty: {msg: "Review text is required"},
       }

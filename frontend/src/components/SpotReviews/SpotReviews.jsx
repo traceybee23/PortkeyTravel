@@ -6,7 +6,6 @@ import DeleteReviewButton from "./DeleteReviewButton";
 import './SpotReviews.css'
 
 
-
 const SpotReviews = () => {
 
   const { spotId } = useParams();

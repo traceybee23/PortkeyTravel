@@ -21,40 +21,55 @@ const CurrUserSpots = () => {
       userSpots.push(spot)
   })
 
+
   useEffect(() => {
-    dispatch(loadCurrUserSpots())
-  }, [dispatch])
+    if(userSpots.length) {
+
+      dispatch(loadCurrUserSpots())
+    }
+  }, [dispatch, userSpots.length])
+
 
   return (
     <>
       <h2>Manage Spots</h2>
-      <Link className="createSpotLink"
-        onClick={() => navigate('/spots/new')}
-      >Create a New Spot</Link>
-      <ul className="spotsContainer">
-        {userSpots && userSpots.map(spot => (
-          <li
-            className="spotsCards"
-            key={spot.id}
-          >
-            <Link style={{ textDecoration: 'none', color: 'black' }} to={`/spots/${spot.id}`}>
-              <div className="userSpotCards">
-                <img src={spot.previewImage} alt={spot.name} />
-                <div className='spotDeets'>
-                  <span>{spot.city},&nbsp;{spot.state}</span>
-                  <span><i className="fa-solid fa-star" />&nbsp;{spot.avgRating}</span>
-                </div>
-                <span className='price'>${Number.parseFloat(`${spot.price}`).toFixed(2)}<span className='text'> night</span></span>
-              </div>
-            </Link>
-            <div className="updateDeleteButtons">
-              <button onClick={() => navigate(`/spots/${spot.id}/edit`)}>Update</button>
-              <DeleteSpotButton spotId={spot.id} />
-            </div>
-          </li>
-        ))
-        }
-      </ul>
+      {
+        !userSpots.length ? (
+          <Link className="createSpotLink"
+            onClick={() => navigate('/spots/new')}
+          >Create a New Spot</Link>
+        ) : (
+          <>
+            <Link className="createSpotLink"
+              onClick={() => navigate('/spots/new')}
+            >Create a New Spot</Link>
+            <ul className="spotsContainer">
+              {userSpots && userSpots.map(spot => (
+                <li
+                  className="spotsCards"
+                  key={spot.id}
+                >
+                  <Link style={{ textDecoration: 'none', color: 'black' }} to={`/spots/${spot.id}`}>
+                    <div className="userSpotCards">
+                      <img src={spot.previewImage} alt={spot.name} />
+                      <div className='spotDeets'>
+                        <span>{spot.city},&nbsp;{spot.state}</span>
+                        <span><i className="fa-solid fa-star" />&nbsp;{spot.avgRating}</span>
+                      </div>
+                      <span className='price'>${Number.parseFloat(`${spot.price}`).toFixed(2)}<span className='text'> night</span></span>
+                    </div>
+                  </Link>
+                  <div className="updateDeleteButtons">
+                    <button onClick={() => navigate(`/spots/${spot.id}/edit`)}>Update</button>
+                    <DeleteSpotButton spotId={spot.id} />
+                  </div>
+                </li>
+              ))
+              }
+            </ul>
+          </>
+        )
+      }
     </>
   )
 }
