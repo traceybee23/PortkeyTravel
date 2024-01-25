@@ -21,9 +21,9 @@ export const loadSpotImages = (spotImage, spotId) => ({
   spotId
 });
 
-export const editSpot = (spotId) => ({
+export const editSpot = (spot) => ({
   type: UPDATE_SPOT,
-  spotId
+  spot
 })
 
 export const removeSpot = (spotId) => ({
@@ -71,7 +71,7 @@ export const createSpot = (spot) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(spot)
   });
-
+  console.log("CREATE SPOT",response)
   if (response.ok) {
     const newSpot = await response.json();
     dispatch(loadSingleSpot(newSpot));
@@ -88,7 +88,7 @@ export const createSpotImage = (spotId, spotImage) => async (dispatch) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(spotImage)
   })
-  console.log("CREATE IMAGE",response)
+  
   if (response.ok) {
     const image = await response.json();
     dispatch(loadSpotImages(image, spotId))
@@ -148,7 +148,7 @@ const spotsReducer = (state = {}, action) => {
     case LOAD_SPOT_IMAGES:
       return { ...state, [action.spotId.id]: action.spotImage }
     case UPDATE_SPOT:
-      return {...state, [action.spotId.id]: action.spot };
+      return {...state, [action.spot.id]: action.spot };
     case REMOVE_SPOT: {
       const newState = {...state}
       delete newState[action.spotId]
