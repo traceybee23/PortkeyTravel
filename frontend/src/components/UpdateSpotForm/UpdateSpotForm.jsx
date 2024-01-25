@@ -79,7 +79,7 @@ const UpdateSpotForm = () => {
     // }
 
     dispatch(updateSpot(spotId, newSpot))
-    dispatch(fetchSingleSpot(spotId))
+
       .then(navigate(`/spots/${spotId}`))
       // (spot) => {
       // const imageArr = Object.values(imageInfo)
@@ -108,7 +108,7 @@ const UpdateSpotForm = () => {
           setErrors(data.errors)
         }
       })
-
+      dispatch(fetchSingleSpot(spotId))
   }
 
   useEffect(() => {
