@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { updateSpot } from "../../store/spots";
+import { fetchSingleSpot, updateSpot } from "../../store/spots";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
@@ -79,6 +79,7 @@ const UpdateSpotForm = () => {
     // }
 
     dispatch(updateSpot(spotId, newSpot))
+    dispatch(fetchSingleSpot(spotId))
       .then(navigate(`/spots/${spotId}`))
       // (spot) => {
       // const imageArr = Object.values(imageInfo)

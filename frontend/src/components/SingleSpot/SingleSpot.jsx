@@ -59,7 +59,7 @@ const SingleSpot = () => {
           </div>
           <h3>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h3>
           <div className="detailsContainer">
-            <p className="spotDescription">&nbsp;&nbsp;&nbsp;{spot.description}</p>
+            <span className="spotDescription">&nbsp;&nbsp;&nbsp;{spot.description}</span>
             <div className="reserveContainer">
               <span style={{ fontWeight: 'bold' }}>${Number.parseFloat(`${spot.price}`).toFixed(2)}&nbsp;night&nbsp;</span>
               <span style={{ fontSize: '13px' }}><i className="fa-solid fa-star" />&nbsp;{spot.avgStarRating}
