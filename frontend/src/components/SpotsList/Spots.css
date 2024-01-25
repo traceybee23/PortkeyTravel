@@ -1,7 +1,7 @@
 img {
  height: 251.42px;
  width: 377.52px;
-
+ border-radius: 20px 20px 0 0;
 }
 
 .spotsContainer {
@@ -18,14 +18,9 @@ img {
 
 }
 
-.spotsCards:hover {
-  box-shadow: 5px 5px 5px 5px rgba(2, 114, 179, 0.247);
-}
-
 .spotDeets {
   display: flex;
   flex-direction: row;
-  padding: 10px 0 10px 0;
   justify-content: space-between;
   flex-wrap: wrap;
 
