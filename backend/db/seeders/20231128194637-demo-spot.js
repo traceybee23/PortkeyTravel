@@ -17,7 +17,7 @@ const demoSpots = [
     "lat": 37.7645358,
     "lng": -122.4730327,
     "name": "App Academy",
-    "description": "Place where web developers are created.",
+    "description": "Place where web developers are created. Lorem ipsum dolor sit posuere.",
     "price": 123
   },
   {
@@ -29,7 +29,7 @@ const demoSpots = [
     "lat": 21.315603,
     "lng": -157.858093,
     "name": "Stitch's Place",
-    "description": "Place where aliens live.",
+    "description": "Place where aliens live. Lorem ipsum viverra.",
     "price": 140
   },
   {
@@ -41,7 +41,7 @@ const demoSpots = [
     "lat": 47.608013,
     "lng": -122.335167,
     "name": "Coffee Haus",
-    "description": "Place where coffee is created.",
+    "description": "Place where coffee is created. Lorem ipsum integer.",
     "price": 158
   },
   {
@@ -53,7 +53,7 @@ const demoSpots = [
     "lat": 30.266666,
     "lng": -97.733330,
     "name": "BBQ Place",
-    "description": "Place where BBQ is created.",
+    "description": "Place where BBQ is created. Lorem ipsum dolor sit at.",
     "price": 111
   },
   {
@@ -65,7 +65,7 @@ const demoSpots = [
     "lat": 32.266666,
     "lng": 37.733330,
     "name": "Jazz Corner",
-    "description": "Music, food, and drinks!",
+    "description": "Music, food, and drinks! Lorem ipsum dolor sit ac.",
     "price": 65
   }
 ]

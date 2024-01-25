@@ -17,19 +17,19 @@ const demoReviews = [
   {
     "userId": 2,
     "spotId": 2,
-    "review": "BEAUTIFUL!!",
+    "review": "BEAUTIFUL!! Lorem leo.",
     "stars": 5
   },
   {
     "userId": 1,
     "spotId": 3,
-    "review": "Very Nice!",
+    "review": "Very Nice! Lorem vel.",
     "stars": 5
   },
   {
     "userId": 2,
     "spotId": 4,
-    "review": "Was OKAY.",
+    "review": "Was OKAY. Eget.",
     "stars": 3
   },
   {
@@ -37,13 +37,7 @@ const demoReviews = [
     "spotId": 1,
     "review": "This was a CLEAN spot!",
     "stars": 4
-  },
-  // {
-  //   "userId": 3,
-  //   "spotId": 5,
-  //   "review": "Was very fun!",
-  //   "stars": 3
-  // },
+  }
 ]
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
