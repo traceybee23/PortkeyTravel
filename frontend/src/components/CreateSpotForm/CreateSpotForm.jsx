@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { createSpot, createSpotImage } from "../../store/spots";
+import { createSpot, createSpotImage, fetchSingleSpot } from "../../store/spots";
 import './CreateSpotForm.css'
 import { useNavigate } from "react-router-dom";
 
@@ -73,6 +73,7 @@ const CreateSpotForm = () => {
             }
           }
 
+          dispatch(fetchSingleSpot(spot.id))
           dispatch(createSpotImage(spot.id, spotImg))
           .then(navigate(`/spots/${spot.id}`))
         })
