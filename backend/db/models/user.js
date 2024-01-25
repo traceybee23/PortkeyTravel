@@ -85,7 +85,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING.BINARY,
         allowNull: false,
         validate: {
-          min: { args: [6], msg: "Password must be more than 6 characters"},
+          len: { args: [6, 100], msg: "Password must be more than 6 characters"},
         }
       },
     },
