@@ -152,6 +152,7 @@ const UpdateSpotForm = () => {
   }, [address, city, state, description, lat, lng, name, price, country])
 
   return (
+    spots &&
     <div className="spotFormContainer">
       <form onSubmit={handleSubmit}>
         <div className="createLocation">

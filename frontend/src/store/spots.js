@@ -72,7 +72,7 @@ export const createSpot = (spot) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(spot)
   });
-  console.log("CREATE SPOT",response)
+
   if (response.ok) {
     const newSpot = await response.json();
     dispatch(loadSingleSpot(newSpot));
@@ -114,7 +114,7 @@ export const loadCurrUserSpots = () => async (dispatch) => {
 }
 
 export const updateSpot = (spotId, spot) => async (dispatch) => {
-  console.log(spot, spotId)
+
   const response = await csrfFetch( `/api/spots/${spotId}`,{
   method: 'PUT',
   headers: { "Content-Type": "application/json" },
@@ -149,7 +149,7 @@ const spotsReducer = (state = {}, action) => {
     case LOAD_SPOT_IMAGES:
       return { ...state, [action.spotId]: action.spotImage }
     case UPDATE_SPOT:
-      return {...state, [action.spot.id]: action.spot };
+      return {...state, [action.spotId.id]: action.spot };
     case REMOVE_SPOT: {
       const newState = {...state}
       delete newState[action.spotId]
