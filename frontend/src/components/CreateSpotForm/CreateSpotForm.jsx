@@ -54,6 +54,7 @@ const CreateSpotForm = () => {
     }
 
     dispatch(createSpot(newSpot))
+
       .then((spot) => {
         const imageArr = Object.values(imageInfo)
         let spotImg;
@@ -71,7 +72,9 @@ const CreateSpotForm = () => {
               preview: false
             }
           }
+
           dispatch(createSpotImage(spot.id, spotImg))
+          .then(navigate(`/spots/${spot.id}`))
         })
       })
       .catch(async (response) => {
@@ -80,7 +83,7 @@ const CreateSpotForm = () => {
           setErrors(data.errors)
         }
       })
-      navigate(`/spots/${spot.id}`)
+
   }
 
   useEffect(() => {
