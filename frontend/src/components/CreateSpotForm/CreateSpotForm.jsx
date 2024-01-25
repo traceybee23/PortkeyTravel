@@ -230,7 +230,7 @@ const CreateSpotForm = () => {
             $ <input style={{ marginBottom: "0", width: "94%", marginRight: "3px" }}
               type="text"
               value={price}
-              onChange={(e) => setPrice(Number.parseFloat(e.target.value).toFixed(2))}
+              onChange={(e) => setPrice(e.target.value)}
               placeholder="Price per night (USD)"
               name="price"
             />
