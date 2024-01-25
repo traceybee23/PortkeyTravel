@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { fetchSingleSpot, updateSpot } from "../../store/spots";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import './UpdateSpotForm.css'
 
 const UpdateSpotForm = () => {
 
@@ -331,7 +332,11 @@ const UpdateSpotForm = () => {
             />
             {errors.img4 && <span className="errors">{errors.img4}</span>} */}
         {/* </div> */}
-        <button type="submit" disabled={!!Object.values(errors).length}>Update your Spot</button>
+        <button
+        type="submit"
+        disabled={!!Object.values(errors).length}
+        className="updateSpotButton"
+        >Update your Spot</button>
       </form>
     </div>
   )
