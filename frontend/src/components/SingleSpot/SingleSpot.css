@@ -73,7 +73,7 @@
 }
 
 .reserveContainer {
-  border: 1px solid rgba(2, 114, 179);
+  border: 1px solid #476574;
   border-radius: 6px;
   width: 250px;
   height: 90px;
@@ -99,7 +99,7 @@
   padding: 10px 0 0 0 ;
 }
 .reviewContainer {
-  border-top: 1px solid rgba(2, 114, 179);
+  border-top: 1px solid #476574;
   margin: auto;
   font-size: 20px;
   font-weight: bold;
@@ -107,8 +107,8 @@
 }
 
 .reviewButton button{
-  background-color: rgba(2, 114, 179);
-  border: 4px groove rgb(235, 50, 80);
+  background-color: #476574;
+  border: 4px groove #e43803;
   height: 25px;
   font-size: medium;
   margin: 10px 0;

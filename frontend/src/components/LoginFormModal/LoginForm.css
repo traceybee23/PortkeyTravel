@@ -21,9 +21,9 @@ form {
 button {
   height: 40px;
   width: 100%;
-  background: rgb(235, 50, 80);
+  background: #e43803;
   color: rgb(255, 255, 255);
-  border: 2.80px solid rgba(2, 114, 179);
+  border: 2.80px solid #476574;
   font-size: 20px;
   align-self: center;
 }

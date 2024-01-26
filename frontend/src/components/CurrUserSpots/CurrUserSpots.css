@@ -2,8 +2,8 @@
   padding: 10px 0;
 }
 .updateDeleteButtons button {
-  background-color: rgba(2, 114, 179);
-  border: 4px groove rgb(235, 50, 80);
+  background-color: #476574;
+  border: 4px groove #e43803;
   height: 25px;
   font-size: medium;
   margin-right: 20px;

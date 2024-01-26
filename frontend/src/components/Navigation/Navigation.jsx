@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
+import mainLogo from '../../../public/boot.png'
 import './Navigation.css'
 
 function Navigation({ isLoaded }) {
@@ -10,7 +11,7 @@ function Navigation({ isLoaded }) {
   return (
     <ul id="header">
       <li>
-        <NavLink className='logo' to="/"><i className="fa-solid fa-dragon fa-3x" />LairBnB</NavLink>
+        <NavLink className='logo' to="/"><img src={mainLogo} style={{height: "77px", width: "77px"}}/><span>Portkey<span>Travel</span></span></NavLink>
       </li>
       {isLoaded && (
         <div className="createNewSpotContainer">
