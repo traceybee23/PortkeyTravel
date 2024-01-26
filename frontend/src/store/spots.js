@@ -21,7 +21,7 @@ export const loadSpotImages = (spotImage, spotId) => ({
   spotId
 });
 
-export const editSpot = (spot) => ({
+export const editSpot = (spot) => ( {
   type: UPDATE_SPOT,
   spot
 })
@@ -88,7 +88,7 @@ export const createSpotImage = (spotId, spotImage) => async (dispatch) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(spotImage)
   })
-  
+
   if (response.ok) {
     const image = await response.json();
     dispatch(loadSpotImages(image, spotId))
