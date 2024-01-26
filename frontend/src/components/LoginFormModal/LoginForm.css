@@ -8,6 +8,7 @@ form {
   display: flex;
   flex-direction: column;
   margin: 15px;
+  width: 300px;
 
 }
 
@@ -28,13 +29,8 @@ button {
 }
 
 .loginButtonModal {
-  width: 100%;
+  width: 186.22px;
 }
-
-#modal-content {
-  border-radius: 30px;
-}
-
 
 button:hover {
   cursor: pointer;
@@ -45,7 +41,6 @@ button:hover {
   width: fit-content;
   align-content: start;
   margin: auto;
-
 }
 
 div {
@@ -55,4 +50,9 @@ div {
 
 .loginButton {
   width: 100%;
+}
+
+.inputBox input {
+  width: 200px;
+  margin-bottom: 10px;
 }

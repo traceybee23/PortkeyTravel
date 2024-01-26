@@ -1,13 +1,14 @@
 form {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .inputFormSignup {
   display: flex;
   flex-wrap: wrap;
   width: 300px;
-  margin: 20px 30px 0 20px;
+  margin: 20px 30px 30px 20px;
   position: relative;
   height: 510px;
   align-items: center;
@@ -24,10 +25,8 @@ div {
 }
 
 
-.submitButton {
-  display: flex;
-  justify-content: center;
-  margin: 10px;
+.signupButton button{
+  margin: 15px 0 50px 0;
 }
 
 
@@ -45,17 +44,28 @@ div {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  max-width: 250px;
 }
 
 
 .inputFormSignup input {
-  width: 300px;
+  width: 250px;
   margin-bottom: 10px;
+
 }
 
 
 .inputFormSignup h1 {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+}
 
+.inputFormSignup label {
+  width: 256.21px;
+  margin-left: 0;
+}
 
+.inputFormSignup span {
+  margin-bottom: 10px;
+  text-align: center;
+  word-wrap: wrap;
 }

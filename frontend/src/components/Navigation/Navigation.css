@@ -50,10 +50,12 @@ button:disabled {
   width: fit-content;
   height: fit-content;
   padding: 15px;
-  margin: 43px 0 0 0;
+  margin: 42px 0 0 0;
   align-self: flex-end;
   position: absolute;
+  border-radius: 20px 0 20px 20px;
 }
+
 
 i.fa-dragon {
   color: rgb(235, 50, 80);
@@ -89,4 +91,9 @@ i.fa-dragon {
 
 .createSpotLink:hover {
   color: rgb(235, 50, 80);
+}
+
+.loginButton  {
+  margin: 10px;
+  width: 100px;
 }

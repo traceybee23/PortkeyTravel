@@ -112,7 +112,7 @@ function SignupFormModal() {
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-        <div className='submitButton'>
+        <div className='signupButton'>
           <button type="submit"
           disabled={!email || !password || !username || !firstName || !lastName || !!Object.values(errors).length}>Sign Up</button>
         </div>
