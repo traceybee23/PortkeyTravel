@@ -71,7 +71,7 @@ export const createSpot = (spot) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(spot)
   });
-  console.log("CREATE SPOT",response)
+
   if (response.ok) {
     const newSpot = await response.json();
     dispatch(loadSingleSpot(newSpot));
