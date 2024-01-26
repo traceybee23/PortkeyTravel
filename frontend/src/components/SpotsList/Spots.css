@@ -53,8 +53,7 @@ img {
   display: block;
 }
 
-
-@media screen and (min-width: 1200px) and (max-width: 1555px) {
+@media screen and (min-width: 1267px) and (max-width: 1615px) {
 
   .spotsContainer {
     display: grid;
@@ -66,7 +65,7 @@ img {
   }
 }
 
-@media screen and (max-width: 1204px) {
+@media screen and (max-width: 1266px) {
 
   .spotsContainer {
     display: grid;

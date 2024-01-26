@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadCurrUserSpots } from "../../store/spots";
+import { fetchSpots, loadCurrUserSpots } from "../../store/spots";
 import { useNavigate, Link } from "react-router-dom";
 import './CurrUserSpots.css'
 
@@ -15,26 +15,27 @@ const CurrUserSpots = () => {
   const user = (useSelector(state => state.session.user))
   const spots = Object.values(useSelector(state => state.spots))
 
-  const userSpots = []
-  spots.forEach(spot => {
-    if (spot.ownerId === user.id)
-      userSpots.push(spot)
-  })
-
+  const filtered = spots.filter(spot => spot.ownerId === user.id)
 
   useEffect(() => {
-    if(userSpots.length) {
-
+    dispatch(fetchSpots())
+    if (filtered.length) {
       dispatch(loadCurrUserSpots())
+        .catch(async (response) => {
+          const data = await response.json();
+          if (data) {
+            console.log(data)
+          }
+        })
     }
-  }, [dispatch, userSpots.length])
+  }, [dispatch, filtered.length])
 
 
   return (
     <>
       <h2>Manage Spots</h2>
       {
-        !userSpots.length ? (
+        !filtered.length ? (
           <Link className="createSpotLink"
             onClick={() => navigate('/spots/new')}
           >Create a New Spot</Link>
@@ -44,7 +45,7 @@ const CurrUserSpots = () => {
               onClick={() => navigate('/spots/new')}
             >Create a New Spot</Link>
             <ul className="spotsContainer">
-              {userSpots && userSpots.map(spot => (
+              {filtered && filtered.map(spot => (
                 <li
                   className="spotsCards"
                   key={spot.id}

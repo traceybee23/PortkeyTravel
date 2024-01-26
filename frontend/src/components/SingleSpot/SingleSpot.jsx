@@ -21,6 +21,7 @@ const SingleSpot = () => {
 
   useEffect(() => {
 
+
     dispatch(fetchSingleSpot(spotId));
 
     if (reviews.length) {

@@ -7,15 +7,25 @@
 
 .reviewForm {
   margin: 10px;
-  padding: 10px;
+  padding: 10px 30px 30px;
+  display: flex;
+  flex-direction: column;
+}
 
+.reviewForm h2 {
+  align-self: center;
+}
+
+.reviewTextArea {
+  width: 100%;
 }
 
 .rating-input {
   display: flex;
   margin-right: 4px;
-  justify-content: space-evenly;
-  padding: 10px;
+  padding: 20px;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .rating-input .filled {

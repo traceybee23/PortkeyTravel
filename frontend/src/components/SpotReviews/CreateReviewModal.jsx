@@ -50,11 +50,12 @@ const CreateReview = () => {
 
   return (
     <div className='reviewForm'>
-      <h1>How was your stay?</h1>
+      <h2>How was your stay?</h2>
       <form onSubmit={handleSubmit}>
         {errors.review && <span className='errors'>{errors.review}</span>}
         {errors.stars && <span className='errors'>{errors.stars}</span>}
         <textarea
+          className='reviewTextArea'
           placeholder='Leave your review here...'
           value={review}
           onChange={(e) => setReview(e.target.value)}
