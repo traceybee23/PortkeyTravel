@@ -1,14 +1,17 @@
 form {
   display: flex;
   flex-direction: column;
-  margin: auto;
 }
 
-.inputForm {
+.inputFormSignup {
   display: flex;
-  margin: 15px;
   flex-wrap: wrap;
   width: 300px;
+  margin: 20px 30px 0 20px;
+  position: relative;
+  height: 510px;
+  align-items: center;
+  justify-content: center;
 }
 
 h1 {
@@ -20,13 +23,6 @@ div {
   width: 50vw;
 }
 
-
-.inputBox {
-  justify-content: right;
-  align-items: right;
-  display: flex;
-  flex-direction: column;
-}
 
 .submitButton {
   display: flex;
@@ -49,4 +45,17 @@ div {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+}
+
+
+.inputFormSignup input {
+  width: 300px;
+  margin-bottom: 10px;
+}
+
+
+.inputFormSignup h1 {
+  margin-bottom: 20px;
+
+
 }

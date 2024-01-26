@@ -30,9 +30,7 @@ function SignupFormModal() {
           password
         })
       )
-      .then(() => {
-        closeModal
-      })
+      .then(closeModal)
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) {
@@ -40,9 +38,6 @@ function SignupFormModal() {
         }
       });
     }
-    // return setErrors({
-    //   confirmPassword: "Confirm Password field must be the same as the Password field"
-    // });
   };
 
   useEffect(() => {
@@ -51,14 +46,16 @@ function SignupFormModal() {
       errObj.password = "Password must be more than 6 characters"
     }
     if(password !== confirmPassword) errObj.confirmPassword = "Confirm Password field must be the same as the Password field"
-
+    if(username.length < 4) {
+      errObj.password = "Username must be more than 4 characters"
+    }
     setErrors(errObj)
-  }, [password, confirmPassword])
+  }, [password, confirmPassword, username])
 
 
 
   return (
-    <div className='inputForm'>
+    <div className='inputFormSignup'>
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         {errors.email && <span className='errors'>{errors.email}</span>}
