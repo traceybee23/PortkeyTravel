@@ -92,14 +92,27 @@
   margin-top: 5px;
 }
 
-.reserveSpans {
-  padding: 10px 0 0 10px;
+.starAndReview {
+  padding: 12px 0 0 0 ;
 }
-
+.reservePrice {
+  padding: 10px 0 0 0 ;
+}
 .reviewContainer {
   border-top: 1px solid rgba(2, 114, 179);
   margin: auto;
   font-size: 20px;
   font-weight: bold;
   padding: 10px 0;
+}
+
+.reviewButton button{
+  background-color: rgba(2, 114, 179);
+  border: 4px groove rgb(235, 50, 80);
+  height: 25px;
+  font-size: medium;
+  margin: 10px 0;
+  padding-bottom: 20px;
+  color: rgb(0, 43, 68);
+  font-weight: 600;
 }

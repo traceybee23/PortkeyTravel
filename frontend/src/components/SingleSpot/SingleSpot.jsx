@@ -23,8 +23,9 @@ const SingleSpot = () => {
 
     dispatch(fetchSingleSpot(spotId));
 
-    if(reviews.length){
-    dispatch(fetchSpotReviews(spotId));}
+    if (reviews.length) {
+      dispatch(fetchSpotReviews(spotId));
+    }
 
 
   }, [dispatch, spotId, reviews.length])
@@ -32,11 +33,11 @@ const SingleSpot = () => {
 
 
   const shouldDisplayReviewButton =
-  sessionUser &&
-  spot &&
-  spot.Owner &&
-  sessionUser.id !== spot.Owner.id &&
-  !reviews.some((review) => review.userId === sessionUser.id && review.spotId === spot.id)
+    sessionUser &&
+    spot &&
+    spot.Owner &&
+    sessionUser.id !== spot.Owner.id &&
+    !reviews.some((review) => review.userId === sessionUser.id && review.spotId === spot.id)
 
 
 
@@ -61,8 +62,8 @@ const SingleSpot = () => {
           <div className="detailsContainer">
             <span className="spotDescription">&nbsp;&nbsp;&nbsp;{spot.description}</span>
             <div className="reserveContainer">
-              <span style={{ fontWeight: 'bold' }}>${Number.parseFloat(`${spot.price}`).toFixed(2)}&nbsp;night&nbsp;</span>
-              <span style={{ fontSize: '13px' }}><i className="fa-solid fa-star" />&nbsp;{spot.avgStarRating}
+              <span className='reservePrice' style={{ fontWeight: 'bold' }}>${Number.parseFloat(`${spot.price}`).toFixed(2)}&nbsp;night&nbsp;</span>
+              <span className="starAndReview" style={{ fontSize: '13px' }}><i className="fa-solid fa-star" />&nbsp;{spot.avgStarRating}
                 {spot.numReviews && spot.numReviews > 1 &&
                   <span style={{ fontSize: '13px' }}>&nbsp;·&nbsp;{spot.numReviews}&nbsp;Reviews </span>
                 }
@@ -87,7 +88,9 @@ const SingleSpot = () => {
         </div>
         <div>
           {shouldDisplayReviewButton &&
-            <ReviewButton />
+            <div className="reviewButton">
+              <ReviewButton />
+            </div>
           }
         </div>
         {
@@ -95,7 +98,7 @@ const SingleSpot = () => {
           <SpotReviews spotId={spotId} />
         }
         {
-          spot.numReviews < 1  && shouldDisplayReviewButton &&
+          spot.numReviews < 1 && shouldDisplayReviewButton &&
           <span>Be the first to post a review!</span>
         }
       </div>

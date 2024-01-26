@@ -1,6 +1,6 @@
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import CreateReviewModal from "./CreateReviewModal";
-
+import './SpotReviews.css'
 
 const ReviewButton = () => {
 
