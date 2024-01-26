@@ -96,3 +96,18 @@ i.fa-dragon {
   margin: 10px;
   width: 100px;
 }
+
+@media screen and (max-width: 375px){
+  .profileButton {
+    margin-left: 5px;
+  }
+  .createSpotLink {
+    font-size: smaller;
+  }
+  .menu {
+    width: fit-content;
+    font-size: 10px;
+    margin: 1px;
+    padding: 0 8px ;
+  }
+}

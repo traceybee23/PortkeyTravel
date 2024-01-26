@@ -49,3 +49,40 @@ img {
 .spotsCards:hover .tooltip {
   display: block;
 }
+
+
+@media screen and (min-width: 1200px) and (max-width: 1555px) {
+
+  .spotsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 20px 0;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+
+  .spotsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 20px 0;
+  }
+}
+
+@media screen and (max-width: 902px) {
+
+  .spotsContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 20px 0;
+  }
+}
+
+@media screen and (max-width: 419px) {
+  img {
+    height: 206.844px;
+    width: 277.52px;
+    border-radius:10px 10px 0 0;
+   }
+
+}
