@@ -35,3 +35,20 @@
   padding-bottom: 20px;
   color: rgb(232, 246, 255);
 }
+
+.deleteReviewModal {
+  display: flex;
+  flex-wrap: wrap;
+  width: 300px;
+  margin: 20px 30px 30px 30px;
+  justify-content: center;
+}
+.deleteReviewModal span {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.deleteReviewModal button {
+  margin: 10px;
+  width: 196.88px;
+}
