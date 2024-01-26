@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         unique: { msg: "User with that username already exists"},
         validate: {
-          len: [4, 30],
+          len: { args: [4, 30], msg: "Username must be more than 4 characters"},
           isNotEmail(value) {
             if (Validator.isEmail(value)) {
               throw new Error("Cannot be an email.");
