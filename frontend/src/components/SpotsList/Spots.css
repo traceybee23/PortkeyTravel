@@ -7,7 +7,10 @@ img {
 .spotsContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  padding: 20px 0;
+  padding: 20px 20px;
+  gap: 15px;
+  margin: auto;
+  width: 1556px;
 }
 
 .spotsCards {
@@ -56,16 +59,22 @@ img {
   .spotsContainer {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    padding: 20px 0;
+    padding: 20px 20px;
+    width: 1205px;
+    margin: auto;
+    gap: 4px;
   }
 }
 
-@media screen and (max-width: 1199px) {
+@media screen and (max-width: 1204px) {
 
   .spotsContainer {
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 20px 0;
+    width: 800px;
+    margin: auto;
+    gap: 10px;
   }
 }
 
@@ -75,14 +84,17 @@ img {
     display: grid;
     grid-template-columns: 1fr;
     padding: 20px 0;
+    width: 500px;
+    margin: auto;
   }
 }
 
-@media screen and (max-width: 419px) {
+@media screen and (max-width: 479px) {
   img {
     height: 206.844px;
     width: 277.52px;
     border-radius:10px 10px 0 0;
+    margin: auto;
    }
 
 }
