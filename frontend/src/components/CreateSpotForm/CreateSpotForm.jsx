@@ -106,21 +106,21 @@ const CreateSpotForm = () => {
     if(lat && (lat > 90 || lat < -90)) errObj.lat = ("Latitude is not valid")
     if(lng && (lng > 180 || lng < -180)) errObj.lng = ("Longitude is not valid")
 
-    // const urlFormat = url.split('.').pop()
-    // if(url && (urlFormat !== "png" && urlFormat !== "jpg" && urlFormat !== "jpeg")) errObj.image = ("Image URL must end in .png, .jpg, or .jpeg")
+    const urlFormat = url.split('.').pop()
+    if(url && (urlFormat !== "png" && urlFormat !== "jpg" && urlFormat !== "jpeg")) errObj.image = ("Image URL must end in .png, .jpg, or .jpeg")
 
-    // const urlFormat1 = img1.split('.').pop()
-    // if(img1 && (urlFormat1 !== "png" && urlFormat1 !== "jpg" && urlFormat1 !== "jpeg")) errObj.img1 = ("Image URL must end in .png, .jpg, or .jpeg")
+    const urlFormat1 = img1.split('.').pop()
+    if(img1 && (urlFormat1 !== "png" && urlFormat1 !== "jpg" && urlFormat1 !== "jpeg")) errObj.img1 = ("Image URL must end in .png, .jpg, or .jpeg")
 
-    // const urlFormat2 = img2.split('.').pop()
-    // if(img2 && (urlFormat2 !== "png" && urlFormat2 !== "jpg" && urlFormat2 !== "jpeg")) errObj.img2 = ("Image URL must end in .png, .jpg, or .jpeg")
+    const urlFormat2 = img2.split('.').pop()
+    if(img2 && (urlFormat2 !== "png" && urlFormat2 !== "jpg" && urlFormat2 !== "jpeg")) errObj.img2 = ("Image URL must end in .png, .jpg, or .jpeg")
 
 
-    // const urlFormat3 = img3.split('.').pop()
-    // if(img3 && (urlFormat3 !== "png" && urlFormat3 !== "jpg" && urlFormat3 !== "jpeg")) errObj.img3 = ("Image URL must end in .png, .jpg, or .jpeg")
+    const urlFormat3 = img3.split('.').pop()
+    if(img3 && (urlFormat3 !== "png" && urlFormat3 !== "jpg" && urlFormat3 !== "jpeg")) errObj.img3 = ("Image URL must end in .png, .jpg, or .jpeg")
 
-    // const urlFormat4 = img4.split('.').pop()
-    // if(img4 && (urlFormat4 !== "png" && urlFormat4 !== "jpg" && urlFormat4 !== "jpeg")) errObj.img4 = ("Image URL must end in .png, .jpg, or .jpeg")
+    const urlFormat4 = img4.split('.').pop()
+    if(img4 && (urlFormat4 !== "png" && urlFormat4 !== "jpg" && urlFormat4 !== "jpeg")) errObj.img4 = ("Image URL must end in .png, .jpg, or .jpeg")
 
     setErrors(errObj)
 
