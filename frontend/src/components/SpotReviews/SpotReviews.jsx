@@ -54,7 +54,7 @@ const SpotReviews = () => {
             {review.review}
           </span>
             {sessionUser && sessionUser.id === review.User?.id &&
-            <span><DeleteReviewButton reviewId={review.id}/></span>
+            <span className="deleteReviewButton"><DeleteReviewButton reviewId={review.id}/></span>
             }
         </li>
       ))}

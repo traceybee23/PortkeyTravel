@@ -26,4 +26,12 @@
   color: rgb(168, 168, 168)
 }
 
-
+.deleteReviewButton button {
+  background-color: rgba(2, 114, 179);
+  border: 4px groove rgb(235, 50, 80);
+  height: 25px;
+  font-size: medium;
+  margin: 10px 0;
+  padding-bottom: 20px;
+  color: rgb(232, 246, 255);
+}
