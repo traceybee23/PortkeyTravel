@@ -5,14 +5,14 @@ img {
 }
 
 .spotsContainer {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 15px 15px 0 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  padding: 20px 0;
 }
 
 .spotsCards {
   padding-bottom: 20px;
-  padding: 20px;
+  padding: 20px 0;
   margin: auto;
   margin-bottom: 20px;
 

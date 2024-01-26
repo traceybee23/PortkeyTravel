@@ -46,7 +46,7 @@ button:disabled {
 }
 
 .profile-dropdown {
-  background-color: rgba(213,232,242,255);
+  background-color: rgba(213, 232, 242);
   width: fit-content;
   height: fit-content;
   padding: 15px;
@@ -63,8 +63,7 @@ i.fa-dragon {
 }
 
 .profileButton {
-  padding: 5px;
-  margin-left: 5px;
+  margin-left: 10px;
 }
 
 .createNewSpotContainer {

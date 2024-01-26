@@ -304,7 +304,7 @@ const CreateSpotForm = () => {
             />
             {errors.img4 && <span className="errors">{errors.img4}</span>}
           </div>
-          <button type="submit" disabled={!!Object.values(errors).length}>Create Spot</button>
+          <button className="createSpotSubmitButton" type="submit" disabled={!!Object.values(errors).length}>Create Spot</button>
         </form>
       }
     </div>
