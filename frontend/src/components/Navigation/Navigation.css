@@ -104,7 +104,7 @@ button:disabled {
 
 .loginButton  {
   margin: 10px;
-  width: 100px;
+  width: 100%;
 }
 
 @media screen and (max-width: 375px){
@@ -124,5 +124,11 @@ button:disabled {
   #header {
     margin: auto;
     width: 100%;
+  }
+
+  .loginButton  {
+    width: 90%;
+    height: 30px;
+    font-size: smaller;
   }
 }

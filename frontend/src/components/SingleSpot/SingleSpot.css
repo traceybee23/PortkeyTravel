@@ -180,6 +180,13 @@
     flex-direction: row;
     align-content: center;
     justify-content: space-between;
+    width: fit-content;
+  }
+
+  .reserveContainer button {
+    align-items: center;
+    justify-self: center;
+    margin: auto;
   }
   .detailsContainer {
     display: flex;
