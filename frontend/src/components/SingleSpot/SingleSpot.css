@@ -76,21 +76,21 @@
 .reserveContainer {
   border: 1px solid #476574;
   border-radius: 6px;
-  width: 250px;
-  height: 90px;
-  padding: 5px 15px;
-  margin-bottom: 10px;
+  width: 300px;
+  height: fit-content;
+  padding: 5px 15px 15px;
+  margin: 10px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   align-content: center;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .reserveContainer button {
   align-self: center;
   width: 250px;
-  margin-top: 5px;
+  margin: auto;
 }
 
 .starAndReview {
@@ -174,12 +174,12 @@
     border: 1px solid #476574;
     border-radius: 6px;
     padding: 0 15px 10px;
-    margin: 10px;
+    margin: 15px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     align-content: center;
-    justify-content: space-between;
+    justify-content: space-around;
     width: fit-content;
   }
 
@@ -216,7 +216,7 @@
     margin: auto;
     font-size: 20px;
     font-weight: bold;
-    padding: 10px 77px;
+    padding: 10px;
     border: none;
   }
 
