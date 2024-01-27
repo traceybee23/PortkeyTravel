@@ -230,7 +230,7 @@ const CreateSpotForm = () => {
           <div className="spotPrice">
             <h4>Set a base price for your spot</h4>
             <span style={{fontSize: "small"}}>Competitive pricing can help your listing stand out and rank higher in search results.</span><br></br>
-            $ <input style={{ marginBottom: "0", width: "94%", marginRight: "3px" }}
+            $&nbsp;<input style={{ marginBottom: "0", width: "94%", marginRight: "3px" }}
               type="text"
               value={price}
               onChange={(e) => setPrice(e.target.value)}

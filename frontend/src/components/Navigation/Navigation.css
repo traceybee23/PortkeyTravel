@@ -120,4 +120,9 @@ button:disabled {
     margin: 1px;
     padding: 0 8px ;
   }
+
+  #header {
+    margin: auto;
+    width: 100%;
+  }
 }

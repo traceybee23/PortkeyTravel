@@ -73,7 +73,6 @@
 .spotPrice {
   border-bottom: 2px grey solid;
   padding: 10px 0;
-
 }
 
 .spotsPhotos {
@@ -96,4 +95,38 @@ h4 {
 
 .createSpotSubmitButton {
   margin-bottom: 40px;
+}
+
+
+@media screen and (max-width: 479px) {
+
+  .city {
+    width: 170px;
+  }
+
+  .state {
+    width: 160px
+  }
+
+  .lat {
+    width: 165px;
+  }
+
+  .lng {
+    width: 165px;
+  }
+
+  .spotPrice {
+    width: 100%;
+    position: relative;
+  }
+  .spotPrice input {
+    position: absolute;
+    width: 100%;
+    margin: 3px 3px  0 ;
+    }
+
+    .spotPrice span {
+      margin: 5px 0 10px;
+    }
 }

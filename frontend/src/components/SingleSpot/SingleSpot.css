@@ -62,7 +62,8 @@
 .spotDescription {
   max-width: 680px;
   display: flex;
-  word-break: break-all;
+  word-break: normal;
+  text-wrap: wrap;
 }
 
 
@@ -114,4 +115,107 @@
   margin: 10px 0;
   padding-bottom: 20px;
   color: rgb(232, 246, 255);
+}
+
+
+@media screen and (max-width: 479px) {
+  .imageContainer {
+    height: 100%;
+    width: 277.52px;
+    grid-template-areas:
+    "a"
+    "b "
+    "c"
+    "d"
+    "e";
+    grid-template-columns: 1fr;
+    margin: auto;
+
+   }
+   .imageContainer img:nth-child(1) {
+    border-radius: 10px 10px 10px 10px;
+    margin: auto;
+   }
+   .imageContainer img:nth-child(2) {
+    border-radius: 10px 10px 10px 10px;
+    margin: auto;
+   }
+   .imageContainer img:nth-child(3) {
+    border-radius: 10px 10px 10px 10px;
+    margin: auto;
+   }
+   .imageContainer img:nth-child(4) {
+    border-radius: 10px 10px 10px 10px;
+    margin: auto;
+   }
+   .imageContainer img:nth-child(5) {
+    border-radius: 10px 10px 10px 10px;
+    margin: auto;
+   }
+
+   h2 {
+    margin: 5px 0;
+   }
+   h4 {
+    font-size: smaller;
+    padding: 10px 0;
+   }
+   h3 {
+    position: relative;
+    margin: auto;
+    padding-top: 10px;
+   }
+
+   .spotsContainer {
+    width: 100%;
+  }
+
+  .reserveContainer {
+    border: 1px solid #476574;
+    border-radius: 6px;
+    padding: 0 15px 10px;
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+  }
+  .detailsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    margin-top: 10px;
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid #476574;
+    text-wrap: wrap;
+  }
+  .spotDescription {
+    text-wrap: wrap;
+    word-break: normal;
+  }
+
+  .singleSpotDeets {
+    padding-bottom: 15px;
+    max-width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .reviewContainer {
+    margin: auto;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 77px;
+    border: none;
+  }
+
+  .reviewButton {
+    display: flex;
+   justify-content: center;
+  }
+
 }
