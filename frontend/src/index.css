@@ -3,5 +3,6 @@
 html {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: auto;
-  max-width: 1702px;
+  max-width: 1270px;
+  min-width: 318px;
 }

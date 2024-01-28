@@ -1,24 +1,21 @@
 img {
- height: 306.844px;
- width: 377.52px;
+  height: 226.844px;
+  width: 297.52px;
  border-radius: 20px 20px 0 0;
+ margin: auto;
 }
 
 .spotsContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  padding: 20px 20px;
   gap: 15px;
-  margin: auto;
-  width: 1556px;
+  padding: 10px 0px;
+  width: 100%;
 }
 
 .spotsCards {
-  padding-bottom: 20px;
   padding: 20px 0;
-  margin: auto;
-  margin-bottom: 20px;
-
+  width: fit-content;
 }
 
 .spotDeets {
@@ -26,7 +23,7 @@ img {
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
-
+  width: 100%;
 }
 
 .price {
@@ -53,36 +50,39 @@ img {
   display: block;
 }
 
-@media screen and (min-width: 1267px) and (max-width: 1615px) {
+@media screen and (max-width: 1246px) {
 
   .spotsContainer {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    padding: 20px 20px;
     width: 100%;
+  }
+
+  .spotsCards {
+    padding: 10px 0;
     margin: auto;
-    gap: 4px;
   }
 }
 
-@media screen and (max-width: 1266px) {
+@media screen and (max-width: 935px) {
 
   .spotsContainer {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding: 20px 0;
     width: 100%;
+  }
+  .spotsCards {
+    padding: 10px 0;
     margin: auto;
-    gap: 10px;
   }
 }
 
-@media screen and (max-width: 902px) {
+@media screen and (max-width: 642px) {
 
   .spotsContainer {
     display: grid;
     grid-template-columns: 1fr;
-    padding: 20px 0;
+    padding: 0;
     width: 100%;
     margin: auto;
   }
@@ -90,8 +90,6 @@ img {
 
 @media screen and (max-width: 479px) {
   img {
-    height: 206.844px;
-    width: 277.52px;
     border-radius:10px 10px 0 0;
     margin: auto;
    }
@@ -99,5 +97,8 @@ img {
    .spotsContainer {
     width: 100%;
   }
-
+  .spotsCards {
+    padding: 10px 0;
+    margin: auto;
+  }
 }
