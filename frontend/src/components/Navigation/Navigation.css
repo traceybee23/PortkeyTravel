@@ -46,7 +46,7 @@ button:disabled {
 }
 
 .profile-dropdown {
-  background-color: #c8e1eb;
+  background-color: #e6eceefd;
   width: fit-content;
   height: fit-content;
   padding: 15px;
@@ -54,6 +54,7 @@ button:disabled {
   align-self: flex-end;
   position: absolute;
   border-radius: 20px 0 20px 20px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 
@@ -84,7 +85,7 @@ button:disabled {
   position: absolute;
   margin-left: -50px;
   margin-top: 16px;
-  color: #607D8B;
+  color: #659fad;
 }
 
 .menuBorders {
@@ -94,8 +95,8 @@ button:disabled {
 
 .createSpotLink {
   text-decoration: none;
-  color: #476574;
-  font-weight: 600;
+  color: #5b8e9b;
+  font-weight: 700;
 }
 
 .createSpotLink:hover {

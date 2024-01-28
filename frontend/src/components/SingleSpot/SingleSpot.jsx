@@ -18,7 +18,7 @@ const SingleSpot = () => {
   const sessionUser = useSelector(state => state.session.user);
   const reviews = Object.values(useSelector((state) => state.reviews))
 
-  const needBreak = spot.description.split('').some(ele => ele === " ")
+  const needBreak = (() => spot.description.split('').some(ele => ele === " "))
 
   useEffect(() => {
 
@@ -61,7 +61,7 @@ const SingleSpot = () => {
           </div>
           <h3>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h3>
           <div className="detailsContainer">
-            <span className="spotDescription">&nbsp;&nbsp;&nbsp;{spot.description && needBreak ? (
+            <span className="spotDescription">&nbsp;&nbsp;&nbsp;{spot.description && needBreak() ? (
               <span>{spot.description}</span>
             ) : (
               <span style={{wordBreak: "break-all"}}>{spot.description}</span>

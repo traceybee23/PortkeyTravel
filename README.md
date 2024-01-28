@@ -1,6 +1,26 @@
 
+# `PortkeyTravel` <img src="frontend/public/boot.png" height="64px"/>
 
-# `shortTermVacayRentals`
+### https://short-term-vacay-rentals.onrender.com/
+
+## Overview
+Welcome to PortkeyTravel, where magic meets hospitality! Immerse yourself in a realm that mirrors the charm and convenience of Airbnb. Whether you're a curious traveler in search of magical accommodations or a benevolent host ready to share your enchanted space, PortkeyTravel offers a seamless, user-friendly solution.
+
+## Technologies Used
+
+* __Frontend__:
+  - HTML
+  - CSS
+  - JavaScript
+  - React.js
+* __Backend__:
+  - Express.js
+  - Sequelize
+  - SQLite(development) | PostgresSQL(production)
+* __Authentication__: JSON Web Tokens (JWT)
+
+## Features
+
 
 ## Database Schema Design
 
