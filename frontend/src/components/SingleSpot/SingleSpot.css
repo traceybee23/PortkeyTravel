@@ -63,7 +63,7 @@
 .spotDescription {
   max-width: 680px;
   display: flex;
-  word-break: normal;
+  word-break: break-all;
   text-wrap: wrap;
 }
 

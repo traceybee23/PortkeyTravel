@@ -18,8 +18,6 @@ const SingleSpot = () => {
   const sessionUser = useSelector(state => state.session.user);
   const reviews = Object.values(useSelector((state) => state.reviews))
 
-  const needBreak = (() => spot.description.split('').some(ele => ele === " "))
-
   useEffect(() => {
 
     dispatch(fetchSingleSpot(spotId));
@@ -27,7 +25,6 @@ const SingleSpot = () => {
     if (reviews.length) {
       dispatch(fetchSpotReviews(spotId));
     }
-
 
   }, [dispatch, spotId, reviews.length])
 
@@ -39,7 +36,6 @@ const SingleSpot = () => {
     spot.Owner &&
     sessionUser.id !== spot.Owner.id &&
     !reviews.some((review) => review.userId === sessionUser.id && review.spotId === spot.id)
-
 
 
   return (
@@ -61,12 +57,7 @@ const SingleSpot = () => {
           </div>
           <h3>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h3>
           <div className="detailsContainer">
-            <span className="spotDescription">&nbsp;&nbsp;&nbsp;{spot.description && needBreak() ? (
-              <span>{spot.description}</span>
-            ) : (
-              <span style={{wordBreak: "break-all"}}>{spot.description}</span>
-            )
-            }</span>
+            <span className="spotDescription">&nbsp;&nbsp;&nbsp;{spot.description}</span>
             <div className="reserveContainer">
               <span className='reservePrice' style={{ fontWeight: 'bold' }}>${Number.parseFloat(`${spot.price}`).toFixed(2)}&nbsp;night&nbsp;</span>
               <span className="starAndReview" style={{ fontSize: '13px' }}><i className="fa-solid fa-star" />&nbsp;{spot.avgStarRating}
