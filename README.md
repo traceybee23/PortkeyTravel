@@ -1,5 +1,5 @@
 
-# `PortkeyTravel` <img src="frontend/public/boot.png" height="64px"/>
+#  <img src="frontend/src/boot.png" height="64px"/> `PortkeyTravel`
 
 ### https://short-term-vacay-rentals.onrender.com/
 
