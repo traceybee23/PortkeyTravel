@@ -1,0 +1,7 @@
+
+const CurrUserReviews = () => {
+
+  return (
+    <>REVIEWS</>
+  )
+}
