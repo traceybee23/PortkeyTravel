@@ -24,7 +24,6 @@ const SpotReviews = () => {
     }
   }, [dispatch, spotId])
 
-
   const getDate = (date) => {
     const newDate = new Date(date);
     const month = newDate.toLocaleString('default', { month: 'long' });
