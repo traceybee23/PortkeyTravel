@@ -1,7 +1,8 @@
 import { csrfFetch } from "./csrf"
 import { fetchSingleSpot } from "./spots"
 
-const LOAD_SPOT_REVIEWS = 'reviews/LOAD_REVIEWS';
+const LOAD_REVIEWS = 'reviews/LOAD_REVIEWS'
+const LOAD_SPOT_REVIEWS = 'reviews/LOAD_SPOT_REVIEWS';
 const CLEAR_SPOT_REVIEWS = 'reviews/CLEAR_SPOT_REVIEWS';
 const CREATE_REVIEW = 'reviews/CREATE_REVIEW';
 const REMOVE_REVIEW = 'reviews/REMOVE_REVIEW';
@@ -10,6 +11,11 @@ const loadSpotReviews = (reviews, spotId) => ({
   type: LOAD_SPOT_REVIEWS,
   reviews,
   spotId
+})
+
+const loadReviews = (reviews) => ({
+  type: LOAD_REVIEWS,
+  reviews
 })
 
 export const clearSpotReviews = () => ({
@@ -80,7 +86,7 @@ export const userReviews = () => async dispatch => {
 
   if (response.ok) {
     const userReviews = await response.json();
-    dispatch(loadSpotReviews(userReviews))
+    dispatch(loadReviews(userReviews))
 
   } else {
     const errors = await response.json();
@@ -90,6 +96,13 @@ export const userReviews = () => async dispatch => {
 
 const reviewsReducer = (state = {}, action) => {
   switch (action.type) {
+    case LOAD_REVIEWS: {
+      const reviewState = {}
+      action.reviews.Reviews.forEach((review) => {
+        reviewState[review.id] = review
+      })
+      return reviewState
+    }
     case LOAD_SPOT_REVIEWS: {
       const reviewState = {...state}
       if(action.reviews.Reviews !== "New"){

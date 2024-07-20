@@ -1,0 +1,12 @@
+.review-cards {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  align-items: center;
+  padding: 20px;
+
+}
+
+.review-cards img {
+  margin: 0;
+}
