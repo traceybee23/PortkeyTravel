@@ -75,6 +75,19 @@ export const deleteReview = (reviewId) => async (dispatch) => {
   }
 }
 
+export const userReviews = () => async dispatch => {
+  const response = await csrfFetch('/api/reviews/current')
+
+  if (response.ok) {
+    const userReviews = await response.json();
+    dispatch(loadSpotReviews(userReviews))
+
+  } else {
+    const errors = await response.json();
+    return errors;
+  }
+}
+
 const reviewsReducer = (state = {}, action) => {
   switch (action.type) {
     case LOAD_SPOT_REVIEWS: {
