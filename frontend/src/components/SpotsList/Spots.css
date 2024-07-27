@@ -37,18 +37,21 @@ img {
 
 }
 
+
 .tooltip {
   display: none;
   position: absolute;
   border: 1px solid black;
+  border-radius: 5px;
   background-color: white;
   padding: 3px;
   cursor: pointer;
-  margin: 130px;
+
 }
 
 .spotsCards:hover .tooltip {
   display: block;
+  margin: 100px;
 }
 
 @media screen and (max-width: 1246px) {
