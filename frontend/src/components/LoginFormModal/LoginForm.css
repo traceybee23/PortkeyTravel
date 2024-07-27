@@ -24,6 +24,7 @@ button {
   background: #e43803;
   color: rgb(255, 255, 255);
   border: 2.80px solid #476574;
+  border-radius: 5px;
   font-size: 20px;
   align-self: center;
 }
