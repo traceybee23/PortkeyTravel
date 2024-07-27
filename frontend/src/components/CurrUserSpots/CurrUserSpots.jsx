@@ -32,7 +32,7 @@ const CurrUserSpots = () => {
 
 
   return (
-    <>
+    <div className="manage-spots-container">
       <h2>Manage Spots</h2>
       {
         !filtered.length ? (
@@ -71,7 +71,7 @@ const CurrUserSpots = () => {
           </>
         )
       }
-    </>
+    </div>
   )
 }
 
