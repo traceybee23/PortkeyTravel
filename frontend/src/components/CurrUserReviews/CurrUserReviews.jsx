@@ -25,8 +25,8 @@ const CurrUserReviews = () => {
   };
 
   return (
-    <>
-      <h2>Manage Reviews</h2>
+    <div className="review-card-container">
+      <h2 className="mr-title">Manage Reviews</h2>
       {reviews &&
         reviews.map((review) => (
           <li key={review.id}>
@@ -40,7 +40,7 @@ const CurrUserReviews = () => {
             </div>
           </li>
         ))}
-    </>
+    </div>
   );
 };
 
