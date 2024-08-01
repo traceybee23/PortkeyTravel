@@ -6,6 +6,7 @@ const LOAD_SPOT_REVIEWS = 'reviews/LOAD_SPOT_REVIEWS';
 const CLEAR_SPOT_REVIEWS = 'reviews/CLEAR_SPOT_REVIEWS';
 const CREATE_REVIEW = 'reviews/CREATE_REVIEW';
 const REMOVE_REVIEW = 'reviews/REMOVE_REVIEW';
+const UPDATE_REVIEW = 'reviews/UPDATE_REVIEW';
 
 const loadSpotReviews = (reviews, spotId) => ({
   type: LOAD_SPOT_REVIEWS,
@@ -22,17 +23,21 @@ export const clearSpotReviews = () => ({
   type: CLEAR_SPOT_REVIEWS
 })
 
-export const receiveReview = (review, spotId) => ({
+const receiveReview = (review, spotId) => ({
   type: CREATE_REVIEW,
   review,
   spotId
 })
 
-export const removeReview = (reviewId) => ({
+const removeReview = (reviewId) => ({
   type: REMOVE_REVIEW,
   reviewId
 })
 
+const modifyReview = (reviewId) => ({
+  type: UPDATE_REVIEW,
+  reviewId
+})
 
 export const fetchSpotReviews = (spotId) => async (dispatch) => {
   const response = await fetch(`/api/spots/${spotId}/reviews`)
@@ -81,6 +86,21 @@ export const deleteReview = (reviewId) => async (dispatch) => {
   }
 }
 
+export const updateReview = (reviewId) => async dispatch => {
+  const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(reviewId)
+  })
+  if (response.ok) {
+    dispatch(modifyReview(reviewId));
+  } else {
+    const errors = await response.json();
+    return errors;
+  }
+
+}
+
 export const userReviews = () => async dispatch => {
   const response = await csrfFetch('/api/reviews/current')
 
@@ -123,6 +143,9 @@ const reviewsReducer = (state = {}, action) => {
       const newState = {...state};
       delete newState[action.reviewId];
       return newState;
+    }
+    case UPDATE_REVIEW: {
+      return {...state, [action.reviewId]: action.review}
     }
     default:
       return state
