@@ -31,7 +31,7 @@ const CurrUserReviews = () => {
         reviews.map((review) => (
           <li key={review.id}>
             <div className="review-cards">
-              <h3 style={{marginBottom: '0'}}>{review.Spot.name}</h3>
+              <h3 style={{marginBottom: '0'}}>{review.Spot && review.Spot.name}</h3>
               <span style={{ fontSize: "14px", color: "grey" }}>
                 {review.createdAt && getDate(review.createdAt)}
               </span>
