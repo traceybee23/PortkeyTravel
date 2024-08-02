@@ -23,7 +23,7 @@ export const clearSpotReviews = () => ({
   type: CLEAR_SPOT_REVIEWS
 })
 
-const receiveReview = (review, spotId) => ({
+export const receiveReview = (review, spotId) => ({
   type: CREATE_REVIEW,
   review,
   spotId
@@ -86,11 +86,11 @@ export const deleteReview = (reviewId) => async (dispatch) => {
   }
 }
 
-export const updateReview = (reviewId) => async dispatch => {
+export const updateReview = (reviewId, review) => async dispatch => {
   const response = await csrfFetch(`/api/reviews/${reviewId}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(reviewId)
+    body: JSON.stringify(review)
   })
   if (response.ok) {
     dispatch(modifyReview(reviewId));

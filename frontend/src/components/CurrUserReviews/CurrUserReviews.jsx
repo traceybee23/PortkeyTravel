@@ -29,21 +29,21 @@ const CurrUserReviews = () => {
       <h2 className="mr-title">Manage Reviews</h2>
       {reviews &&
         reviews.map((review) => (
-          <li key={review.id}>
+          <li key={review?.id}>
             <div className="review-cards">
               <h3 style={{ marginBottom: "0" }}>
-                {review.Spot && review.Spot.name}
+                {review && review?.Spot && review?.Spot.name}
               </h3>
               <span style={{ fontSize: "14px", color: "grey" }}>
-                {review.createdAt && getDate(review.createdAt)}
+                {review?.createdAt && getDate(review?.createdAt)}
               </span>
-              <div>{review.review}</div>
+              <div>{review?.review}</div>
               <div>
                 <span className="deleteReviewButton">
-                  <DeleteReviewButton reviewId={review.id} />
+                  <DeleteReviewButton reviewId={review?.id} />
                 </span>
                 <span className="deleteReviewButton">
-                  <UpdateReviewButton reviewId={review.id} />
+                  <UpdateReviewButton reviewId={review?.id} spotId={review?.spotId} />
                 </span>
               </div>
             </div>
