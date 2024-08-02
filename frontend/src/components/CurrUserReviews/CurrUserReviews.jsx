@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate, Link } from "react-router-dom";
 import { userReviews } from "../../store/reviews";
 import DeleteReviewButton from "../SpotReviews/DeleteReviewButton";
-
+import UpdateReviewButton from "./UpdateReviewButton";
 import "./CurrUserReviews.css";
 
 const CurrUserReviews = () => {
@@ -31,12 +31,21 @@ const CurrUserReviews = () => {
         reviews.map((review) => (
           <li key={review.id}>
             <div className="review-cards">
-              <h3 style={{marginBottom: '0'}}>{review.Spot && review.Spot.name}</h3>
+              <h3 style={{ marginBottom: "0" }}>
+                {review.Spot && review.Spot.name}
+              </h3>
               <span style={{ fontSize: "14px", color: "grey" }}>
                 {review.createdAt && getDate(review.createdAt)}
               </span>
               <div>{review.review}</div>
-              <span className="deleteReviewButton"><DeleteReviewButton reviewId={review.id}/></span>
+              <div>
+                <span className="deleteReviewButton">
+                  <DeleteReviewButton reviewId={review.id} />
+                </span>
+                <span className="deleteReviewButton">
+                  <UpdateReviewButton reviewId={review.id} />
+                </span>
+              </div>
             </div>
           </li>
         ))}
