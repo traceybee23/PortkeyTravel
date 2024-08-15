@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import { useModal } from "../../context/Modal";
 import { updateReview } from "../../store/reviews";
 import StarRatingInput from "../SpotReviews/StarRatingInput";
-import { receiveReview } from "../../store/reviews";
+// import { receiveReview } from "../../store/reviews";
 
-const UpdateReview = ({ reviewId, spotId }) => {
+const UpdateReview = ({ reviewId }) => {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const reviewData = useSelector((state) => state.reviews[reviewId.reviewId]);
