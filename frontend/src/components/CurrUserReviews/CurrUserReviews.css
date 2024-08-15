@@ -16,3 +16,7 @@
 .review-card-container {
   margin: auto 5vw;
 }
+
+.updateReviewModal {
+  padding: 25px
+}

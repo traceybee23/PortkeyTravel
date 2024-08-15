@@ -48,7 +48,7 @@ const UpdateReview = ({ reviewId }) => {
   };
 
   return (
-    <div>
+    <div className="updateReviewModal">
       <form onSubmit={handleUpdate}>
         <h2>Edit</h2>
         {errors.review && <span className='errors'>{errors.review}</span>}
