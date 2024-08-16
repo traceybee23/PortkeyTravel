@@ -1,30 +1,31 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useModal } from "../../context/Modal";
 import { updateReview } from "../../store/reviews";
 import StarRatingInput from "../SpotReviews/StarRatingInput";
+import { userReviews } from "../../store/reviews";
 // import { receiveReview } from "../../store/reviews";
 
 const UpdateReview = ({ reviewId }) => {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const reviewData = useSelector((state) => state.reviews[reviewId.reviewId]);
-  console.log(reviewData, "CLG");
+  console.log(reviewData,reviewId.reviewId, "CLG");
   const [review, setReview] = useState(reviewData?.review);
   const [stars, setStars] = useState(reviewData?.stars);
   const [errors, setErrors] = useState({});
 
 
-  useEffect(() => {
-    let errObj = {};
-    if (!review) errObj.review = "review is required.";
-    if (review && review.length < 10)
-      errObj.review = "reviews must be at least 10 characters in length.";
-    if (review && review.length > 2000)
-      errObj.review = "reviews must be 2000 characters in length at most.";
-    if (!stars) errObj.stars = "star rating is required.";
-    setErrors(errObj);
-  }, [review, stars]);
+  // useEffect(() => {
+  //   let errObj = {};
+  //   if (!review) errObj.review = "review is required.";
+  //   if (review && review?.length < 10)
+  //     errObj.review = "reviews must be at least 10 characters in length.";
+  //   if (review && review?.length > 2000)
+  //     errObj.review = "reviews must be 2000 characters in length at most.";
+  //   if (!stars) errObj.stars = "star rating is required.";
+  //   setErrors(errObj);
+  // }, [review, stars]);
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -36,6 +37,7 @@ const UpdateReview = ({ reviewId }) => {
       stars,
     };
     dispatch(updateReview(reviewId.reviewId, reviewData))
+      .then(dispatch(userReviews()))
       .then(closeModal)
       .catch(async (response) => {
         const data = await response.json();
@@ -62,7 +64,7 @@ const UpdateReview = ({ reviewId }) => {
           rows="6"
         />
         <StarRatingInput onChange={onChange} stars={stars} />
-        <button type="submit" disabled={review.length < 10 || !stars}>
+        <button type="submit" disabled={review?.length < 10 || !stars}>
           update your review
         </button>
       </form>

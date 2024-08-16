@@ -11,7 +11,7 @@ const CurrUserReviews = () => {
   // const navigate = useNavigate();
   // const user = useSelector((state) => state.session.user);
   const reviews = Object.values(useSelector((state) => state.reviews));
-  console.log(reviews);
+  console.log(reviews, "curr user reviews");
 
   useEffect(() => {
     dispatch(userReviews());
