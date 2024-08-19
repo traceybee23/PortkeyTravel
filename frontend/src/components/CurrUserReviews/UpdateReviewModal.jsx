@@ -10,7 +10,7 @@ const UpdateReview = ({ reviewId }) => {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const reviewData = useSelector((state) => state.reviews[reviewId.reviewId]);
-  console.log(reviewData,reviewId.reviewId, "CLG");
+  // console.log(reviewData,reviewId.reviewId, "CLG");
   const [review, setReview] = useState(reviewData?.review);
   const [stars, setStars] = useState(reviewData?.stars);
   const [errors, setErrors] = useState({});
