@@ -2,14 +2,14 @@ import OpenModalButton from "../OpenModalButton";
 import UpdateReview from "./UpdateReviewModal";
 
 
-const UpdateReviewButton = (reviewId, spotId) => {
+const UpdateReviewButton = ({reviewData}) => {
 
 
   return (
     <OpenModalButton
     buttonText={"Edit"}
-    reviewId={reviewId}
-    modalComponent={<UpdateReview reviewId={reviewId} spotId={spotId}/>}
+    reviewData={reviewData}
+    modalComponent={<UpdateReview reviewData={reviewData} />}
     />
   )
 

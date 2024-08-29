@@ -34,9 +34,8 @@ const removeReview = (reviewId) => ({
   reviewId
 })
 
-const modifyReview = (reviewId, review) => ({
+const modifyReview = (review) => ({
   type: UPDATE_REVIEW,
-  reviewId,
   review
 })
 
@@ -87,15 +86,16 @@ export const deleteReview = (reviewId) => async (dispatch) => {
   }
 }
 
-export const updateReview = (reviewId, review) => async dispatch => {
-  console.log(reviewId, review, "thunk")
-  const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+export const updateReview = (reviewData) => async dispatch => {
+  console.log(reviewData, "thunk")
+  const response = await csrfFetch(`/api/reviews/${reviewData.id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({...review})
+    body: JSON.stringify(reviewData)
   })
   if (response.ok) {
-    dispatch(modifyReview(reviewId, review));
+    const data = await response.json();
+    dispatch(modifyReview(data));
   } else {
     const errors = await response.json();
     return errors;
@@ -147,8 +147,8 @@ const reviewsReducer = (state = {}, action) => {
       return newState;
     }
     case UPDATE_REVIEW: {
-      console.log(action.reviewId, action, "reducer")
-      return {...state, [action.reviewId]: action.review}
+      console.log(action.review, "reducer")
+      return {...state, [action.review.id]: action.review}
     }
     default:
       return state

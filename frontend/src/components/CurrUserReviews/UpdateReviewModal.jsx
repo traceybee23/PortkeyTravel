@@ -1,48 +1,49 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useModal } from "../../context/Modal";
 import { updateReview } from "../../store/reviews";
 import StarRatingInput from "../SpotReviews/StarRatingInput";
 import { userReviews } from "../../store/reviews";
 // import { receiveReview } from "../../store/reviews";
 
-const UpdateReview = ({ reviewId }) => {
+const UpdateReview = ({ reviewData }) => {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
-  const reviewData = useSelector((state) => state.reviews[reviewId.reviewId]);
-  // console.log(reviewData,reviewId.reviewId, "CLG");
+  // const reviewData = useSelector((state) => state.reviews);
+  console.log(reviewData , "CLG");
   const [review, setReview] = useState(reviewData?.review);
   const [stars, setStars] = useState(reviewData?.stars);
   const [errors, setErrors] = useState({});
 
 
-  // useEffect(() => {
-  //   let errObj = {};
-  //   if (!review) errObj.review = "review is required.";
-  //   if (review && review?.length < 10)
-  //     errObj.review = "reviews must be at least 10 characters in length.";
-  //   if (review && review?.length > 2000)
-  //     errObj.review = "reviews must be 2000 characters in length at most.";
-  //   if (!stars) errObj.stars = "star rating is required.";
-  //   setErrors(errObj);
-  // }, [review, stars]);
+  useEffect(() => {
+    let errObj = {};
+    if (!review) errObj.review = "review is required.";
+    if (review && review?.length < 10)
+      errObj.review = "reviews must be at least 10 characters in length.";
+    if (review && review?.length > 2000)
+      errObj.review = "reviews must be 2000 characters in length at most.";
+    if (!stars) errObj.stars = "star rating is required.";
+    setErrors(errObj);
+  }, [review, stars]);
 
   const handleUpdate = (e) => {
     e.preventDefault();
 
     setErrors({});
 
-    const reviewData = {
+    const newData = {
+      id: reviewData.id,
       review,
       stars,
     };
-    dispatch(updateReview(reviewId.reviewId, reviewData))
+    dispatch(updateReview(newData))
       .then(dispatch(userReviews()))
       .then(closeModal)
-      .catch(async (response) => {
-        const data = await response.json();
-        return data;
-      });
+      // .catch(async (response) => {
+      //   const data = await response.json();
+      //   return data;
+      // });
   };
 
   const onChange = (number) => {

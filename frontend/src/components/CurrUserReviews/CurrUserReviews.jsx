@@ -43,7 +43,7 @@ const CurrUserReviews = () => {
                   <DeleteReviewButton reviewId={review?.id} />
                 </span>
                 <span className="deleteReviewButton">
-                  <UpdateReviewButton reviewId={review?.id} spotId={review?.spotId} />
+                  <UpdateReviewButton reviewData={review} />
                 </span>
               </div>
             </div>
