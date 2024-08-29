@@ -27,7 +27,7 @@ const UpdateReview = ({ reviewData }) => {
     setErrors(errObj);
   }, [review, stars]);
 
-  const handleUpdate = (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
 
     setErrors({});
@@ -37,9 +37,12 @@ const UpdateReview = ({ reviewData }) => {
       review,
       stars,
     };
-    dispatch(updateReview(newData))
-      .then(dispatch(userReviews()))
-      .then(closeModal)
+
+    await dispatch(updateReview(newData)).then(() => {
+      dispatch(userReviews())
+    })
+
+    .then(closeModal)
       // .catch(async (response) => {
       //   const data = await response.json();
       //   return data;

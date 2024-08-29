@@ -6,13 +6,14 @@ import DeleteReviewButton from "../SpotReviews/DeleteReviewButton";
 import UpdateReviewButton from "./UpdateReviewButton";
 import "./CurrUserReviews.css";
 
+
 const CurrUserReviews = () => {
   const dispatch = useDispatch();
   // const navigate = useNavigate();
   // const user = useSelector((state) => state.session.user);
   const reviews = Object.values(useSelector((state) => state.reviews));
-  console.log(reviews, "curr user reviews");
 
+  console.log(reviews, "Curr user reviews")
   useEffect(() => {
     dispatch(userReviews());
   }, [dispatch]);
@@ -32,7 +33,7 @@ const CurrUserReviews = () => {
           <li key={review?.id}>
             <div className="review-cards">
               <h3 style={{ marginBottom: "0" }}>
-                {review && review?.Spot && review?.Spot.name}
+                {review?.Spot && review?.Spot.name}
               </h3>
               <span style={{ fontSize: "14px", color: "grey" }}>
                 {review?.createdAt && getDate(review?.createdAt)}
