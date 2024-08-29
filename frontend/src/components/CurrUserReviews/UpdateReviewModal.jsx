@@ -1,10 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { useModal } from "../../context/Modal";
 import { updateReview } from "../../store/reviews";
 import StarRatingInput from "../SpotReviews/StarRatingInput";
 import { userReviews } from "../../store/reviews";
-// import { receiveReview } from "../../store/reviews";
+
 
 const UpdateReview = ({ reviewData }) => {
   const dispatch = useDispatch();
