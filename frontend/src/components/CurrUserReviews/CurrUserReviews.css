@@ -1,9 +1,9 @@
 .review-cards {
   display: flex;
   flex-direction: column;
-  width: 50vw;
+  width: 60vw;
   align-items: start;
-
+  max-width: 500px;
 
 }
 
@@ -19,4 +19,12 @@
 
 .updateReviewModal {
   padding: 25px
+}
+
+.review-button-container {
+  display: flex;
+}
+
+.review-button-container div {
+  margin-right: 20px;
 }

@@ -39,13 +39,13 @@ const CurrUserReviews = () => {
                 {review?.createdAt && getDate(review?.createdAt)}
               </span>
               <div>{review?.review}</div>
-              <div>
-                <span className="deleteReviewButton">
+              <div className="review-button-container">
+                <div className="deleteReviewButton">
                   <DeleteReviewButton reviewId={review?.id} />
-                </span>
-                <span className="deleteReviewButton">
+                </div>
+                <div className="deleteReviewButton">
                   <UpdateReviewButton reviewData={review} />
-                </span>
+                </div>
               </div>
             </div>
           </li>
