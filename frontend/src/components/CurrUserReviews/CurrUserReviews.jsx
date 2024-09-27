@@ -6,11 +6,10 @@ import DeleteReviewButton from "../SpotReviews/DeleteReviewButton";
 import UpdateReviewButton from "./UpdateReviewButton";
 import "./CurrUserReviews.css";
 
-
 const CurrUserReviews = () => {
+  
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
-  // const user = useSelector((state) => state.session.user);
+
   const reviews = Object.values(useSelector((state) => state.reviews));
 
   console.log(reviews, "Curr user reviews")
