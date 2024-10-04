@@ -15,6 +15,7 @@ const CurrUserReviews = () => {
   console.log(reviews, "Curr user reviews")
   useEffect(() => {
     dispatch(userReviews());
+    
   }, [dispatch]);
 
   const getDate = (date) => {

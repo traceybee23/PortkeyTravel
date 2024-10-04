@@ -108,7 +108,7 @@ export const userReviews = () => async dispatch => {
 
   if (response.ok) {
     const userReviews = await response.json();
-    console.log(userReviews.Reviews, "THUNK USER REVIEWS")
+
     dispatch(loadReviews(userReviews))
 
   } else {
@@ -124,11 +124,11 @@ const reviewsReducer = (state = {}, action) => {
       action.reviews.Reviews.forEach((review) => {
         reviewState[review.id] = review
       })
-      console.log(reviewState, "REVIEWS REDUCER LOAD REVIEWS")
+      
       return reviewState
     }
     case LOAD_SPOT_REVIEWS: {
-      const reviewState = {...state}
+      const reviewState = {}
       if(action.reviews.Reviews !== "New"){
         action.reviews.Reviews.forEach((review) => {
           reviewState[review.id] = review
