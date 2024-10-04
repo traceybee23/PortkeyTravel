@@ -7,7 +7,7 @@ const UpdateReviewButton = ({reviewData}) => {
 
   return (
     <OpenModalButton
-    buttonText={"Edit"}
+    buttonText={"Update"}
     reviewData={reviewData}
     modalComponent={<UpdateReview reviewData={reviewData} />}
     />
