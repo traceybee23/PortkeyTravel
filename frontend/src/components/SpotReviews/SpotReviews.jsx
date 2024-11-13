@@ -47,11 +47,11 @@ const SpotReviews = () => {
             </span>
             <span style={{ fontSize: "12px" }}>{review.review}</span>
             {sessionUser && sessionUser.id === review.User?.id && (
-              <div>
-                <span className="deleteReviewButton">
+              <div className="reviewButtonContainer">
+                <span>
                   <UpdateReviewButton spotId={spotId} reviewData={review} />
                 </span>
-                <span className="deleteReviewButton">
+                <span>
                   <DeleteReviewButton reviewId={review.id} />
                 </span>
               </div>

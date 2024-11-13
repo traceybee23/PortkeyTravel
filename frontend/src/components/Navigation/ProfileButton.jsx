@@ -56,7 +56,7 @@ function ProfileButton({ user }) {
             <li>{user.email}</li>
             <li className='menuBorders'>
               <Link to={`/spots/current`}
-              className='createSpotLink '
+              className='createSpotLink'
               onClick={closeMenu}
               >Manage Spots</Link>
             </li>

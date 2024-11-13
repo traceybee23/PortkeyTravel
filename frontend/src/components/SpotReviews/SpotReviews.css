@@ -62,3 +62,10 @@
   margin: 10px;
   width: 100%;
 }
+
+.reviewButtonContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 20%;
+  margin: 2% 0;
+}
