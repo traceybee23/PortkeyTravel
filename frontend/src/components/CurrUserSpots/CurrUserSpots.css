@@ -1,15 +1,14 @@
 .updateDeleteButtons {
   padding: 10px 0;
 }
-.updateDeleteButtons button {
-  background-color: #476574;
-  border: 4px groove #e43803;
-  height: 25px;
-  font-size: medium;
-  margin-right: 20px;
-  padding-bottom: 20px;
-  color: rgb(232, 246, 255);
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
 }
+
+
 
 .deleteModal {
   display: flex;

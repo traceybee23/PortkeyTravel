@@ -15,7 +15,7 @@ const CurrUserReviews = () => {
   console.log(reviews, "Curr user reviews")
   useEffect(() => {
     dispatch(userReviews());
-    
+
   }, [dispatch]);
 
   const getDate = (date) => {
@@ -40,10 +40,10 @@ const CurrUserReviews = () => {
               </span>
               <div>{review?.review}</div>
               <div className="review-button-container">
-                <div className="deleteReviewButton">
+                <div >
                   <UpdateReviewButton reviewData={review} />
                 </div>
-                <div className="deleteReviewButton">
+                <div>
                   <DeleteReviewButton reviewId={review?.id} />
                 </div>
               </div>

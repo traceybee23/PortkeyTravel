@@ -68,7 +68,7 @@ const SingleSpot = () => {
                   <span style={{ fontSize: '13px' }}>&nbsp;·&nbsp;{spot.numReviews} Review </span>
                 }
               </span>
-              <button onClick={() => window.alert("Feature Coming Soon...")}>Reserve</button>
+              <button style={{backgroundColor: '#e43803', marginTop: '5px'}} onClick={() => window.alert("Feature Coming Soon...")}>Reserve</button>
             </div>
           </div>
         </>

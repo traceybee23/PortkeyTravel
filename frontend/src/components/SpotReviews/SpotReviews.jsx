@@ -17,7 +17,7 @@ const SpotReviews = () => {
 
   reviews.sort((a, b) => b.id - a.id);
 
-  
+
   useEffect(() => {
     dispatch(fetchSpotReviews(spotId));
     return () => {

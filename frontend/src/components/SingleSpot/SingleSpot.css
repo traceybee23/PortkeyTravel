@@ -108,14 +108,8 @@
   padding: 10px 0;
 }
 
-.reviewButton button{
-  background-color: #476574;
-  border: 4px groove #e43803;
-  height: 25px;
-  font-size: medium;
+.reviewButton {
   margin: 10px 0;
-  padding-bottom: 20px;
-  color: rgb(232, 246, 255);
 }
 
 
@@ -184,11 +178,7 @@
     width: fit-content;
   }
 
-  .reserveContainer button {
-    align-items: center;
-    justify-self: center;
-    margin: auto;
-  }
+
   .detailsContainer {
     display: flex;
     flex-direction: column;
@@ -223,7 +213,7 @@
 
   .reviewButton {
     display: flex;
-   justify-content: center;
+    justify-content: center;
   }
 
 }

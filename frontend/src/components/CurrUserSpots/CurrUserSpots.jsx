@@ -60,7 +60,7 @@ const CurrUserSpots = () => {
                       <span className='price'>${Number.parseFloat(`${spot.price}`).toFixed(2)}<span className='text'> night</span></span>
                     </div>
                   </Link>
-                  <div className="updateDeleteButtons">
+                  <div className="buttonContainer">
                     <button onClick={() => navigate(`/spots/${spot.id}/edit`)}>Update</button>
                     <DeleteSpotButton spotId={spot.id} />
                   </div>
