@@ -22,7 +22,7 @@ const UpdateReview = ({ reviewData }) => {
     if (review && review?.length < 10)
       errObj.review = "reviews must be at least 10 characters in length.";
     if (review && review?.length > 2000)
-      errObj.review = "reviews must be 2000 characters in length at most.";
+      errObj.review = "reviews must be less than 2000 characters.";
     if (!stars) errObj.stars = "star rating is required.";
     setErrors(errObj);
   }, [review, stars]);
